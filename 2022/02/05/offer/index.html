@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="剑指offer，leetcode刷题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/02/05/offer/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="剑指offer，leetcode刷题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/%E5%89%91%E6%8C%87offer.png">
+<meta property="article:published_time" content="2022-02-05T11:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-11T05:23:13.917Z">
+<meta property="article:author" content="Cherish">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/%E5%89%91%E6%8C%87offer.png">
+  
+  
+  <title>剑指offer - Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-05 19:00" pubdate>
+        February 5, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      16k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      131 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer</h1>
+            
+            <div class="markdown-body">
+              <h1 id="双栈队列"><a href="#双栈队列" class="headerlink" title="双栈队列"></a>双栈队列</h1><p><img src="/blog/2022/02/05/offer/CQueue.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205185541039"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CQueue</span> </span>&#123;<br>    Stack&lt;Integer&gt; in;<br>    Stack&lt;Integer&gt; out;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CQueue</span><span class="hljs-params">()</span> </span>&#123;<br>        in = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>        out = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">appendTail</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>        in.push(value);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">deleteHead</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (out.isEmpty()) &#123;<br>            <span class="hljs-keyword">while</span> (!in.isEmpty()) out.push(in.pop());<br>        &#125;<br>        <span class="hljs-keyword">if</span>(out.isEmpty()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> out.pop();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h1><p><img src="/blog/2022/02/05/offer/fib.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205190001684"></p>
+<p>方法：一维动态规划</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> n;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>        c = (a + b) % <span class="hljs-number">1000000007</span>;<br>        a = b;<br>        b = c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> c;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="重复的数字"><a href="#重复的数字" class="headerlink" title="重复的数字"></a>重复的数字</h1><p><img src="/blog/2022/02/05/offer/repeatNum.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205190452839"></p>
+<p>方法：见注释   修改两次为重复</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findRepeatNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = nums.length;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-comment">//当前元素原本指向的元素</span><br>        <span class="hljs-keyword">int</span> k = nums[i];<br>        <span class="hljs-keyword">if</span> (k &lt; <span class="hljs-number">0</span>) k += n;<br><br>        <span class="hljs-comment">//如果已经被修改过,表示当前元素是重复的</span><br>        <span class="hljs-keyword">if</span> (nums[k] &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> k;<br><br>        <span class="hljs-comment">//没有修改过,进行修改</span><br>        nums[k] -= n;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二维数组查找"><a href="#二维数组查找" class="headerlink" title="二维数组查找"></a>二维数组查找</h1><p><img src="/blog/2022/02/05/offer/findNumIn2DArray.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205191017656"></p>
+<p>方法：二分查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">findNumberIn2DArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> m = matrix.length;<br>    <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">int</span> n = matrix[<span class="hljs-number">0</span>].length;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> j = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>        <span class="hljs-keyword">if</span> (matrix[i][j] == target) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>            <span class="hljs-comment">//二分查找列 j[0 - j-1]  ,找到第一个小于等于</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (matrix[i][j] &gt; target) &#123;<br>            <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">int</span> r = j - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-keyword">int</span> mid = (l + r + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (matrix[i][mid] &gt; target) r = mid - <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span> l = mid;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (r &lt; <span class="hljs-number">0</span> || matrix[i][r] &gt; target) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>            j = r;<br>        &#125;<br>        <span class="hljs-comment">// 二分查找行 i[i+1, m-1] ,找到第一个大于等于</span><br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">int</span> l = i + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">int</span> r = m - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>                <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (matrix[mid][j] &lt; target) l = mid + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span> r = mid;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (l &gt; m - <span class="hljs-number">1</span> || matrix[l][j] &lt; target) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>            i = l;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="跳台阶"><a href="#跳台阶" class="headerlink" title="跳台阶"></a>跳台阶</h1><p><img src="/blog/2022/02/05/offer/jump.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205190208571"></p>
+<p>方法：一维动态规划</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numWays</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> n;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> b = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++) &#123;<br>        c = (a + b) % <span class="hljs-number">1000000007</span>;<br>        a = b;<br>        b = c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> c;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="旋转数组的查找"><a href="#旋转数组的查找" class="headerlink" title="旋转数组的查找"></a>旋转数组的查找</h1><p><img src="/blog/2022/02/05/offer/minArray.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205191242154"></p>
+<p>方法：二分查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] numbers)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> r = numbers.length - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>        <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (numbers[mid] &gt; numbers[r]) l = mid + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (numbers[mid] == numbers[r]) r--;<br>        <span class="hljs-keyword">else</span> r = mid;<br>    &#125;<br>    <span class="hljs-keyword">return</span> Math.min(numbers[l], numbers[<span class="hljs-number">0</span>]);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="矩阵中的路径"><a href="#矩阵中的路径" class="headerlink" title="矩阵中的路径"></a>矩阵中的路径</h1><p><img src="/blog/2022/02/05/offer/path.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220205210205321"></p>
+<p>方法：dfs</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">exist</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] board, String word)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> m = board.length;<br>    <span class="hljs-keyword">int</span> n = board[<span class="hljs-number">0</span>].length;<br>    <span class="hljs-keyword">boolean</span>[][] visited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[m][n];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">if</span> (dfs(board, word, visited, i, j, <span class="hljs-number">0</span>)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] board, String word, <span class="hljs-keyword">boolean</span>[][] visited, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j, <span class="hljs-keyword">int</span> idx)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (idx == word.length()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || i &gt;= board.length || j &lt; <span class="hljs-number">0</span> || j &gt;= board[<span class="hljs-number">0</span>].length || visited[i][j] || board[i][j] != word.charAt(idx))<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    visited[i][j] = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">boolean</span> res = dfs(board, word, visited, i + <span class="hljs-number">1</span>, j, idx + <span class="hljs-number">1</span>) ||<br>            dfs(board, word, visited, i - <span class="hljs-number">1</span>, j, idx + <span class="hljs-number">1</span>) ||<br>            dfs(board, word, visited, i, j + <span class="hljs-number">1</span>, idx + <span class="hljs-number">1</span>) ||<br>            dfs(board, word, visited, i, j - <span class="hljs-number">1</span>, idx + <span class="hljs-number">1</span>);<br>    visited[i][j] = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h1><p><img src="/blog/2022/02/05/offer/replaceSpace.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206122102020"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">replaceSpace</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> length = s.length();<br>    <span class="hljs-keyword">char</span>[] array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[length * <span class="hljs-number">3</span>];<br>    <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<br>        <span class="hljs-keyword">char</span> c = s.charAt(i);<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>            array[size++] = <span class="hljs-string">&#x27;%&#x27;</span>;<br>            array[size++] = <span class="hljs-string">&#x27;2&#x27;</span>;<br>            array[size++] = <span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            array[size++] = c;<br>        &#125;<br>    &#125;<br>    String res = <span class="hljs-keyword">new</span> String(array, <span class="hljs-number">0</span>, size);<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h1><p><img src="/blog/2022/02/05/offer/range.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206121639479"></p>
+<p>方法：dfs</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">movingCount</span><span class="hljs-params">(<span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>    <span class="hljs-keyword">boolean</span>[][] visited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[m][n];<br>    <span class="hljs-keyword">return</span> dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, m, n, k, visited);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">boolean</span>[][] visited)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span> || i &gt;= m || j &gt;= n || visited[i][j] || sum(i) + sum(j) &gt; k) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    visited[i][j] = <span class="hljs-keyword">true</span>;<br>    System.out.println(i + <span class="hljs-string">&quot; &quot;</span> + j);<br>    <span class="hljs-keyword">return</span> dfs(i + <span class="hljs-number">1</span>, j, m, n, k, visited) + dfs(i, j + <span class="hljs-number">1</span>, m, n, k, visited) + <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>        sum += n % <span class="hljs-number">10</span>;<br>        n /= <span class="hljs-number">10</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> sum;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h1><p><img src="/blog/2022/02/05/offer/printFromTailToHead.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206123324634"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] reversePrint2(ListNode head) &#123;<br>    <span class="hljs-keyword">int</span> length = <span class="hljs-number">0</span>;<br>    ListNode node = head;<br>    <span class="hljs-keyword">while</span> (node != <span class="hljs-keyword">null</span>) &#123;<br>        node = node.next;<br>        length++;<br>    &#125;<br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[length];<br><br>    node = head;<br>    <span class="hljs-keyword">while</span> (node != <span class="hljs-keyword">null</span>) &#123;<br>        res[--length] = node.val;<br>        node = node.next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h1><p><img src="/blog/2022/02/05/offer/rebuildTree.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206124628018"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">buildTree</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] preorder, <span class="hljs-keyword">int</span>[] inorder)</span> </span>&#123;<br>    Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; inorder.length; i++) &#123;<br>        map.put(inorder[i], i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> rebuild(preorder, inorder, map, <span class="hljs-number">0</span>, preorder.length - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, inorder.length - <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> TreeNode <span class="hljs-title">rebuild</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] preorder, <span class="hljs-keyword">int</span>[] inorder, Map&lt;Integer, Integer&gt; map, <span class="hljs-keyword">int</span> preStart, <span class="hljs-keyword">int</span> preEnd, <span class="hljs-keyword">int</span> inStart, <span class="hljs-keyword">int</span> inEnd)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (preStart &gt; preEnd || inStart &gt; inEnd) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    TreeNode root = <span class="hljs-keyword">new</span> TreeNode(preorder[preStart]);<br>    <span class="hljs-keyword">int</span> idx = map.get(preorder[preStart]);<br>    root.left = rebuild(preorder, inorder, map, preStart + <span class="hljs-number">1</span>, preStart + idx - inStart, inStart, idx - <span class="hljs-number">1</span>);<br>    root.right = rebuild(preorder, inorder, map, preStart + idx - inStart + <span class="hljs-number">1</span>, preEnd, idx + <span class="hljs-number">1</span>, inEnd);<br>    <span class="hljs-keyword">return</span> root;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="剪绳子"><a href="#剪绳子" class="headerlink" title="剪绳子"></a>剪绳子</h1><p><img src="/blog/2022/02/05/offer/cuttingRope.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206131124703"></p>
+<p>方法：数学推导</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">cuttingRope2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> n - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> a = n / <span class="hljs-number">3</span>, b = n % <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>)Math.pow(<span class="hljs-number">3</span>, a);<br>    <span class="hljs-keyword">if</span>(b == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>)Math.pow(<span class="hljs-number">3</span>, a - <span class="hljs-number">1</span>) * <span class="hljs-number">4</span>;<br>    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>)Math.pow(<span class="hljs-number">3</span>, a) * <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="合并两个排序的链表"><a href="#合并两个排序的链表" class="headerlink" title="合并两个排序的链表"></a>合并两个排序的链表</h1><p><img src="/blog/2022/02/05/offer/mergeLinkedList.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206134417189"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> </span>&#123;<br>    ListNode dummy = <span class="hljs-keyword">new</span> ListNode();<br>    ListNode ptr = dummy;<br>    <span class="hljs-keyword">while</span> (l1 != <span class="hljs-keyword">null</span> &amp;&amp; l2 != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (l1.val &lt; l2.val) &#123;<br>            ptr.next = l1;<br>            l1 = l1.next;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ptr.next = l2;<br>            l2 = l2.next;<br>        &#125;<br>        ptr = ptr.next;<br>    &#125;<br>    ptr.next = l1 == <span class="hljs-keyword">null</span> ? l2 : l1;<br>    <span class="hljs-keyword">return</span> dummy.next;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a>树的子结构</h1><p><img src="/blog/2022/02/05/offer/subTree.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220206140422876"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSubStructure</span><span class="hljs-params">(TreeNode A, TreeNode B)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (A == <span class="hljs-keyword">null</span> || B == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">return</span> subStructure(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">subStructure</span><span class="hljs-params">(TreeNode A, TreeNode B)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (B == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">if</span> (A == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">return</span> A.val == B.val &amp;&amp; subStructure(A.left, B.left) &amp;&amp; subStructure(A.right, B.right);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二叉树的镜像"><a href="#二叉树的镜像" class="headerlink" title="二叉树的镜像"></a>二叉树的镜像</h1><p><img src="/blog/2022/02/05/offer/mirror.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207125331133"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">mirrorTree</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    TreeNode left = mirrorTree(root.left);<br>    root.left = mirrorTree(root.right);<br>    root.right = left;<br>    <span class="hljs-keyword">return</span> root;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="对称二叉树"><a href="#对称二叉树" class="headerlink" title="对称二叉树"></a>对称二叉树</h1><p><img src="/blog/2022/02/05/offer/isSymmetric.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207125229066"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSymmetric</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> symmetric(root, root);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">symmetric</span><span class="hljs-params">(TreeNode tree1, TreeNode tree2)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (tree1 == <span class="hljs-keyword">null</span> &amp;&amp; tree2 == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">if</span> (tree1 == <span class="hljs-keyword">null</span> || tree2 == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">return</span> tree1.val == tree2.val &amp;&amp; symmetric(tree1.left, tree2.right) &amp;&amp; symmetric(tree1.right, tree2.left);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="调整数组使奇数在偶数之前"><a href="#调整数组使奇数在偶数之前" class="headerlink" title="调整数组使奇数在偶数之前"></a>调整数组使奇数在偶数之前</h1><p><img src="/blog/2022/02/05/offer/exchange.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207131051282"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] exchange(<span class="hljs-keyword">int</span>[] nums) &#123;<br>    <span class="hljs-keyword">int</span> odd = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> even = nums.length - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (odd &lt; even) &#123;<br>        <span class="hljs-keyword">while</span> (odd &lt; even &amp;&amp; (nums[odd] &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) odd++;<br>        <span class="hljs-keyword">while</span> (odd &lt; even &amp;&amp; (nums[even] &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) even--;<br>        <span class="hljs-keyword">int</span> tmp = nums[odd];<br>        nums[odd] = nums[even];<br>        nums[even] = tmp;<br>    &#125;<br>    <span class="hljs-keyword">return</span> nums;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h1><p><img src="/blog/2022/02/05/offer/numOf1.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207132948484"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;<br>        res += n &amp; <span class="hljs-number">1</span>;<br>        n &gt;&gt;= <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>        n &amp;= n - <span class="hljs-number">1</span>;<br>        res++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="顺时针打印矩阵"><a href="#顺时针打印矩阵" class="headerlink" title="顺时针打印矩阵"></a>顺时针打印矩阵</h1><p><img src="/blog/2022/02/05/offer/spiralOrder.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207141115949"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] spiralOrder(<span class="hljs-keyword">int</span>[][] matrix) &#123;<br>    <span class="hljs-keyword">if</span> (matrix == <span class="hljs-keyword">null</span> || matrix.length == <span class="hljs-number">0</span> || matrix[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">0</span>];<br>    &#125;<br>    <span class="hljs-keyword">int</span> rows = matrix.length, columns = matrix[<span class="hljs-number">0</span>].length;<br>    <span class="hljs-keyword">int</span>[] order = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[rows * columns];<br>    <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = columns - <span class="hljs-number">1</span>, top = <span class="hljs-number">0</span>, bottom = rows - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (left &lt;= right &amp;&amp; top &lt;= bottom) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> column = left; column &lt;= right; column++) &#123;<br>            order[index++] = matrix[top][column];<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> row = top + <span class="hljs-number">1</span>; row &lt;= bottom; row++) &#123;<br>            order[index++] = matrix[row][right];<br>        &#125;<br>        <span class="hljs-keyword">if</span> (left &lt; right &amp;&amp; top &lt; bottom) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> column = right - <span class="hljs-number">1</span>; column &gt; left; column--) &#123;<br>                order[index++] = matrix[bottom][column];<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> row = bottom; row &gt; top; row--) &#123;<br>                order[index++] = matrix[row][left];<br>            &#125;<br>        &#125;<br>        left++;<br>        right--;<br>        top++;<br>        bottom--;<br>    &#125;<br>    <span class="hljs-keyword">return</span> order;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="链表中倒数第K个节点"><a href="#链表中倒数第K个节点" class="headerlink" title="链表中倒数第K个节点"></a>链表中倒数第K个节点</h1><p><img src="/blog/2022/02/05/offer/kth.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220207142426403"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">getKthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>    ListNode p1 = head, p2 = head;<br>    <span class="hljs-keyword">while</span> (p1 != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (k-- &lt;= <span class="hljs-number">0</span>) &#123;<br>            p2 = p2.next;<br>        &#125;<br>        p1 = p1.next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> p2;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="数值的整数次方"><a href="#数值的整数次方" class="headerlink" title="数值的整数次方"></a>数值的整数次方</h1><p><img src="/blog/2022/02/05/offer/myPow.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210140744398"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">myPow</span><span class="hljs-params">(<span class="hljs-keyword">double</span> x, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">long</span> b = n;<br>    <span class="hljs-keyword">double</span> res = <span class="hljs-number">1.0</span>;<br>    <span class="hljs-keyword">if</span> (b &lt; <span class="hljs-number">0</span>) &#123;<br>        x = <span class="hljs-number">1</span> / x;<br>        b = -b;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (b &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">if</span> ((b &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) res *= x;<br>        x *= x;<br>        b &gt;&gt;= <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="打印从1到最大的n位数"><a href="#打印从1到最大的n位数" class="headerlink" title="打印从1到最大的n位数"></a>打印从1到最大的n位数</h1><p><img src="/blog/2022/02/05/offer/print.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210140906686"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] printNumbers(<span class="hljs-keyword">int</span> n) &#123;<br>    <span class="hljs-keyword">int</span> size = (<span class="hljs-keyword">int</span>) Math.pow(<span class="hljs-number">10</span>, n) - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) &#123;<br>        res[i] = i + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>大数打印</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] printNumbers2(<span class="hljs-keyword">int</span> n) &#123;<br>    <span class="hljs-keyword">char</span>[] chars = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[]&#123;<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;6&#x27;</span>, <span class="hljs-string">&#x27;7&#x27;</span>, <span class="hljs-string">&#x27;8&#x27;</span>, <span class="hljs-string">&#x27;9&#x27;</span>&#125;;<br>    StringBuilder stringBuilder = <span class="hljs-keyword">new</span> StringBuilder();<br>    <span class="hljs-keyword">int</span> size = (<span class="hljs-keyword">int</span>) Math.pow(<span class="hljs-number">10</span>, n) - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        traceback(i, chars, stringBuilder, res);<br><br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br><span class="hljs-keyword">int</span> idx = <span class="hljs-number">0</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">traceback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num, <span class="hljs-keyword">char</span>[] chars, StringBuilder stringBuilder, <span class="hljs-keyword">int</span>[] res)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (num == <span class="hljs-number">0</span>) &#123;<br>        res[idx++] = Integer.parseInt(stringBuilder.toString());<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : chars) &#123;<br>        <span class="hljs-keyword">if</span> (stringBuilder.length() &gt; <span class="hljs-number">0</span> || c != <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>            stringBuilder.append(c);<br>            traceback(num - <span class="hljs-number">1</span>, chars, stringBuilder, res);<br>            stringBuilder.deleteCharAt(stringBuilder.length() - <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="正则表达式匹配"><a href="#正则表达式匹配" class="headerlink" title="正则表达式匹配"></a>正则表达式匹配</h1><p><img src="/blog/2022/02/05/offer/match.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210141053487"></p>
+<p>方法一：递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isMatch</span><span class="hljs-params">(String s, String p)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> match(s, p, s.length() - <span class="hljs-number">1</span>, p.length() - <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">match</span><span class="hljs-params">(String s, String p, <span class="hljs-keyword">int</span> idx1, <span class="hljs-keyword">int</span> idx2)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (idx2 == -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> idx1 == -<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (p.charAt(idx2) == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>        <span class="hljs-keyword">boolean</span> res = match(s, p, idx1, idx2 - <span class="hljs-number">2</span>);<br>        <span class="hljs-keyword">if</span> (idx1 &gt;= <span class="hljs-number">0</span> &amp;&amp; (p.charAt(idx2 - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;.&#x27;</span> || s.charAt(idx1) == p.charAt(idx2 - <span class="hljs-number">1</span>)))<br>            res |= match(s, p, idx1 - <span class="hljs-number">1</span>, idx2);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (idx1 &gt;= <span class="hljs-number">0</span> &amp;&amp; (s.charAt(idx1) == p.charAt(idx2) || p.charAt(idx2) == <span class="hljs-string">&#x27;.&#x27;</span>))<br>        <span class="hljs-keyword">return</span> match(s, p, idx1 - <span class="hljs-number">1</span>, idx2 - <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>方法二：动态规划</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">dp[i][j] = dp[i][j-<span class="hljs-number">2</span>] or dp[i-<span class="hljs-number">1</span>][j] or dp[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isMatch2</span><span class="hljs-params">(String s, String p)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> len1 = s.length();<br>    <span class="hljs-keyword">int</span> len2 = p.length();<br>    <span class="hljs-keyword">boolean</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[len1 + <span class="hljs-number">1</span>][len2 + <span class="hljs-number">1</span>];<br>    dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= len1; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= len2; j++) &#123;<br>            <span class="hljs-keyword">if</span> (p.charAt(j - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                dp[i][j] = dp[i][j - <span class="hljs-number">2</span>];<br>                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; (p.charAt(j - <span class="hljs-number">2</span>) == <span class="hljs-string">&#x27;.&#x27;</span> || s.charAt(i - <span class="hljs-number">1</span>) == p.charAt(j - <span class="hljs-number">2</span>)))<br>                    dp[i][j] |= dp[i - <span class="hljs-number">1</span>][j];<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; (p.charAt(j - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;.&#x27;</span> || s.charAt(i - <span class="hljs-number">1</span>) == p.charAt(j - <span class="hljs-number">1</span>)))<br>                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[len1][len2];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>优化后：滚动数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isMatch3</span><span class="hljs-params">(String s, String p)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> len1 = s.length();<br>    <span class="hljs-keyword">int</span> len2 = p.length();<br>    <span class="hljs-keyword">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[len2 + <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">boolean</span> old2;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= len1; i++) &#123;<br>        <span class="hljs-keyword">boolean</span> old1 = dp[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">0</span>] = i == <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= len2; j++) &#123;<br>            old2 = dp[j];<br>            dp[j] = <span class="hljs-keyword">false</span>;<br>            <span class="hljs-keyword">if</span> (p.charAt(j - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                dp[j] = dp[j - <span class="hljs-number">2</span>];<br>                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; (p.charAt(j - <span class="hljs-number">2</span>) == <span class="hljs-string">&#x27;.&#x27;</span> || s.charAt(i - <span class="hljs-number">1</span>) == p.charAt(j - <span class="hljs-number">2</span>)))<br>                    dp[j] |= old2;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; (p.charAt(j - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;.&#x27;</span> || s.charAt(i - <span class="hljs-number">1</span>) == p.charAt(j - <span class="hljs-number">1</span>))) dp[j] = old1;<br>            old1 = old2;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[len2];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h1><p><img src="/blog/2022/02/05/offer/reverseList.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210141414281"></p>
+<p>从头到尾</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>&#123;<br>    ListNode pre = <span class="hljs-keyword">null</span>, cur = head, next;<br>    <span class="hljs-keyword">while</span> (cur != <span class="hljs-keyword">null</span>) &#123;<br>        next = cur.next;<br>        cur.next = pre;<br>        pre = cur;<br>        cur = next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> pre;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList2</span><span class="hljs-params">(ListNode head)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> head;<br>    ListNode next = reverseList2(head.next);<br>    head.next.next = head;<br>    head.next = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">return</span> next;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="删除链表到节点"><a href="#删除链表到节点" class="headerlink" title="删除链表到节点"></a>删除链表到节点</h1><p><img src="/blog/2022/02/05/offer/deleteListNode.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210144416239"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">deleteNode</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> val)</span> </span>&#123;<br>    ListNode dummy = <span class="hljs-keyword">new</span> ListNode();<br>    dummy.next = head;<br>    ListNode ptr = dummy;<br>    <span class="hljs-keyword">while</span> (ptr.next != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (ptr.next.val == val) &#123;<br>            ptr.next = ptr.next.next;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        ptr = ptr.next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dummy.next;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="复杂链表的复制"><a href="#复杂链表的复制" class="headerlink" title="复杂链表的复制"></a>复杂链表的复制</h1><p><img src="/blog/2022/02/05/offer/copyList.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210160359865"></p>
+<p>方法一：哈希表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Node <span class="hljs-title">copyRandomList</span><span class="hljs-params">(Node head)</span> </span>&#123;<br>    Map&lt;Node, Node&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>    Node dummy = <span class="hljs-keyword">new</span> Node(-<span class="hljs-number">1</span>);<br>    Node from = head, to = dummy;<br>    <span class="hljs-keyword">while</span> (from != <span class="hljs-keyword">null</span>) &#123;<br>        to.next = <span class="hljs-keyword">new</span> Node(from.val);<br>        to = to.next;<br>        map.put(from, to);<br>        from = from.next;<br>    &#125;<br><br>    from = head;<br>    <span class="hljs-keyword">while</span> (from != <span class="hljs-keyword">null</span>) &#123;<br>        map.get(from).random = map.get(from.random);<br>        from = from.next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dummy.next;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>方法二：S-&gt;S’</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Node <span class="hljs-title">copyRandomList2</span><span class="hljs-params">(Node head)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">for</span> (Node node = head; node != <span class="hljs-keyword">null</span>; node = node.next.next) &#123;<br>        Node nodeNew = <span class="hljs-keyword">new</span> Node(node.val);<br>        nodeNew.next = node.next;<br>        node.next = nodeNew;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (Node node = head; node != <span class="hljs-keyword">null</span>; node = node.next.next) &#123;<br>        node.next.random = node.random == <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">null</span> : node.random.next;<br>    &#125;<br><br>    Node headNew = head.next;<br>    <span class="hljs-keyword">for</span> (Node node = head; node != <span class="hljs-keyword">null</span>; node = node.next) &#123;<br>        Node nodeNew = node.next;<br>        node.next = node.next.next;<br>        nodeNew.next = nodeNew.next == <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">null</span> : nodeNew.next.next;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> headNew;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="最小k个数"><a href="#最小k个数" class="headerlink" title="最小k个数"></a>最小k个数</h1><p><img src="/blog/2022/02/05/offer/mink.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210182301099"></p>
+<p>方法一：堆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] getLeastNumbers(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> k) &#123;<br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[k];<br>    <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> res;<br>    PriorityQueue&lt;Integer&gt; priorityQueue = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;(k, <span class="hljs-keyword">new</span> Comparator&lt;Integer&gt;() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Integer o1, Integer o2)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> o2 - o1;<br>        &#125;<br>    &#125;);<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>        <span class="hljs-keyword">if</span> (i &lt; k) priorityQueue.add(arr[i]);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (arr[i] &lt; priorityQueue.peek()) &#123;<br>            priorityQueue.poll();<br>            priorityQueue.add(arr[i]);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>        res[i] = priorityQueue.poll();<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>方法二：快排</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] getLeastNumbers2(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> k) &#123;<br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[k];<br>    doGetNumbers(res, arr, k, <span class="hljs-number">0</span>, arr.length - <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGetNumbers</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] res, <span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (start &gt; end || k == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">int</span> count = partition(arr, start, end);<br>    <span class="hljs-keyword">if</span> (count &lt;= k) &#123;<br>        <span class="hljs-keyword">int</span> idx = res.length - k;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = idx; i &lt; idx + count; i++) &#123;<br>            res[i] = arr[start++];<br>        &#125;<br>        doGetNumbers(res, arr, k - count, start, end);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        doGetNumbers(res, arr, k, start, start + count - <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> pivot = arr[start];<br>    <span class="hljs-keyword">int</span> i = start;<br>    <span class="hljs-keyword">int</span> j = end;<br>    <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>        <span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; arr[j] &gt;= pivot) j--;<br>        arr[i] = arr[j];<br>        <span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; arr[i] &lt; pivot) i++;<br>        arr[j] = arr[i];<br>    &#125;<br>    arr[i] = pivot;<br>    <span class="hljs-keyword">return</span> i - start + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="最小栈"><a href="#最小栈" class="headerlink" title="最小栈"></a>最小栈</h1><p><img src="/blog/2022/02/05/offer/minStack.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220210182918964"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span> </span>&#123;<br>    Stack&lt;Integer&gt; stack;<br>    Stack&lt;Integer&gt; minStack;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * initialize your data structure here.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MinStack</span><span class="hljs-params">()</span> </span>&#123;<br>        stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>        minStack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>        stack.push(x);<br>        minStack.push(Math.min(x, minStack.isEmpty() ? Integer.MAX_VALUE : minStack.peek()));<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        stack.pop();<br>        minStack.pop();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> stack.peek();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">min</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> minStack.peek();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="数据流中的中位数"><a href="#数据流中的中位数" class="headerlink" title="数据流中的中位数"></a>数据流中的中位数</h1><p><img src="/blog/2022/02/05/offer/midNum.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220211112957477"></p>
+<p>方法：大小根堆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MedianFinder</span> </span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * initialize your data structure here.</span><br><span class="hljs-comment">     */</span><br><br>    PriorityQueue&lt;Integer&gt; minQueue;<br>    PriorityQueue&lt;Integer&gt; maxQueue;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MedianFinder</span><span class="hljs-params">()</span> </span>&#123;<br>        maxQueue = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;(<span class="hljs-keyword">new</span> Comparator&lt;Integer&gt;() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Integer o1, Integer o2)</span> </span>&#123;<br>                <span class="hljs-keyword">return</span> o2 - o1;<br>            &#125;<br>        &#125;);<br>        minQueue = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (maxQueue.size() == minQueue.size()) &#123;<br>            maxQueue.add(num);<br>            minQueue.add(maxQueue.poll());<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            minQueue.add(num);<br>            maxQueue.add(minQueue.poll());<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">findMedian</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> minQueue.size() == maxQueue.size() ? minQueue.peek() : (minQueue.peek() + maxQueue.peek()) / <span class="hljs-number">2.0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="连续子数组最大和"><a href="#连续子数组最大和" class="headerlink" title="连续子数组最大和"></a>连续子数组最大和</h1><p><img src="/blog/2022/02/05/offer/maxSubArray.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220211113642860"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> max = nums[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">int</span> a = nums[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.length; i++) &#123;<br>        a = Math.max(a + nums[i], nums[i]);<br>        max = Math.max(max, a);<br>    &#125;<br>    <span class="hljs-keyword">return</span> max;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二叉搜索树与双向链表"><a href="#二叉搜索树与双向链表" class="headerlink" title="二叉搜索树与双向链表"></a>二叉搜索树与双向链表</h1><p><img src="/blog/2022/02/05/offer/treeToList.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220211123931039"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java">Node pre;<br>Node head;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> Node <span class="hljs-title">treeToDoublyList</span><span class="hljs-params">(Node root)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    inOrder(root);<br>    head.left = pre;<br>    pre.right = head;<br>    <span class="hljs-keyword">return</span> head;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inOrder</span><span class="hljs-params">(Node node)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;<br>    inOrder(node.left);<br>    <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>) head = node;<br>    node.left = pre;<br>    <span class="hljs-keyword">if</span> (pre != <span class="hljs-keyword">null</span>) pre.right = node;<br>    pre = node;<br>    inOrder(node.right);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="栈的压入、弹出序列"><a href="#栈的压入、弹出序列" class="headerlink" title="栈的压入、弹出序列"></a>栈的压入、弹出序列</h1><p><img src="/blog/2022/02/05/offer/stackPush.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220211132217842"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">validateStackSequences</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] pushed, <span class="hljs-keyword">int</span>[] popped)</span> </span>&#123;<br>    Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> num : pushed) &#123;<br>        stack.push(num); <span class="hljs-comment">// num 入栈</span><br>        <span class="hljs-keyword">while</span>(!stack.isEmpty() &amp;&amp; stack.peek() == popped[i]) &#123; <span class="hljs-comment">// 循环判断与出栈</span><br>            stack.pop();<br>            i++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> stack.isEmpty();<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/01/18/algorithm/">
+                        <span class="hidden-mobile">算法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
