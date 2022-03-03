@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/01/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="Java并发">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/Java%E5%B9%B6%E5%8F%91.png">
+<meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
+<meta property="article:modified_time" content="2022-03-02T03:14:38.557Z">
+<meta property="article:author" content="Cherish">
+<meta property="article:tag" content="并发、多线程、Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/Java%E5%B9%B6%E5%8F%91.png">
+  
+  
+  <title>Java并发 - Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java并发">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-27 14:30" pubdate>
+        January 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java并发</h1>
+            
+            <div class="markdown-body">
+              <p>1：创建线程的几种方式<br>实现Runnable接口<br>继承Thread类 重写run方法</p>
+<p>2：线程状态<br>new —–&gt; start ——&gt; runnable<br>runnable——-&gt;wait,park,join——&gt; waiting<br>runnable——-&gt;wait,park,join,sleep—–&gt;timedWaiting<br>runnable——&gt; 获取对象锁失败—–&gt; blocked<br>runnable——-&gt;运行完——-&gt;terminated</p>
+<p>3：synchronized 原理<br>加锁流程：一个对象被创建时，对象默认处于可偏向状态，如果此时一个线程对此对象加锁<br>会对比MarkWord 中对ThreadId 和当前线程对线程Id，如果一致，加锁成功。 如果不一致，升级为轻量级锁<br>轻量级锁首先会在栈帧中创建一个指向锁对象的锁记录LockRecord，<br>然后尝试用cas 替换MarkWord ，如果cas 替换成功，加锁 成功，如果替换不成功，分两种情况，<br>1：如果是自己持有锁，添加一条null锁记录作为重入计数<br>2：如果其他线程持有锁，表明有竞争，进入锁膨胀，首先申请一个Monitor对象，让MarkWord指向<br>，把加锁失败的线程放入Monitor中的EntryList阻塞</p>
+<p>解锁流程：如果栈帧中有null 锁记录，表明有重入，删除null 锁记录，重入次数减一 ，如果没有重入，用cas 恢复MarkWord，<br>如果恢复成功，解锁成功，恢复失败，进入重量级锁解锁流程，把monitor 中的owner 指针置为null，唤醒entryList<br>中阻塞的线程</p>
+<p>4：wait notify notifyAll原理<br>当Owner 线程发现条件不满足时，调用wait  方法进入到 Monitor 的 waitSet 进行等待<br>当调用notify 或 notifyAll 会唤醒waitSet 中等待的线程进入entryList 竞争锁</p>
+<p>5: join 原理  t1.join()  将自己加入到 t1 的waitSet 直到 t1 结束</p>
+<p>6：park unPark 原理<br>_counter 默认为0   调用park()方法，检查_counter,如果为0，将自己加入到_cond 中等待<br>调用unPark() 方法，设置_counter 为1，唤醒_cond 中等待到线程</p>
+<p>7：aqs<br>aqs 是一个抽象队列式同步器，底层维护了一个state变量，一个FIFO的等待队列，以及可能存在的多个<br>condition队列，JUC 下多个同步工具，比如ReentrantLock，CountDownLatch，Semaphore 都是基于此实现</p>
+<p>8：ReentrantLock 原理<br>加锁流程：当调用ReentrantLock的lock()方法时，首先会调用非公平锁的lock()，使用cas操作把state 设置为1，<br>如果设置成功，将占有线程设置为当前线程，获取锁成功。 如果设置失败，判断是否是当前线程占有锁，<br>如果是，state+1 ，获取锁成功   否则，获取锁失败 获取锁失败后，将自己封装成一个Node节点加入到等待队列中去，将自己前驱节点的<br>状态改为signal，调用park()方法阻塞</p>
+<p>解锁流程：当调用ReentrantLock的unlock()方法时，首先会调用非公平锁的release()方法，如果是重入状态，state-1<br>否则，将持有线程设置为null，state设置为0，唤醒头节点后的第一个节点来竞争锁</p>
+<p>await流程：当调用ConditionObject的 await() 方法时，会将当前线程封装成一个Node 节点，状态为Condition，<br>唤醒头节点后第一个节点</p>
+<p>signal流程：当调用ConditionLock的signal方法，会唤醒等待队列中的第一个节点去竞争锁</p>
+<p>9：ReentrantReadWriteLock 原理<br>读占用state高十六位，写占用state低十六位，读读并发，锁降级47</p>
+<p>10：volatile<br>指令重排序：jvm 在不改变运行结果的前提下，对指令执行的顺序进行调整，以提高程序运行的效率<br>volatile 可以防止指令重排序，保证共享变量的可见性<br>volatile 写会在后面添加写屏障，写屏障之前的代码不能重排序到写屏障之后，同时写屏障可以保证写屏障之前<br>的共享变量同步到主存<br>volatile 读会在前面添加读屏障，读屏障之后的代码不能重排序到读屏障之前，同时读屏障可以保证读屏障之后对<br>共享变量的读取是主存中的最新数据</p>
+<p>11：cas 操作<br>compareAndSet是个原子性操作，赋值之前会将旧的预期值和内存位置值进行比较，如果相对才会赋值新值<br>应用-原子类</p>
+<p>12: HashMap  ConcurrentHashMap<br>HashMap<br>1：判断table 是否为null，或者length == 0 ，如果是，就进行resize扩容<br>2：根据key找到bucket   hashcode ^ (hash&gt;&gt;&gt;16)   hash &amp; n-1<br>3: 如果不发生hash冲突，直接插入到bucket 中，如果发生冲突，判读节点是否为treeNode，如果是，直接插入红黑树<br>否则遍历链表，如果在遍历过程中，key 存在，则覆盖，否则把entry 插入到链表尾部，插入后判读链表长度是否大于阈值，<br>如果大于阈值，则转换为红黑树<br>4：插入成功后判断hashmap 容量是否大于阈值，如果大于，就进行resize扩容</p>
+<p>1.7 的HashMap(头插法) resize扩容操作可能会导致死链<br>并发安全的map HashTable，ConcurrentHashMap</p>
+<p>ConcurrentHashMap  通过cas 操作和对头节点加锁来保证线程安全<br>1：初始化Map时，使用cas操作保证只有一个线程进行初始化<br>2：插入时，如果Bucket 中没有entity，使用cas操作进行插入，如果有entity，锁住头节点进行插入<br>4：扩容时，锁住头节点进行transfer，transfer 完成的链表或红黑树，将头节点标记为ForwardingNode 表示转移完成</p>
+<p>jdk 1.7  segment分段锁，segment继承自ReentrantLock，每个segment 锁住一些bucket<br>缺点：segment 默认大小为16，不可以改变，非懒惰加载</p>
+<p>13 线程池<br>构造参数： 核心线程数，最大线程数，工作线程存活时间，时间的单位，阻塞队列，线程工程，拒绝策略<br>线程池状态： Running（创建），Shutdown（调用Shutdown方法），<br>Stop（调用ShutDownNow），Tidying（所有任务完成，即将进入终结），Terminated（终结）<br>提交任务，先懒惰创建核心线程，当核心线程达到值定的核心线程数时，再提交任务，将任务加入到阻塞队列，当阻塞队列满之后<br>再提交任务，创建救急线程执行任务，救急线程+核心线程 不能大于最大线程数，救急线程有存活时间，当达到最大线程数<br>再提交任务，执行拒绝策略<br>AbortPolicy  抛异常<br>DiscardPolicy 直接丢弃<br>DiscardOldestPolicy  丢弃最早入队的<br>CallerRunsPolicy  由调用者线程来执行</p>
+<p>ShutDown，ShutDownNow<br>ShutDown 将线程状态改为ShutDown，不会接受新线程，等待所有提交的任务执行完毕<br>ShutDownNow 将线程池状态改为Stop，不会接受新任务，中断正在执行的任务，队列中的任务作为结果返回</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/%E5%B9%B6%E5%8F%91%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81Java/">并发、多线程、Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/01/18/algorithm/">
+                        <span class="hidden-mobile">算法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

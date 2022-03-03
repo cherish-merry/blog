@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="Java基础">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/Java%E5%9F%BA%E7%A1%80.jpeg">
+<meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
+<meta property="article:modified_time" content="2022-03-03T06:49:42.942Z">
+<meta property="article:author" content="Cherish">
+<meta property="article:tag" content="Java基础">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/Java%E5%9F%BA%E7%A1%80.jpeg">
+  
+  
+  <title>Java基础 - Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-27 14:30" pubdate>
+        January 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      95 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java基础</h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-基本数据类型"><a href="#1-基本数据类型" class="headerlink" title="1  基本数据类型"></a>1  基本数据类型</h2><p>boolean 1bit<br>byte    8bit<br>char    16bit<br>short    16bit<br>int    32bit<br>long    64bit<br>float    32bit<br>double  64bit</p>
+<h2 id="2-String"><a href="#2-String" class="headerlink" title="2 String"></a>2 String</h2><h3 id="2-1-String类能被继承吗，为什么。"><a href="#2-1-String类能被继承吗，为什么。" class="headerlink" title="2.1 String类能被继承吗，为什么。"></a>2.1 String类能被继承吗，为什么。</h3><p>不能,<code>String </code>类被<code>final</code>关键字修饰</p>
+<h3 id="2-2-String，StringBuffer，StringBuilder的区别。"><a href="#2-2-String，StringBuffer，StringBuilder的区别。" class="headerlink" title="2.2 String，StringBuffer，StringBuilder的区别。"></a>2.2 String，StringBuffer，StringBuilder的区别。</h3><p><code>String</code> 不可变,每次操作生成新的<code>String</code>对象<br><code>StringBuffer</code> 和 <code>StringBuilder</code> 类的对象能够被多次的修改，并且不产生新的未使用对象<br><code>StringBuilder</code> 线程不安全,<code>StringBuffer</code>线程安全</p>
+<h3 id="2-3-字符串常量池"><a href="#2-3-字符串常量池" class="headerlink" title="2.3 字符串常量池"></a>2.3 字符串常量池</h3><p>为了提高匹配速度，即更快的查找某个字符串是否存在于常量池，Java在设计字符串常量池的时候，还搞了一张<code>stringtable</code>， <code>stringtable</code> 有点类似于我们的<code>hashtable</code>，里面保存了字符串的引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123; <br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123; <br>		String str1 = <span class="hljs-string">&quot;abc&quot;</span>; <br>		String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>); <br>		System.out.println(str1 == str2); <span class="hljs-comment">//false</span><br>		<br>		String str3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>); <br>		System.out.println(str3 == str2); <span class="hljs-comment">//false</span><br>		<br>		String str4 = <span class="hljs-string">&quot;a&quot;</span> + <span class="hljs-string">&quot;b&quot;</span>; <br>		System.out.println(str4 == <span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">//true</span><br>		<br>		<span class="hljs-keyword">final</span> String s = <span class="hljs-string">&quot;a&quot;</span>; <br>		String str5 = s + <span class="hljs-string">&quot;b&quot;</span>; <br>		System.out.println(str5 == <span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">//true</span><br>		<br>		String s1 = <span class="hljs-string">&quot;a&quot;</span>; String s2 = <span class="hljs-string">&quot;b&quot;</span>; <br>		String str6 = s1 + s2; <br>		System.out.println(str6 == <span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">//false</span><br>		<br>		String str7 = <span class="hljs-string">&quot;abc&quot;</span>.substring(<span class="hljs-number">0</span>， <span class="hljs-number">2</span>); <br>		System.out.println(str7 == <span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">//false</span><br>		<br>		String str8 = <span class="hljs-string">&quot;abc&quot;</span>.toUpperCase(); <br>		System.out.println(str8 == <span class="hljs-string">&quot;ABC&quot;</span>); <span class="hljs-comment">//false</span><br>		<br>		String s3 = <span class="hljs-string">&quot;ab&quot;</span>; <br>		String s4 = <span class="hljs-string">&quot;ab&quot;</span> + getString(); <br>		System.out.println(s3 == s4); <span class="hljs-comment">//false</span><br>		<br>		String s5 = <span class="hljs-string">&quot;a&quot;</span>; <br>		String s6 = <span class="hljs-string">&quot;abc&quot;</span>; <br>		String s7 = s5 + <span class="hljs-string">&quot;bc&quot;</span>; <br>		System.out.println(s6 == s7.intern()); <span class="hljs-comment">//true</span><br>	&#125;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">getString</span><span class="hljs-params">()</span></span>&#123; <br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;c&quot;</span>; <br>	&#125; <br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String str1 = <span class="hljs-string">&quot;abc&quot;</span>; <br>System.out.println(str1 == <span class="hljs-string">&quot;abc&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1：栈中开辟一块空间存放引用str1</li>
+<li>2：String池中开辟一块空间，存放String常量”abc”</li>
+<li>3：引用str1指向池中String常量”abc”</li>
+<li>4：str1所指代的地址即常量”abc”所在地址，输出为true</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>); <br>System.out.println(str2 == <span class="hljs-string">&quot;abc&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1： 栈中开辟一块空间存放引用str2</li>
+<li>2：堆中开辟一块空间存放一个新建的String对象”abc”</li>
+<li>3：引用str2指向堆中的新建的String对象”abc”</li>
+<li>4：str2所指代的对象地址为堆中地址，而常量”abc”地址在池中，输出为false</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>); <br>String str3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>);<br>System.out.println(str3 == str2);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1：栈中开辟一块空间存放引用str3</li>
+<li>2：堆中开辟一块新空间存放另外一个(不同于str2所指)新建的String对象</li>
+<li>3：引用str3指向另外新建的那个String对象</li>
+<li>4：str3和str2指向堆中不同的String对象，地址也不相同，输出为false</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String str4 = <span class="hljs-string">&quot;a&quot;</span> + <span class="hljs-string">&quot;b&quot;</span>; <br>System.out.println(str4 == <span class="hljs-string">&quot;ab&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1： 栈中开辟一块空间存放引用str4</li>
+<li>2：根据编译器合并已知量的优化功能，池中开辟一块空间，存放合并后的String常量”ab”</li>
+<li>3：引用str4指向池中常量”ab”</li>
+<li>4：str4所指即池中常量”ab”，输出为true</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">String s1 = <span class="hljs-string">&quot;a&quot;</span>;<br>String s2 = <span class="hljs-string">&quot;b&quot;</span>; <br>String str6 = s1 + s2; <br>System.out.println(str6 == <span class="hljs-string">&quot;ab&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1：栈中开辟一块中间存放引用s1，s1指向池中String常量”a”</li>
+<li>2：栈中开辟一块中间存放引用s2，s2指向池中String常量”b”</li>
+<li>3： 栈中开辟一块中间存放引用str6</li>
+<li>4：s1 + s2通过StringBuilder的最后一步toString()方法还原一个新的String对象”ab”，因此 堆中开辟一块空间存放此对象</li>
+<li>5：引用str6指向堆中(s1 + s2)所还原的新String对象</li>
+<li>6： str6指向的对象在堆中，而常量”ab”在池中，输出为false</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String str7 = <span class="hljs-string">&quot;abc&quot;</span>.substring(<span class="hljs-number">0</span>， <span class="hljs-number">2</span>); <br>System.out.println(str7 == <span class="hljs-string">&quot;ab&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>栈中开辟一块空间存放引用str7</li>
+<li>substring()方法还原一个新的String对象”ab”（不同于str6所指），堆中开辟一块空间存放此 对象</li>
+<li>引用str7指向堆中的新String对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String str8 = <span class="hljs-string">&quot;abc&quot;</span>.toUpperCase();<br>System.out.println(str8 == <span class="hljs-string">&quot;ABC&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>1：栈中开辟一块空间存放引用str8</li>
+<li>2：toUpperCase()方法还原一个新的String对象”ABC”，池中并未开辟新的空间存放String常 量”ABC”</li>
+<li>3：引用str8指向堆中的新String对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String a = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;haha&quot;</span>);<br>System.out.println(a.intern() == a);<span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+
+<p>String的Intern方法详解<br>intern的作用<br>intern的作用是把new出来的字符串的引用添加到stringtable中，java会先计算string的hashcode，查找stringtable中是否已经有string对应的引用了，如果有返回引用（地址），然后没有把字符串的地址放到stringtable中，并返回字符串的引用（地址）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String a = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;haha&quot;</span>);<br>System.out.println(a.intern() == a);<span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+
+
+<p>因为有双引号括起来的字符串，所以会把ldc命令，即”haha”会被我们添加到字符串常量池，它的引用是string的char数组的地址，会被我们添加到stringtable中。所以a.intern的时候，返回的其实是string中的char数组的地址，和a的string实例化地址肯定是不一样的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String e = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;jo&quot;</span>) + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;hn&quot;</span>); <br>System.out.println(e.intern() == e);<span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<p>new String(“jo”) + new String(“hn”)实际上会转为stringbuffer的append 然后tosring()出来，实际上是new 一个新的string出来。在这个过程中，并没有双引号括起john，也就是说并不会执行ldc然后把john的引用添加到stringtable中，所以intern的时候实际就是把新的string地址（即e的地址）添加到stringtable中并且返回回来。</p>
+<h2 id="3-Object"><a href="#3-Object" class="headerlink" title="3 Object"></a>3 Object</h2><h3 id="3-1-getClass"><a href="#3-1-getClass" class="headerlink" title="3.1 getClass()"></a>3.1 getClass()</h3><p>​    获取类对象</p>
+<h3 id="3-2-hashCode"><a href="#3-2-hashCode" class="headerlink" title="3.2 hashCode()"></a>3.2 hashCode()</h3><p>返回当前对象的hashCode值，int</p>
+<p>对于hashCode有以下几点约束</p>
+<ul>
+<li><p>在 Java 应用程序执行期间，在对同一对象多次调用 hashCode 方法时，必须一致地返回相同的整数。</p>
+</li>
+<li><p>如果两个对象 x.equals(y) 方法返回true，则x、y这两个对象的hashCode必须相等。</p>
+</li>
+<li><p>如果两个对象x.equals(y) 方法返回false，则x、y这两个对象的hashCode可以相等也可以不等。</p>
+</li>
+<li><p>默认的hashCode是将内存地址转换为的hash值，重写过后就是自定义的计算方式；也可以通过System.identityHashCode(Object)来返回原本的hashCode。</p>
+<p>总的来说，Java中的集合（Collection）有两类，一类是List，再有一类是Set。前者集合内的元素是有序的，元素可以重复；后者元素无序，但元素不可重复。这里就引出一个问题：要想保证元素不重复，可两个元素是否重复应该依据什么来判断呢？<br>  这就是Object.equals方法了。但是，如果每增加一个元素就检查一次，那么当元素很多时，后添加到集合中的元素比较的次数就非常多了。也就是说，如果集合中现在已经有1000个元素，那么第1001个元素加入集合时，它就要调用1000次equals方法。这显然会大大降低效率。<br>  于是，Java采用了哈希表的原理。哈希（Hash）实际上是个人名，由于他提出一哈希算法的概念，所以就以他的名字命名了。哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上，初学者可以简单理解，hashCode方法实际上返回的就是对象存储的物理地址（实际可能并不是）。<br>  这样一来，当集合要添加新的元素时，先调用这个元素的hashCode方法，就一下子能定位到它应该放置的物理位置上。如果这个位置上没有元素，它就可以直接存储在这个位置上，不用再进行任何比较了；如果这个位置上已经有元素了，就调用它的equals方法与新元素进行比较，相同的话就不存了，不相同就散列其它的地址。所以这里存在一个冲突解决的问题。这样一来实际调用equals方法的次数就大大降低了，几乎只需要一两次。  </p>
+</li>
+</ul>
+<p><strong>相等（相同）的对象必须具有相等的哈希码（或者散列码），为什么？</strong></p>
+<p> 想象一下，假如两个Java对象A和B，A和B相等（eqauls结果为true），但A和B的哈希码不同，则A和B存入HashMap时的哈希码计算得到的HashMap内部数组位置索引可能不同，那么A和B很有可能允许同时存入HashMap，显然相等/相同的元素是不允许同时存入HashMap，HashMap不允许存放重复元素。</p>
+<p> <strong>两个对象的hashCode相同，它们并不一定相同</strong></p>
+<p> 也就是说，不同对象的hashCode可能相同；假如两个Java对象A和B，A和B不相等（eqauls结果为false），但A和B的哈希码相等，将A和B都存入HashMap时会发生哈希冲突，也就是A和B存放在HashMap内部数组的位置索引相同这时HashMap会在该位置建立一个链接表，将A和B串起来放在该位置，显然，该情况不违反HashMap的使用原则，是允许的。当然，哈希冲突越少越好，尽量采用好的哈希算法以避免哈希冲突。</p>
+<h3 id="3-3-equals"><a href="#3-3-equals" class="headerlink" title="3.3 equals()"></a>3.3 equals()</h3><p><code>equals()</code>方法是用来判断其他的对象是否和该对象相等.</p>
+<p> equals()方法在object类中定义如下： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;  <br>    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);  <br>&#125;  <br></code></pre></td></tr></table></figure>
+
+<p>很明显是对两个对象的地址值进行的比较（即比较引用是否相同）。但是我们知道，<code>String</code> 、<code>Math</code>、<code>Integer</code>、<code>Double</code>等这些封装类在使用<code>equals()</code>方法时，已经覆盖了<code>object</code>类的equals()方法，基于内容进行比较。</p>
+<p> 比如在<code>String</code>类中如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;  <br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;  <br>    &#125;  <br>    <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;  <br>        String anotherString = (String)anObject;  <br>        <span class="hljs-keyword">int</span> n = count;  <br>        <span class="hljs-keyword">if</span> (n == anotherString.count) &#123;  <br>            <span class="hljs-keyword">char</span> v1[] = value;  <br>            <span class="hljs-keyword">char</span> v2[] = anotherString.value;  <br>            <span class="hljs-keyword">int</span> i = offset;  <br>            <span class="hljs-keyword">int</span> j = anotherString.offset;  <br>            <span class="hljs-keyword">while</span> (n– != <span class="hljs-number">0</span>) &#123;  <br>                <span class="hljs-keyword">if</span> (v1[i++] != v2[j++])  <br>                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;  <br>            &#125;  <br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;  <br>&#125;  <br></code></pre></td></tr></table></figure>
+
+<h3 id="3-4-clone"><a href="#3-4-clone" class="headerlink" title="3.4 clone()"></a>3.4 clone()</h3><p>此方法返回当前对象的一个副本</p>
+<p>子类需要实现<code>Cloneable</code> 接口，如果没实现，会抛出<code>CloneNotSupportedException</code></p>
+<p>浅拷贝（拷贝引用）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-keyword">private</span> String name;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.clone();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age, String name)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.age = age;<br>        <span class="hljs-keyword">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>        Person person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">18</span>, <span class="hljs-string">&quot;zs&quot;</span>);<br>        Person clone = (Person) person.clone();<br>        System.out.println(clone == person); <span class="hljs-comment">//false</span><br>        System.out.println(person.age == clone.age); <span class="hljs-comment">//true</span><br>        System.out.println(person.name == clone.name); <span class="hljs-comment">//true</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>深拷贝（拷贝值）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-keyword">private</span> String name;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>        Person person = (Person) <span class="hljs-keyword">super</span>.clone();<br>        person.name = <span class="hljs-keyword">new</span> String(name);<br>        <span class="hljs-keyword">return</span> person;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age, String name)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.age = age;<br>        <span class="hljs-keyword">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>        Person person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">18</span>, <span class="hljs-string">&quot;zs&quot;</span>);<br>        Person clone = (Person) person.clone();<br>        System.out.println(clone == person); <span class="hljs-comment">//false</span><br>        System.out.println(person.age == clone.age); <span class="hljs-comment">//true</span><br>        System.out.println(person.name == clone.name); <span class="hljs-comment">//false</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-5-toString"><a href="#3-5-toString" class="headerlink" title="3.5 toString()"></a>3.5 toString()</h3><p>子类可重写，默认的<code>toString</code>方法，只是将当前类的全限定性类名+@+十六进制的hashCode值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getClass().getName() + <span class="hljs-string">&quot;@&quot;</span> + Integer.toHexString(hashCode());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-6-wait-、wait-long-、wait-long-int"><a href="#3-6-wait-、wait-long-、wait-long-int" class="headerlink" title="3.6 wait()、wait(long)、wait(long,int)"></a>3.6 wait()、wait(long)、wait(long,int)</h3><p>这三个方法是用来 线程间通信用 的，作用是 阻塞当前线程 ，等待其他线程调用<code>notify</code>()、<code>notifyAll</code>()方法将其唤醒。</p>
+<p>注意：</p>
+<ol>
+<li>此方法只能在当前线程获取到对象的锁监视器之后才能调用，否则会抛出·异常。</li>
+<li>调用<code>wait</code>方法，线程会将锁监视器进行释放；而<code>Thread.sleep</code>，<code>Thread.yield</code>并不会释放锁 。<ol>
+<li><code>wait</code>方法会一直阻塞，直到其他线程调用当前对象的<code>notify</code>()、<code>notifyAll()</code>方法将其唤醒；而<code>wait(long)</code>是等待给定超时时间内（单位毫秒），如果还没有调用<code>notify()</code>、<code>nofiyAll()</code>会自动唤醒；<code>waite(long,int)</code>如果第二个参数大于0并且小于999999，则第一个参数+1作为超时时间；</li>
+</ol>
+</li>
+</ol>
+<h3 id="3-7-notify-、notifyAll"><a href="#3-7-notify-、notifyAll" class="headerlink" title="3.7 notify()、notifyAll()"></a>3.7 notify()、notifyAll()</h3><p>如果当前线程获得了当前对象锁，调用<code>wait</code>方法，将锁释放并阻塞；这时另一个线程获取到了此对象锁，并调用此对象的<code>notify()</code>、<code>notifyAll()</code>方法将之前的线程唤醒。 </p>
+<p> <code>notify()</code> 随机唤醒之前在当前对象上调用wait方法的一个线程</p>
+<p><code>notifyAll()</code>  唤醒所有之前在当前对象上调用wait方法的线程</p>
+<h3 id="3-8-finalize"><a href="#3-8-finalize" class="headerlink" title="3.8 finalize()"></a>3.8 finalize()</h3><p>此方法是在垃圾回收之前，JVM会调用此方法来清理资源。此方法可能会将对象重新置为可达状态，导致JVM无法进行垃圾回收。</p>
+<p>finalize()方法具有如下4个特点：</p>
+<ol>
+<li>永远不要主动调用某个对象的finalize()方法，该方法由垃圾回收机制自己调用；</li>
+<li>finalize()何时被调用，是否被调用具有不确定性；</li>
+<li>当JVM执行可恢复对象的finalize()可能会将此对象重新变为可达状态；</li>
+<li>当JVM执行finalize()方法时出现异常，垃圾回收机制不会报告异常，程序继续执行。</li>
+</ol>
+<h2 id="4-集合"><a href="#4-集合" class="headerlink" title="4 集合"></a>4 集合</h2><p><img src="/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/collection.png" srcset="/blog/img/loading.gif" lazyload alt="collection"></p>
+<h3 id="4-1-List"><a href="#4-1-List" class="headerlink" title="4.1 List"></a>4.1 List</h3><p>ArrayList和LinkedList有什么区别?<br>ArrayList 底层用数组实现, LinkedList底层链表实现<br>ArrayList 适合随机访问时用,LinkedList适合插入时用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+<p>ArrayList 扩容，大小变为原来的1.5倍</p>
+<h3 id="4-2-Map"><a href="#4-2-Map" class="headerlink" title="4.2 Map"></a>4.2 Map</h3><p>HashMap 实现原理</p>
+<p>基于数组+链表+红黑树</p>
+<p><strong>插入流程</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-keyword">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)<br>		n = (tab = resize()).length;<br></code></pre></td></tr></table></figure>
+
+<p>如果table 为空就行<code>resize()</code>扩容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-keyword">null</span>)<br>    tab[i] = newNode(hash, key, value, <span class="hljs-keyword">null</span>);<br></code></pre></td></tr></table></figure>
+
+<p>根据<code>hash</code>码找到<code>Node</code> 在数组中的下标，如果该下标下没有<code>Node</code>，直接插入到该下标</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p <span class="hljs-keyword">instanceof</span> TreeNode)<br>    e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="hljs-keyword">this</span>, tab, hash, key, value);<br></code></pre></td></tr></table></figure>
+
+<p>否则，判断节点类型是不是<code>TreeNode</code>，如果是，插入到红黑树中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> binCount = <span class="hljs-number">0</span>; ; ++binCount) &#123;<br>    <span class="hljs-keyword">if</span> ((e = p.next) == <span class="hljs-keyword">null</span>) &#123;<br>        p.next = newNode(hash, key, value, <span class="hljs-keyword">null</span>);<br>        <span class="hljs-keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="hljs-number">1</span>) <span class="hljs-comment">// -1 for 1st</span><br>            treeifyBin(tab, hash);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;<br>        ((k = e.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))<br>        <span class="hljs-keyword">break</span>;<br>    p = e;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果不是，插入到链表尾部，插入完成后判断链表长度是否达到树化阈值<code>TREEIFY_THRESHOLD</code>，如果达到，将链表转化成红黑树</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (++size &gt; threshold)<br>    resize();<br></code></pre></td></tr></table></figure>
+
+<p>插入完成后，判断节点个数是否大于扩容阈值<code>threshold</code>，如果大于，进行扩容</p>
+<p><strong>扩容流程(1.8)</strong></p>
+<ul>
+<li>capacity 即容量，默认16。</li>
+<li>loadFactor 加载因子，默认是0.75</li>
+<li>threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">newCap = DEFAULT_INITIAL_CAPACITY;<br>newThr = (<span class="hljs-keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">HashMap(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">tableSizeFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cap)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = cap - <span class="hljs-number">1</span>;<br>    n |= n &gt;&gt;&gt; <span class="hljs-number">1</span>;<br>    n |= n &gt;&gt;&gt; <span class="hljs-number">2</span>;<br>    n |= n &gt;&gt;&gt; <span class="hljs-number">4</span>;<br>    n |= n &gt;&gt;&gt; <span class="hljs-number">8</span>;<br>    n |= n &gt;&gt;&gt; <span class="hljs-number">16</span>;<br>    <span class="hljs-keyword">return</span> (n &lt; <span class="hljs-number">0</span>) ? <span class="hljs-number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>指定<code>initialCapacity</code>时，大小为大于<code>initialCapacity</code>的2^n</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-keyword">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)<br>		n = (tab = resize()).length;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="hljs-keyword">new</span> Node[newCap];<br></code></pre></td></tr></table></figure>
+
+<p>第一次插入元素时，触发resize()，创建Node数组 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (++size &gt; threshold)<br>    resize();<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">newCap = oldCap &lt;&lt; <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (oldTab != <span class="hljs-keyword">null</span>) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; oldCap; ++j) &#123;<br>        Node&lt;K,V&gt; e;<br>        <span class="hljs-keyword">if</span> ((e = oldTab[j]) != <span class="hljs-keyword">null</span>) &#123;<br>            oldTab[j] = <span class="hljs-keyword">null</span>;<br>            <span class="hljs-keyword">if</span> (e.next == <span class="hljs-keyword">null</span>)<br>                newTab[e.hash &amp; (newCap - <span class="hljs-number">1</span>)] = e;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> TreeNode)<br>                ((TreeNode&lt;K,V&gt;)e).split(<span class="hljs-keyword">this</span>, newTab, j, oldCap);<br>            <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// preserve order</span><br>                Node&lt;K,V&gt; loHead = <span class="hljs-keyword">null</span>, loTail = <span class="hljs-keyword">null</span>;<br>                Node&lt;K,V&gt; hiHead = <span class="hljs-keyword">null</span>, hiTail = <span class="hljs-keyword">null</span>;<br>                Node&lt;K,V&gt; next;<br>                <span class="hljs-keyword">do</span> &#123;<br>                    next = e.next;<br>                    <span class="hljs-keyword">if</span> ((e.hash &amp; oldCap) == <span class="hljs-number">0</span>) &#123;<br>                        <span class="hljs-keyword">if</span> (loTail == <span class="hljs-keyword">null</span>)<br>                            loHead = e;<br>                        <span class="hljs-keyword">else</span><br>                            loTail.next = e;<br>                        loTail = e;<br>                    &#125;<br>                    <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-keyword">if</span> (hiTail == <span class="hljs-keyword">null</span>)<br>                            hiHead = e;<br>                        <span class="hljs-keyword">else</span><br>                            hiTail.next = e;<br>                        hiTail = e;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">while</span> ((e = next) != <span class="hljs-keyword">null</span>);<br>                <span class="hljs-keyword">if</span> (loTail != <span class="hljs-keyword">null</span>) &#123;<br>                    loTail.next = <span class="hljs-keyword">null</span>;<br>                    newTab[j] = loHead;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (hiTail != <span class="hljs-keyword">null</span>) &#123;<br>                    hiTail.next = <span class="hljs-keyword">null</span>;<br>                    newTab[j + oldCap] = hiHead;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>Node</code> 个数大于阈值<code>threshold</code>时，进行扩容，容量大小为原来的两倍，创建<code>newTab</code>后进行数据迁移</p>
+<p>遍历<code>oldTab</code>，重新计算下标，插入到<code>newTab</code>，新下标要么是原下标，要么是原下标的两倍(数组大小为2^n)。</p>
+<h2 id="5-异常"><a href="#5-异常" class="headerlink" title="5 异常"></a>5 异常</h2><p><img src="/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/exception.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h3 id="5-1-Error"><a href="#5-1-Error" class="headerlink" title="5.1 Error"></a>5.1 Error</h3><p>是程序中无法处理的错误，表示运行应用程序中出现了严重的错误。此类错误一般表示代码运行时JVM出现问题。通常有<code>Virtual MachineError</code>（虚拟机运行错误）、<code>NoClassDefFoundError</code>（类定义错误）等。比如说当jvm耗完可用内存时，将出现<code>OutOfMemoryError</code>。此类错误发生时，JVM将终止线程。这些错误是不可查的，非代码性错误。因此，当此类错误发生时，应用不应该去处理此类错误。</p>
+<h3 id="5-2-Exception"><a href="#5-2-Exception" class="headerlink" title="5.2 Exception"></a>5.2 Exception</h3><p>程序本身可以捕获并且可以处理的异常。</p>
+<p>Exception这种异常又分为两类：运行时异常和编译异常。</p>
+<p>1、运行时异常(不受检异常)：<code>RuntimeException</code>类极其子类表示JVM在运行期间可能出现的错误。比如说试图使用空值对象的引用（<code>NullPointerException</code>）、数组下标越界（<code>ArrayIndexOutBoundException</code>）。此类异常属于不可查异常，一般是由程序逻辑错误引起的，在程序中可以选择捕获处理，也可以不处理。</p>
+<p>2、编译异常(受检异常)：<code>Exception</code>中除<code>RuntimeException</code>极其子类之外的异常。如果程序中出现此类异常，比如说<code>IOException</code>，必须对该异常进行处理，否则编译不通过。在程序中，通常不会自定义该类异常，而是直接使用系统提供的异常类。</p>
+<h2 id="6-IO"><a href="#6-IO" class="headerlink" title="6 IO"></a>6 IO</h2><p><img src="/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/io.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h2 id="7-反射"><a href="#7-反射" class="headerlink" title="7 反射"></a>7 反射</h2><p><strong>反射的原理，获取类对象的三种方式。</strong><br>原理：操作.class字节码文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">A.class<br>a.getClass()<br>Class.forName();<br></code></pre></td></tr></table></figure>
+
+<p><strong>动态代理的几种实现方式，优缺点</strong><br>                                 Jdk动态代理                     Cglib动态代理<br>实现接口                        需要                                    不需要<br>生成字节码文件            生成                                    不生成<br>速度                                快                                            慢</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/Netty/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IO模型、Netty</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="hidden-mobile">Java并发</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
