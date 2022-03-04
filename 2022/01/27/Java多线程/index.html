@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cherish-merry.github.io/blog/img/Java%E5%B9%B6%E5%8F%91.png">
 <meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-03-02T03:14:38.557Z">
+<meta property="article:modified_time" content="2022-03-04T09:09:45.616Z">
 <meta property="article:author" content="Cherish">
 <meta property="article:tag" content="并发、多线程、Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      6.3k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26 分钟
+      53 分钟
     </span>
   
 
@@ -252,20 +252,150 @@
             <h1 style="display: none">Java并发</h1>
             
             <div class="markdown-body">
-              <p>1：创建线程的几种方式<br>实现Runnable接口<br>继承Thread类 重写run方法</p>
-<p>2：线程状态<br>new —–&gt; start ——&gt; runnable<br>runnable——-&gt;wait,park,join——&gt; waiting<br>runnable——-&gt;wait,park,join,sleep—–&gt;timedWaiting<br>runnable——&gt; 获取对象锁失败—–&gt; blocked<br>runnable——-&gt;运行完——-&gt;terminated</p>
-<p>3：synchronized 原理<br>加锁流程：一个对象被创建时，对象默认处于可偏向状态，如果此时一个线程对此对象加锁<br>会对比MarkWord 中对ThreadId 和当前线程对线程Id，如果一致，加锁成功。 如果不一致，升级为轻量级锁<br>轻量级锁首先会在栈帧中创建一个指向锁对象的锁记录LockRecord，<br>然后尝试用cas 替换MarkWord ，如果cas 替换成功，加锁 成功，如果替换不成功，分两种情况，<br>1：如果是自己持有锁，添加一条null锁记录作为重入计数<br>2：如果其他线程持有锁，表明有竞争，进入锁膨胀，首先申请一个Monitor对象，让MarkWord指向<br>，把加锁失败的线程放入Monitor中的EntryList阻塞</p>
-<p>解锁流程：如果栈帧中有null 锁记录，表明有重入，删除null 锁记录，重入次数减一 ，如果没有重入，用cas 恢复MarkWord，<br>如果恢复成功，解锁成功，恢复失败，进入重量级锁解锁流程，把monitor 中的owner 指针置为null，唤醒entryList<br>中阻塞的线程</p>
-<p>4：wait notify notifyAll原理<br>当Owner 线程发现条件不满足时，调用wait  方法进入到 Monitor 的 waitSet 进行等待<br>当调用notify 或 notifyAll 会唤醒waitSet 中等待的线程进入entryList 竞争锁</p>
-<p>5: join 原理  t1.join()  将自己加入到 t1 的waitSet 直到 t1 结束</p>
-<p>6：park unPark 原理<br>_counter 默认为0   调用park()方法，检查_counter,如果为0，将自己加入到_cond 中等待<br>调用unPark() 方法，设置_counter 为1，唤醒_cond 中等待到线程</p>
-<p>7：aqs<br>aqs 是一个抽象队列式同步器，底层维护了一个state变量，一个FIFO的等待队列，以及可能存在的多个<br>condition队列，JUC 下多个同步工具，比如ReentrantLock，CountDownLatch，Semaphore 都是基于此实现</p>
-<p>8：ReentrantLock 原理<br>加锁流程：当调用ReentrantLock的lock()方法时，首先会调用非公平锁的lock()，使用cas操作把state 设置为1，<br>如果设置成功，将占有线程设置为当前线程，获取锁成功。 如果设置失败，判断是否是当前线程占有锁，<br>如果是，state+1 ，获取锁成功   否则，获取锁失败 获取锁失败后，将自己封装成一个Node节点加入到等待队列中去，将自己前驱节点的<br>状态改为signal，调用park()方法阻塞</p>
+              <h3 id="1-创建线程的几种方式"><a href="#1-创建线程的几种方式" class="headerlink" title="1  创建线程的几种方式"></a>1  创建线程的几种方式</h3><p>实现Runnable接口<br>继承Thread类 重写run方法</p>
+<h3 id="2-重要方法"><a href="#2-重要方法" class="headerlink" title="2 重要方法"></a>2 重要方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th align="left">功能说明</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start()</td>
+<td align="left">启动一个新线程，在新的线程 运行 run 方法中的代码</td>
+<td>start 方法只是让线程进入就绪，里面代码不一定立刻 运行（CPU 的时间片还没分给它）。每个线程对象的 start方法只能调用一次，如果调用了多次会出现 IllegalThreadStateException</td>
+</tr>
+<tr>
+<td>join()</td>
+<td align="left">阻塞调用线程直至线程结束</td>
+<td></td>
+</tr>
+<tr>
+<td>yield()</td>
+<td align="left">让出cpu调度，线程状态由运行变为就绪</td>
+<td>下次可能还是调度改线程</td>
+</tr>
+<tr>
+<td>interrupt</td>
+<td align="left">打断线程</td>
+<td>如果被打断线程正在 sleep，wait，join 会导致被打断 的线程抛出 InterruptedException，并清除打断标记 ；如果打断的正在运行的线程，则会设置 打断标 记 ；park 的线程被打断，也会设置 打断标记</td>
+</tr>
+<tr>
+<td>interrupted()</td>
+<td align="left">判断当前线程是 否被打断</td>
+<td>会清除 打断标记</td>
+</tr>
+</tbody></table>
+<h3 id="2-线程状态"><a href="#2-线程状态" class="headerlink" title="2 线程状态"></a>2 线程状态</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/thread-convert.png" srcset="/blog/img/loading.gif" lazyload alt="thread-convert"></p>
+<h3 id="3-JMM-内存模型"><a href="#3-JMM-内存模型" class="headerlink" title="3 JMM 内存模型"></a>3 JMM 内存模型</h3><p>java内存模型规定所有变量保存在主内存中，每个线程有自己的工作内存。线程的工作内存中保存了该线程使用到的变量的主内存拷贝，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同的线程之间无法直接访问对方的工作内存，需通过主内存才能进行变量的传递。</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/jmm.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304163320142"></p>
+<h3 id="4-可见性、有序性、原子性、volatile"><a href="#4-可见性、有序性、原子性、volatile" class="headerlink" title="4 可见性、有序性、原子性、volatile"></a>4 可见性、有序性、原子性、volatile</h3><h4 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a><strong>可见性</strong></h4><p>可见性指的是当一个线程修改了共享变量后，其他线程能够立即得知这个修改，volatile可以保证可见性</p>
+<h4 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a><strong>有序性</strong></h4><p>有序性指的是程序按照代码的先后顺序执行</p>
+<p> 为了性能优化，编译器和处理器会可能进行指令重排序，有时候会改变程序中语句的先后顺序</p>
+<h4 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a><strong>原子性</strong></h4><p>原子性指的是一个或者多个操作在 CPU 执行的过程中不被中断的特性</p>
+<p>在多线程情况下，线程会被操作系统调度进行任务切换，占有CPU时间片段的就执行，否则就阻塞</p>
+<h4 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a><strong>volatile</strong></h4><p><strong>指令重排序</strong></p>
+<p>jvm 在不改变运行结果的前提下，对指令执行的顺序进行调整，以提高程序运行的效率</p>
+<p><strong>内存屏障</strong></p>
+<p>可见性 </p>
+<ol>
+<li>写屏障（sfence）保证在该屏障之前的，对共享变量的改动，都同步到主存当中 </li>
+<li>而读屏障（lfence）保证在该屏障之后，对共享变量的读取，加载的是主存中最新数据</li>
+</ol>
+<p>有序性 </p>
+<ol>
+<li>写屏障会确保指令重排序时，不会将写屏障之前的代码排在写屏障之后 </li>
+<li>读屏障会确保指令重排序时，不会将读屏障之后的代码排在读屏障之前</li>
+</ol>
+<p><strong>volatle 原理</strong></p>
+<p>volatile 的底层实现原理是内存屏障，<code>Memory Barrier``（Memory Fence）</code> </p>
+<p>对 volatile 变量的写指令后会加入写屏障 </p>
+<p>对 volatile 变量的读指令前会加入读屏障</p>
+<h3 id="5-对象头"><a href="#5-对象头" class="headerlink" title="5 对象头"></a>5 对象头</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/head2.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220303215531080"></p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/head.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220303215436254"></p>
+<h3 id="6-synchronized-原理"><a href="#6-synchronized-原理" class="headerlink" title="6 synchronized 原理"></a>6 synchronized 原理</h3><h4 id="6-1-monitor-原理"><a href="#6-1-monitor-原理" class="headerlink" title="6.1 monitor 原理"></a>6.1 monitor 原理</h4><p>每个 <code>Java</code> 对象都可以关联一个 <code>Monitor</code> 对象，如果使用 <code>synchronized</code> 给对象上锁（重量级）之后，该对象头的 <code>Mark Word</code> 中就被设置指向 <code>Monitor</code> 对象的指针</p>
+<p><code>Monitor</code> 结构</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/monitor.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304101553600"></p>
+<p>刚开始 <code>Monitor</code> 中 <code>Owner</code> 为 <code>null</code> </p>
+<p>当 <code>Thread-2</code> 执行 <code>synchronized(obj)</code> 就会将 <code>Monitor</code> 的所有者 <code>Owner</code> 置为 <code>Thread-2</code>，<code>Monitor</code>中只能有一 个 <code>Owner</code> </p>
+<p>在<code>Thread-2</code> 上锁的过程中，如果 <code>Thread-3</code>，<code>Thread-4</code>，<code>Thread-5</code> 也来执行 <code>synchronized(obj)</code>，就会进入 <code>EntryList</code> <code>BLOCKED</code> </p>
+<p><code>Thread-2</code> 执行完同步代码块的内容，然后唤醒 <code>EntryList</code> 中等待的线程来竞争锁，竞争的时是非公平的 </p>
+<p>图中 <code>WaitSet</code> 中的 <code>Thread-0</code>，<code>Thread-1</code> 是之前获得过锁，但条件不满足进入 <code>WAITING</code> 状态的线程，后面讲 <code>wait-notify</code> 时会分析</p>
+<h4 id="6-2-轻量级锁"><a href="#6-2-轻量级锁" class="headerlink" title="6.2 轻量级锁"></a>6.2 轻量级锁</h4><p>如果一个对象虽然有多线程要加锁，但加锁的时间是错开的（也就是没有竞争），那么可以 使用轻量级锁来优化。 </p>
+<p>在线程的栈桢中创建锁记录（<code>Lock Record</code>）对象，让锁记录中 <code>Object reference</code> 指向锁对象，并尝试用 cas 替换 <code>Object</code> 的 <code>Mark Word</code>，将<code>Mark Word</code> 的值存 入锁记录</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/lock-cas.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304122554620"></p>
+<p><strong>如果 cas 替换成功</strong></p>
+<p>对象头中存储了锁记录地址和状态 00 ，表示由该线程给对象加锁，这时图示如下</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/lock-cas2.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304122859602"></p>
+<p><strong>如果 cas 失败，有两种情况</strong> </p>
+<p>如果是其它线程已经持有了该 <code>Object</code> 的轻量级锁，这时表明有竞争，进入锁膨胀过程</p>
+<p>如果是自己执行了 synchronized 锁重入，那么再添加一条 <code>Lock Record</code> 作为重入的计数</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/lock-cas3.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304123050785"></p>
+<p><strong>当退出 synchronized 代码块（解锁时）</strong></p>
+<p>如果有取值为 <code>null</code> 的锁记录，表示有重入，这时重置锁记录，表示重 入计数减一</p>
+<h4 id="6-3-偏向锁"><a href="#6-3-偏向锁" class="headerlink" title="6.3 偏向锁"></a>6.3 偏向锁</h4><p>如果开启了偏向锁（默认开启），那么对象创建后，<code>markword</code> 最后 3 位为 101，否则为001</p>
+<p>可以添加VM 参数 -XX:-UseBiasedLocking 禁用偏向锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-number">11</span>:08:<span class="hljs-number">58.117</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 前<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000101</span><br><span class="hljs-number">11</span>:08:<span class="hljs-number">58.121</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 中<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00011111</span> <span class="hljs-number">11101011</span> <span class="hljs-number">11010000</span> <span class="hljs-number">00000101</span><br><span class="hljs-number">11</span>:08:<span class="hljs-number">58.121</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 后<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00011111</span> <span class="hljs-number">11101011</span> <span class="hljs-number">11010000</span> <span class="hljs-number">00000101</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-number">11</span>:<span class="hljs-number">13</span>:<span class="hljs-number">10.018</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 前<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000001</span><br><span class="hljs-number">11</span>:<span class="hljs-number">13</span>:<span class="hljs-number">10.021</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 中<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00100000</span> <span class="hljs-number">00010100</span> <span class="hljs-number">11110011</span> <span class="hljs-number">10001000</span><br><span class="hljs-number">11</span>:<span class="hljs-number">13</span>:<span class="hljs-number">10.021</span> c.TestBiased [t1] - <span class="hljs-keyword">synchronized</span> 后<br><span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000000</span> <span class="hljs-number">00000001</span> <br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong></p>
+<p>处于偏向锁的对象解锁后，线程 id 仍存储于对象头中</p>
+<p>正常状态对象一开始是没有 hashCode 的，第一次调用才生成</p>
+<p>调用hashcode()方法，会导致偏向锁被撤销(存储hashcode)</p>
+<p>其他线程使用对象，会导致偏向锁被撤销（轻量级锁）</p>
+<p>调用wait/notify，会导致偏向锁被撤销（重量级锁）</p>
+<p>轻量级锁会在锁记录中记录 hashCode</p>
+<p>重量级锁会在 Monitor 中记录 hashCode</p>
+</blockquote>
+<h4 id="6-4-synchronized-锁升级"><a href="#6-4-synchronized-锁升级" class="headerlink" title="6.4 synchronized 锁升级"></a>6.4 synchronized 锁升级</h4><ol>
+<li><p>如果开启了偏向锁（默认开启），最后三位是101，处于可偏向状态，<code>Mark Word</code>记录线程Id</p>
+</li>
+<li><p>当线程A获取锁时，会对比<code>Mark Word</code>中的线程id和自己的线程id。</p>
+<p>如果相同，获取锁成功</p>
+<p>如果不同，他会检查<code>Mark Word</code> 线程id对应的线程是否存活</p>
+<p>​    如果存活，取消偏向状态，升级为轻量级锁</p>
+<p>​    如果不存活，使用cas替换<code>Mark Word</code>中的线程id为自己的线程id</p>
+</li>
+<li><p>偏向锁状态抢锁失败，代表当前锁有一定的竞争，偏向锁将升级为轻量级锁。<code>JVM</code>会在当前线程的线程栈中创建一条锁记录，锁记录的<code>Object</code> 指针指向锁对象，使用cas操作保存<code>Mark Word</code>的信息，同时使用cas 操作使<code>Mark Word</code> 指向锁记录，开启自旋，重复尝试。</p>
+</li>
+<li><p>当替换失败达到一定次数时(默认是10)，就会进入锁膨胀，升级为重量级锁。如果在此期间还有其他线程竞争锁，立即升级为重量级锁。</p>
+</li>
+<li><p>升级重量级锁， 首先申请一个<code>Monitor</code>对象，让<code>Mark Word</code>指向<code>Monitor</code> 对象，把加锁失败的线程放入到<code>Monitor</code> 对象的<code>EntryList</code>中阻塞</p>
+</li>
+</ol>
+<h3 id="7-wait、notify、notifyAll、join原理"><a href="#7-wait、notify、notifyAll、join原理" class="headerlink" title="7 wait、notify、notifyAll、join原理"></a>7 wait、notify、notifyAll、join原理</h3><p><strong>wait、notify、notifyAll</strong></p>
+<p>当<code>Owner</code> 线程发现条件不满足时，调用<code>wait</code> 方法进入到 <code>Monitor</code> 的 <code>waitSet</code> 进行等待<br>当调用<code>notify</code> 或 <code>notifyAll</code> 会唤醒<code>waitSet</code> 中等待的线程进入<code>entryList</code> 竞争锁</p>
+<p><strong>join</strong> </p>
+<p> <code>t1.join()</code>  将自己加入到 <code>t1</code> 的<code>waitSet</code> 直到 <code>t1</code> 结束</p>
+<p>question：线程对象会在线程结束后唤醒所有等待的线程？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    Object lock = <span class="hljs-keyword">new</span> Object();<br><br>    Thread thread1 = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            Thread.sleep(<span class="hljs-number">200</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                Thread.sleep(<span class="hljs-number">200</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>            System.out.println(i);<br>        &#125;<br>    &#125;);<br><br>    thread1.start();<br><br>    <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>        <span class="hljs-keyword">synchronized</span> (thread1) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                thread1.wait(<span class="hljs-number">0</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>            System.out.println(<span class="hljs-number">11</span>);<br>        &#125;<br>    &#125;).start();<br><br>    <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>        <span class="hljs-keyword">synchronized</span> (lock) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                lock.wait(<span class="hljs-number">0</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>            System.out.println(<span class="hljs-number">10</span>);<br>        &#125;<br>    &#125;).start();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="8-park-unPark-原理"><a href="#8-park-unPark-原理" class="headerlink" title="8 park unPark 原理"></a>8 park unPark 原理</h3><p>每个线程都有自己的一个 Parker 对象，由三部分组成 <code>_counter</code> ， <code>_cond</code> 和 <code>_mutex</code></p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/park.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304161105092"></p>
+<ol>
+<li>当前线程调用 Unsafe.park() 方法 </li>
+<li>检查 _counter ，本情况为 0，这时，获得 _mutex 互斥锁 </li>
+<li>线程进入 _cond 条件变量阻塞 </li>
+<li>设置 _counter = 0</li>
+</ol>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/unpark.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220304161219021"></p>
+<ol>
+<li>调用 Unsafe.unpark(Thread_0) 方法，设置 _counter 为 1 </li>
+<li>唤醒 _cond 条件变量中的 Thread_0 </li>
+<li>Thread_0 恢复运行 </li>
+<li>设置 _counter 为 0</li>
+</ol>
+<h3 id="9-AQS"><a href="#9-AQS" class="headerlink" title="9 AQS"></a>9 AQS</h3><h4 id="9-1-简介"><a href="#9-1-简介" class="headerlink" title="9.1 简介"></a>9.1 简介</h4><p><code>AQS</code> 全称 <code>AbstractQueuedSynchronizer</code>，JUC 下多个同步工具，比如ReentrantLock，CountDownLatch，Semaphore 都是基于此实现</p>
+<h4 id="9-2-原理"><a href="#9-2-原理" class="headerlink" title="9.2 原理"></a>9.2 原理</h4><p>8：ReentrantLock 原理<br>加锁流程：当调用ReentrantLock的lock()方法时，首先会调用非公平锁的lock()，使用cas操作把state 设置为1，<br>如果设置成功，将占有线程设置为当前线程，获取锁成功。 如果设置失败，判断是否是当前线程占有锁，<br>如果是，state+1 ，获取锁成功   否则，获取锁失败 获取锁失败后，将自己封装成一个Node节点加入到等待队列中去，将自己前驱节点的<br>状态改为signal，调用park()方法阻塞</p>
 <p>解锁流程：当调用ReentrantLock的unlock()方法时，首先会调用非公平锁的release()方法，如果是重入状态，state-1<br>否则，将持有线程设置为null，state设置为0，唤醒头节点后的第一个节点来竞争锁</p>
 <p>await流程：当调用ConditionObject的 await() 方法时，会将当前线程封装成一个Node 节点，状态为Condition，<br>唤醒头节点后第一个节点</p>
 <p>signal流程：当调用ConditionLock的signal方法，会唤醒等待队列中的第一个节点去竞争锁</p>
 <p>9：ReentrantReadWriteLock 原理<br>读占用state高十六位，写占用state低十六位，读读并发，锁降级47</p>
-<p>10：volatile<br>指令重排序：jvm 在不改变运行结果的前提下，对指令执行的顺序进行调整，以提高程序运行的效率<br>volatile 可以防止指令重排序，保证共享变量的可见性<br>volatile 写会在后面添加写屏障，写屏障之前的代码不能重排序到写屏障之后，同时写屏障可以保证写屏障之前<br>的共享变量同步到主存<br>volatile 读会在前面添加读屏障，读屏障之后的代码不能重排序到读屏障之前，同时读屏障可以保证读屏障之后对<br>共享变量的读取是主存中的最新数据</p>
 <p>11：cas 操作<br>compareAndSet是个原子性操作，赋值之前会将旧的预期值和内存位置值进行比较，如果相对才会赋值新值<br>应用-原子类</p>
 <p>12: HashMap  ConcurrentHashMap<br>HashMap<br>1：判断table 是否为null，或者length == 0 ，如果是，就进行resize扩容<br>2：根据key找到bucket   hashcode ^ (hash&gt;&gt;&gt;16)   hash &amp; n-1<br>3: 如果不发生hash冲突，直接插入到bucket 中，如果发生冲突，判读节点是否为treeNode，如果是，直接插入红黑树<br>否则遍历链表，如果在遍历过程中，key 存在，则覆盖，否则把entry 插入到链表尾部，插入后判读链表长度是否大于阈值，<br>如果大于阈值，则转换为红黑树<br>4：插入成功后判断hashmap 容量是否大于阈值，如果大于，就进行resize扩容</p>
 <p>1.7 的HashMap(头插法) resize扩容操作可能会导致死链<br>并发安全的map HashTable，ConcurrentHashMap</p>
@@ -317,8 +447,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/01/18/algorithm/">
-                        <span class="hidden-mobile">算法</span>
+                      <a href="/blog/2022/01/27/Netty/">
+                        <span class="hidden-mobile">IO模型、Netty</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
