@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cherish-merry.github.io/blog/img/JVM.jpeg">
 <meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-03-08T06:02:42.080Z">
+<meta property="article:modified_time" content="2022-03-08T06:34:39.049Z">
 <meta property="article:author" content="Cherish">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -253,8 +253,8 @@
             <h1 style="display: none">JVM</h1>
             
             <div class="markdown-body">
-              <h3 id="1-JVM-JRE-JDK的区别"><a href="#1-JVM-JRE-JDK的区别" class="headerlink" title="1 JVM JRE JDK的区别"></a>1 JVM JRE JDK的区别</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/jre.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
-<h3 id="2-内存结构（运行时数据区）"><a href="#2-内存结构（运行时数据区）" class="headerlink" title="2 内存结构（运行时数据区）"></a>2 内存结构（运行时数据区）</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/memory.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307165912478"></p>
+              <h3 id="1-JVM-JRE-JDK的区别"><a href="#1-JVM-JRE-JDK的区别" class="headerlink" title="1 JVM JRE JDK的区别"></a>1 JVM JRE JDK的区别</h3><p><img src="/blog/2022/01/27/Jvm/jre.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h3 id="2-内存结构（运行时数据区）"><a href="#2-内存结构（运行时数据区）" class="headerlink" title="2 内存结构（运行时数据区）"></a>2 内存结构（运行时数据区）</h3><p><img src="/blog/2022/01/27/Jvm/memory.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307165912478"></p>
 <p><code>jvm</code> 的运行时数据区由<strong>程序计数器</strong>，<strong>虚拟机栈</strong>，<strong>本地方法栈</strong>，<strong>方法区</strong>几部分组成</p>
 <ul>
 <li>程序计数器：记录了下一条虚拟机指令的位置</li>
@@ -266,7 +266,7 @@
 <p>程序计数器，虚拟机栈，本地方法栈是线程私有的</p>
 <p>方法区，堆是线程共享的</p>
 <p><strong>方法区</strong></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/method.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307170009776"></p>
+<p><img src="/blog/2022/01/27/Jvm/method.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307170009776"></p>
 <h3 id="3-直接内存"><a href="#3-直接内存" class="headerlink" title="3 直接内存"></a>3 直接内存</h3><ul>
 <li>属于操作系统，常见于NIO操作时，<strong>用于数据缓冲区</strong></li>
 <li>分配回收成本较高，但读写性能高</li>
@@ -278,7 +278,7 @@
 <p>一旦 ByteBuffer 对象被垃圾回收，那么就会由 ReferenceHandler 线程通过 Cleaner 的 clean 方法调 用 freeMemory 来释放直接内存</p>
 <h3 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4 垃圾回收"></a>4 垃圾回收</h3><h4 id="4-1-如何判断对象可以回收"><a href="#4-1-如何判断对象可以回收" class="headerlink" title="4.1 如何判断对象可以回收"></a>4.1 如何判断对象可以回收</h4><p><strong>引用计数法</strong></p>
 <p>弊端：循环引用时，两个对象的计数都为1，导致两个对象都无法被释放</p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/reference.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102652818"></p>
+<p><img src="/blog/2022/01/27/Jvm/reference.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102652818"></p>
 <p><strong>可达性分析算法</strong></p>
 <ul>
 <li>JVM中的垃圾回收器通过<strong>可达性分析</strong>来探索所有存活的对象</li>
@@ -291,7 +291,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="4-2-五种引用"><a href="#4-2-五种引用" class="headerlink" title="4.2 五种引用"></a>4.2 五种引用</h4><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/reference2.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102810499"></p>
+<h4 id="4-2-五种引用"><a href="#4-2-五种引用" class="headerlink" title="4.2 五种引用"></a>4.2 五种引用</h4><p><img src="/blog/2022/01/27/Jvm/reference2.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102810499"></p>
 <p>只有GC Root<strong>都不引用</strong>该对象时，才会回收<strong>强引用</strong>对象</p>
 <ul>
 <li>如上图B、C对象都不引用A1对象时，A1对象才会被回收</li>
@@ -332,13 +332,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="5-垃圾回收算法"><a href="#5-垃圾回收算法" class="headerlink" title="5 垃圾回收算法"></a>5 垃圾回收算法</h3><h4 id="5-1-标记清除算法"><a href="#5-1-标记清除算法" class="headerlink" title="5.1 标记清除算法"></a>5.1 标记清除算法</h4><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/mark-clean.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103039362"></p>
+<h3 id="5-垃圾回收算法"><a href="#5-垃圾回收算法" class="headerlink" title="5 垃圾回收算法"></a>5 垃圾回收算法</h3><h4 id="5-1-标记清除算法"><a href="#5-1-标记清除算法" class="headerlink" title="5.1 标记清除算法"></a>5.1 标记清除算法</h4><p><img src="/blog/2022/01/27/Jvm/mark-clean.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103039362"></p>
 <p>标记要被回收的对象，清除，会产生内存碎片</p>
-<h4 id="5-2-标记整理算法"><a href="#5-2-标记整理算法" class="headerlink" title="5.2 标记整理算法"></a>5.2 标记整理算法</h4><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/mark-sort.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103119774"></p>
+<h4 id="5-2-标记整理算法"><a href="#5-2-标记整理算法" class="headerlink" title="5.2 标记整理算法"></a>5.2 标记整理算法</h4><p><img src="/blog/2022/01/27/Jvm/mark-sort.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103119774"></p>
 <p>将存活的对象向一端移动，然后清除掉端边界以外的内容</p>
-<h4 id="5-3-复制算法"><a href="#5-3-复制算法" class="headerlink" title="5.3 复制算法"></a>5.3 复制算法</h4><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/copy.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103706534"></p>
+<h4 id="5-3-复制算法"><a href="#5-3-复制算法" class="headerlink" title="5.3 复制算法"></a>5.3 复制算法</h4><p><img src="/blog/.copy.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103706534"></p>
 <p>标记存活对象，将对象复制到另一块区域中区</p>
-<h4 id="5-4-分代回收"><a href="#5-4-分代回收" class="headerlink" title="5.4 分代回收"></a>5.4 分代回收</h4><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/divide.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103157273"></p>
+<h4 id="5-4-分代回收"><a href="#5-4-分代回收" class="headerlink" title="5.4 分代回收"></a>5.4 分代回收</h4><p><img src="/blog/2022/01/27/Jvm/divide.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103157273"></p>
 <ul>
 <li>对象首先分配在伊甸园区域新生代空间不足时，触发 <code>minor gc</code></li>
 <li>伊甸园和<code>from</code>存活的对象使用 <code>copy</code> 复制到<code>to</code>中，存活的对象年龄加1并且交换 <code>from</code> <code>to</code> </li>
@@ -394,7 +394,7 @@
 <p>Serial 工作在新生代，使用复制算法</p>
 <p>SerialOld 工作在老年代，使用标记整理算法</p>
 <p><code>-XX:+UseSerialGC = Serial + SerialOld</code></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/serial.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104204084"></p>
+<p><img src="/blog/2022/01/27/Jvm/serial.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104204084"></p>
 <h4 id="6-2-吞吐量优先"><a href="#6-2-吞吐量优先" class="headerlink" title="6.2 吞吐量优先"></a>6.2 吞吐量优先</h4><p><strong>Parallel + ParallelOld</strong></p>
 <p>Parallel 工作在新生代，使用复制算法</p>
 <p>ParallelOld 工作在老年代，使用标记整理算法</p>
@@ -403,7 +403,7 @@
 <p><code>-XX:GCTimeRatio=ratio</code>  GC时间占比（默认99   1%）</p>
 <p><code>-XX:MaxGCPauseMillis=ms</code> 最大暂停ms（默认200ms）</p>
 <p><code>-XX:ParallelGCThreads=n</code> 多少个回收线程</p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/parallel.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104715067"></p>
+<p><img src="/blog/2022/01/27/Jvm/parallel.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104715067"></p>
 <h4 id="6-3-响应时间优先"><a href="#6-3-响应时间优先" class="headerlink" title="6.3 响应时间优先"></a>6.3 响应时间优先</h4><p><strong>ParallelNew + CMS</strong></p>
 <p>ParallelNew  工作在新生代</p>
 <p>CMS 工作在老年代</p>
@@ -411,7 +411,7 @@
 <p><code>-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads</code>  并发线程数，建议为总线程数的1/4</p>
 <p><code>-XX:CMSInitiatingOccupancyFraction=percent</code> 垃圾回收时机的内存占比</p>
 <p><code>-XX:+CMSScavengeBeforeRemark</code> 重新标记直接执行新生代垃圾回收</p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/CMS.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308110912272"></p>
+<p><img src="/blog/2022/01/27/Jvm/CMS.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308110912272"></p>
 <p><code>Cms</code>工作在老年带，采用标记清除算法，分为初始标记，并发标记，重新标记，并发清理几个过程</p>
 <ol>
 <li>初始标记阶段会标记那些存活的<code>GcRoot</code>，会造成<code>STW</code></li>
@@ -430,17 +430,17 @@
 <p><code>-XX:G1HeapRegionSize=size</code> </p>
 <p><code>-XX:MaxGCPauseMillis=time</code></p>
 <p><strong>垃圾回收阶段</strong></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/garbage.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132241999"></p>
+<p><img src="/blog/2022/01/27/Jvm/garbage.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132241999"></p>
 <p><strong>1）Young Collection</strong></p>
 <p><code>Young Collection</code> 阶段  当<code>Eden Region</code> 内存空间不足时，把<code>Eden Region</code> ，<code>Survival Region</code><br>存活对象复制到 Survival Region，存活年龄 +1，<code>Survival Region</code> 中存活年龄达到阈值的复制到<code>Old Region</code>中，会<code>STW</code></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/young.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132548389"></p>
+<p><img src="/blog/2022/01/27/Jvm/young.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132548389"></p>
 <p><strong>2）Young Collection + Concurrent Mark</strong></p>
 <p><code>Young Collection</code> + <code>Concurrent Mark</code> 阶段  当老年代占用达到这个堆当一定比例时</p>
 <p>(-<code>XX:InitiatingHeapOccupancyPercent=percent</code>默认45%)，在进行<code>Young Collection</code>时进行并发标记，不会<code>STW</code></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/G12.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133414219"></p>
+<p><img src="/blog/2022/01/27/Jvm/G12.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133414219"></p>
 <p><strong>3）Mixed Collection</strong>  </p>
 <p>当并发标记完成后进行混合收集，新生带执行<code>Young Collection</code> 老年代挑选一些回收价值高的<code>Region</code> 进行回收，会造成<code>STW</code></p>
-<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/jvm/mix.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133719490"></p>
+<p><img src="/blog/2022/01/27/Jvm/mix.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133719490"></p>
 <h3 id="7-类加载机制"><a href="#7-类加载机制" class="headerlink" title="7 类加载机制"></a>7 类加载机制</h3><h4 id="7-1-阶段"><a href="#7-1-阶段" class="headerlink" title="7.1 阶段"></a>7.1 阶段</h4><p>加载、链接（验证，准备，解析）、初始化</p>
 <ul>
 <li>加载：将字节码文件加载到方法区</li>
@@ -530,9 +530,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2022/01/27/Java%E5%9F%BA%E7%A1%80/">
+                      <a href="/blog/2022/01/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java基础</span>
+                        <span class="hidden-mobile">Java并发</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -540,8 +540,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/01/27/Netty/">
-                        <span class="hidden-mobile">IO模型、Netty</span>
+                      <a href="/blog/2022/01/18/algorithm/">
+                        <span class="hidden-mobile">算法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
