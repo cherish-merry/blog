@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/01/27/Mysql/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="Mysql">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/mysql.jpeg">
+<meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
+<meta property="article:modified_time" content="2022-04-18T06:55:19.353Z">
+<meta property="article:author" content="Cherish">
+<meta property="article:tag" content="Mysql、数据库">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/mysql.jpeg">
+  
+  
+  <title>Mysql - Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Mysql">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-27 14:30" pubdate>
+        January 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      60 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Mysql</h1>
+            
+            <div class="markdown-body">
+              <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="CHAR-和-VARCHAR-区别？"><a href="#CHAR-和-VARCHAR-区别？" class="headerlink" title="CHAR 和 VARCHAR 区别？"></a>CHAR 和 VARCHAR 区别？</h3><p>1）首先可以明确的是 CHAR 是定长的，而 VARCHAR 是可以变长。</p>
+<p>VARCHAR 在 MySQL 5.0 之后长度支持到 65535 字节，但会在数据开头使用额外 1~2 个字节存储字符串长度（列长度小于 255 字节时使用 1 字节表示，否则 2 字节），在结尾使用 1 字节表示字符串结束。</p>
+<p>2）再者，在存储方式上，CHAR 对英文字符（ASCII）占用 1 字节，对一个汉字使用用 2 字节。而 VARCHAR 对每个字符均使用 2 字节。</p>
+<h3 id="CHAR-和-VARCHAR-如何选择？"><a href="#CHAR-和-VARCHAR-如何选择？" class="headerlink" title="CHAR 和 VARCHAR 如何选择？"></a>CHAR 和 VARCHAR 如何选择？</h3><p>1）对于经常变更的数据来说，CHAR 比 VARCHAR更好，因为 CHAR 不容易产生碎片。</p>
+<p>2）对于非常短的列或固定长度的数据（如 MD5），CHAR 比 VARCHAR 在存储空间上更有效率。</p>
+<h3 id="Mysql的InnoDB和MyISAM有什么区别？"><a href="#Mysql的InnoDB和MyISAM有什么区别？" class="headerlink" title="Mysql的InnoDB和MyISAM有什么区别？"></a>Mysql的InnoDB和MyISAM有什么区别？</h3><p>InnoDB支持事务和行级锁，MyISAM不支持事务和行级锁，MyISAM最小锁单位是表级。因为MyISAM不支持行级锁，所以在并发处理能力上InnoDB会比MyISAM好。</p>
+<p>Innodb 使用的是聚簇索引、MyISAM 使用的是非聚簇索引</p>
+<p>数据文件构成：MyISAM有三种存储文件分别是扩展名为：.frm（文件存储表定义）、.MYD (MYData数据文件)、.MYI (MYIndex索引文件)。而InnoDB的表只有两个文件 .frm  .idb</p>
+<h3 id="主键使用自增ID还是UUID-能说说原因吗？"><a href="#主键使用自增ID还是UUID-能说说原因吗？" class="headerlink" title="主键使用自增ID还是UUID?能说说原因吗？"></a>主键使用自增ID还是UUID?能说说原因吗？</h3><p>自增ID和UUID作为主键的考虑主要有两方面，一个是<strong>性能</strong>另一个就是<strong>存储的空间</strong>大小，<strong>一般没有特定的业务要求都不推荐使用UUID作为主键</strong>。</p>
+<p>因为使用<strong>UUID作为主键插入并不能保证插入是有序的，有可能会涉及数据的挪动，也有可能触发数据页的分裂</strong>，因为一个数据页的大小就是16KB，这样插入数据的成本就会比较高。</p>
+<p>而<strong>自增ID作为主键的话插入数据都是追加操作，不会有数据的移动以及数据页的分裂</strong>，性能会比较好。</p>
+<p>另一方面就是存储空间，<strong>自增主键一般整形只要4个字节，长整形才占8字节的大小空间</strong>，而使用<strong>UUID作为主键存储空间需要16字节的大小</strong>，会占用更多的磁盘，在二级索引中也会存出一份主键索引，这样多占用消耗的空间就是两倍，性能低，所以不推荐使用。</p>
+<h3 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h3><ul>
+<li>1NF: 保证列的原子性，每一列都是不可拆隔的最小单位</li>
+<li>2NF: 保证所以非主属性都依赖于主键</li>
+<li>3NF: 非主属性直接不存在传播依赖的关系</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h3><p>索引从<strong>数据结构</strong>进行划分的分为：<strong>B+树索引、hash索引、R-Tree索引、FULLTEXT索引</strong>。</p>
+<p>索引从<strong>物理存储</strong>的角度划分为：<strong>聚族索引</strong>和<strong>非聚族索引</strong>。</p>
+<p>从<strong>逻辑的角度</strong>分为：<strong>主键索引</strong>、<strong>普通索引、唯一索引、联合索引</strong>以及<strong>空间索引</strong>。</p>
+<ul>
+<li><p><strong>聚簇索引</strong>  索引文件和数据文件存放在一起   （.frm  .ibd） frm 存放表结构、ibd 存放索引及数据</p>
+<p><img src="/blog/../%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" srcset="/blog/img/loading.gif" lazyload alt="preview"></p>
+</li>
+<li><p><strong>非聚簇索引</strong> (索引文件和非索引文件分开存放  .frm  .MYD  .MYI)  frm 存放表结构，MYD 存放数据，MYI 存放索引  MYI B+ 树叶子节点存放数据地址</p>
+</li>
+</ul>
+<p><img src="/blog/../%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95.png" srcset="/blog/img/loading.gif" lazyload alt="preview"></p>
+<h3 id="Mysql-索引底层实现，为什么不用有序数组、hash、二叉树？"><a href="#Mysql-索引底层实现，为什么不用有序数组、hash、二叉树？" class="headerlink" title="Mysql 索引底层实现，为什么不用有序数组、hash、二叉树？"></a>Mysql 索引底层实现，为什么不用有序数组、hash、二叉树？</h3><p>Mysql的索引底层是使用B+树的数据结构进行实现</p>
+<p>索引的一个数据页的大小是16kb，从磁盘加载到内存中是以数据页的大小为单位进行加载，然后供查询操作进行查询，若是查询的数据不在内存中，才会从磁盘中再次加载到内存中。</p>
+<p>索引的实现有很多，比如hash。hash是以key-value的形式进行存储，<strong>适合于等值查询的场景</strong>，查询的时间复杂度为O(1)，因为<strong>hash储存并不是有序的，所以对于范围查询就可能要遍历所有数据进行查询</strong>，而且<strong>不同值的计算还会出现hash冲突</strong>，所以hash并不适合于做Mysql的索引。</p>
+<p>有序数组在等值查询和范围查询性能都是非常好的，那为什么又不用有序数组作为索引呢？因为<strong>对于数组而言作为索引更新的成本太高，新增数据要把后面的数据都往后移一位</strong>，所以也不采用有序数组作为索引的底层实现。</p>
+<p>最后二叉树，主要是因为<strong>二叉树只有二叉，一个节点存储的数据量非常有限，需要频繁的随机IO读写磁盘，若是数据量大的情况下二叉的树高太高</strong>，严重影响性能，所以也不采用二叉树进行实现。</p>
+<p>而B+树是多叉树，一个数据页的大小是16kb，在1-3的树高就能存储10亿级以上的数据，也就是只要访问磁盘1-3次就足够了，并且<strong>B+树的叶子结点上一个叶子结点有指针指向下一个叶子结点，便于范围查询</strong></p>
+<p><img src="/blog/../B+%E6%A0%91.png" srcset="/blog/img/loading.gif" lazyload alt="preview"></p>
+<h3 id="如何查看索引是否生效、什么情况下索引会失效？"><a href="#如何查看索引是否生效、什么情况下索引会失效？" class="headerlink" title="如何查看索引是否生效、什么情况下索引会失效？"></a>如何查看索引是否生效、什么情况下索引会失效？</h3><p>查看索引是否起作用可以使用explain关键字，查询后的语句中的key字段，若是使用了索引，该字段会展示索引的名字。</p>
+<p>失效情况</p>
+<ul>
+<li>where条件查询中使用了or关键字</li>
+<li>条件查询中使用like关键字，并且不符合最左前缀原则   eg: like “%xxx”**</li>
+<li>联合索引查询不符合最左前缀原则</li>
+<li>会导致索引失效，解决的办法就是可以把null改为0或者-1这些特殊的值代替会导致索引失效</li>
+<li>where子句中使用!= ,&lt; &gt;这样的符号</li>
+<li>where条件子句中=的左边使用表达式操作或者函数操作</li>
+</ul>
+<h3 id="什么是回表？回表是怎么产生的呢？"><a href="#什么是回表？回表是怎么产生的呢？" class="headerlink" title="什么是回表？回表是怎么产生的呢？"></a>什么是回表？回表是怎么产生的呢？</h3><p>上面说过InnoDB引擎的<strong>主键索引存储的是行数据，二级索引的叶子结点存储的是索引数据以及对应的主键</strong>，所以回表<strong>就是根据索引进行条件查询，回到主键索引树进行搜索的过程</strong>：</p>
+<p><img src="/blog/../%E5%9B%9E%E8%A1%A82.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>因为查询还要回表一次，再次查询主键索引树，所以实际中应该尽量避免回表的产生。</p>
+<h3 id="怎么解决回表的问题？"><a href="#怎么解决回表的问题？" class="headerlink" title="怎么解决回表的问题？"></a>怎么解决回表的问题？</h3><p>解决回表问题可以建立联合索引进行索引覆盖，如图所示根据name字段查询用户的name和sex属性出现了回表问题：</p>
+<p><img src="/blog/../%E5%9B%9E%E8%A1%A8.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>那么我们可以建立下面这个联合索引来解决：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs text">create table user (<br> id int primary key,<br> name varchar(20),<br> sex varchar(5),<br> index(name, sex)<br>) engine = innodb;<br></code></pre></td></tr></table></figure>
+
+<p>建立了如上所示的index(name,sex)联合索引，在二级索引的叶子结点的位置就会同时也出现sex字段的值，因为能够获取到要查询的所有字段，因为就不用再回表查询一次。</p>
+<h3 id="什么是最左前缀原则？"><a href="#什么是最左前缀原则？" class="headerlink" title="什么是最左前缀原则？"></a>什么是最左前缀原则？</h3><p><strong>最左前缀原则可以是联合索引的的最左N个字段，也可以是字符串索引的最左的M个字符</strong>。举个例子，假如现在有一个表的原始数据如下所示：</p>
+<p><img src="/blog/../%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>并根据col3 ，col2的顺序建立<strong>联合索引</strong>，此时联合索引树结构如图下所示：</p>
+<p><img src="/blog/../%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D2.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>叶子结点中首先会根据col3的字符进行排序，若是col3相等，在col3相等的值里面再对col2进行排序，假如我们要查询where col3 like ‘Eri%’，就可以快速的定位查询到Eric。</p>
+<p>若是查询条件为where col3 like ‘%se’，前面的字符不确定，表示任意字符都可以，这样就可以导致全表扫描进行字符的比较，就会使索引失效。</p>
+<h3 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h3><p>Mysql5.6之前是没有索引下推这个功能，后面为了提高性能，避免不必要的回表5.6之后就有了索引下推优化的功能。</p>
+<p>假如我们有一个用户表，并且使用用户的name，age两个字段建立联合索引，name在没有索引下推的功能，执行下面的sql，执行的流程如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">select * from tuser where name like &#x27;张%&#x27; and age=10 and ismale=1;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/blog/..%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A81.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>当比较第一个索引字段name like ‘张%’ 就会筛选出四行数据，后面它不会再比较age值是否符合要求，直接获取到主键值，然后在回表查询，回表后再对比age、ismale是否符合条件。</p>
+<p>从上面的数据看来其实name，age两个字段建立的联合索引，两个字段的值会存储在联合索引树中，可以直接对比age字段是否符合查询的条件age=10，那么索引下推就是做了这些事：</p>
+<p><img src="/blog/../%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A82.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>索引下推会再次根据你的age进行比较，发现有两条记录不符合条件直接过滤掉，符合条件的才会进行回表查询，这样就减少了不必要的回表查询。</p>
+<h2 id="事物"><a href="#事物" class="headerlink" title="事物"></a>事物</h2><h3 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a><strong>ACID</strong></h3><ul>
+<li><strong>原子性</strong>：是指事务的原子性操作，<strong>对数据的修改要么全部执行成功，要么全部失败，实现事务的原子性</strong>，是基于日志的Redo/Undo机制。</li>
+<li><strong>一致性</strong>：是指<strong>执行事务前后的状态要一致</strong>，可以理解为数据一致性。</li>
+<li><strong>隔离性</strong>：侧重指<strong>事务之间相互隔离，不受影响</strong>，这个与事务设置的隔离级别有密切的关系。</li>
+<li><strong>持久性</strong>：则是指在<strong>一个事务提交后，这个事务的状态会被持久化到数据库中，也就是事务提交，对数据的新增、更新将会持久化到数据库中</strong>。</li>
+</ul>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><p><strong>读未提交-读提交-可重复读-串行化</strong>，<strong>级别越来越高，隔离也就越来越严实，到最后的串行化，当出现读写锁冲突的时候，后面的事务只能等前面的事务完成后才能继续访问</strong>。</p>
+<ul>
+<li><strong>读未提交：读取到别的事务还没有提交的数据，从而产生了脏读</strong>。</li>
+<li><strong>读已提交：读取别的事务已经提交的数据，从而产生不可重复读。</strong></li>
+<li><strong>可重复读：事务开启过程中看到的数据和事务刚开始看到的数据是一样的，从而产生幻读，在Mysql的中通过MVCC多版本控制的一致性视图解决了不可重复读问题以及通过间隙锁解决了幻读问题。</strong></li>
+<li><strong>串行化：对于同一行记录，若是读写锁发生冲突，后面访问的事务只能等前面的事务执行完才能继续访问</strong>。</li>
+</ul>
+<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>MVCC叫做<strong>多版本控制</strong>，实现MVCC时用到了<strong>一致性视图</strong>，用于支持<strong>读提交</strong>和<strong>可重复读</strong>的实现。</p>
+<p>对于一行数据若是想实现可重复读取或者能够读取数据的另一个事务未提交前的原始值，那么必须对原始数据进行保存或者对更新操作进行保存，这样才能够查询到原始值。</p>
+<p>在Mysql的MVCC中规定<strong>每一行数据都有多个不同的版本，一个事务更新操作完后就生成一个新的版本</strong>，并不是对全部数据的全量备份，因为全量备份的代价太大了：</p>
+<p><img src="/blog/../MVCC.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>如图中所示，假如三个事务更新了同一行数据，那么就会有对应的v1、v2、v3三个数据版本，每一个事务在开始的时候都获得一个唯一的事务id（transaction id），并且是顺序递增的，并且这个事务id最后会赋值给row trx_id，这样就形成了一个唯一的一行数据版本。</p>
+<p>实际上版本1、版本2并非实际物理存在的，而图中的U1和U2实际就是undo log日志（<strong>回滚日志</strong>），这v1和v2版本是根据当前v3和undo log计算出来的。</p>
+<p>InnoDB引擎就是利用每行数据有多个版本的特性，实现了秒级创建“快照”，并不需要花费大量的是时间。</p>
+<h3 id="redo-log-binlog"><a href="#redo-log-binlog" class="headerlink" title="redo log , binlog"></a>redo log , binlog</h3><p>redo log日志也叫做WAL技术（Write- Ahead Logging），他是一种<strong>先写日志，并更新内存，最后再更新磁盘的技术</strong>，为了就是减少sql执行期间的数据库io操作，并且更新磁盘往往是在Mysql比较闲的时候，这样就大大减轻了Mysql的压力。</p>
+<p>redo log是固定大小，是物理日志，属于InnoDB引擎的，并且写redo log是环状写日志的形式：</p>
+<p><img src="/blog/../relog.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>如上图所示：若是四组的redo log文件，一组为1G的大小，那么四组就是4G的大小，其中write pos是<strong>记录当前的位置</strong>，有数据写入当前位置，那么write pos就会边写入边往后移。</p>
+<p>check point记录<strong>擦除的位置</strong>，因为redo log是固定大小，所以当redo log满的时候，也就是write pos追上check point的时候，需要清除redo log的部分数据，清除的数据会被持久化到磁盘中，然后将check point向前移动。</p>
+<p>redo log日志实现了即使在数据库出现异常宕机的时候，重启后之前的记录也不会丢失，这就是crash-safe能力。</p>
+<p>binlog称为<strong>归档日志</strong>，是逻辑上的日志，它属于Mysql的Server层面的日志，记录着sql的原始逻辑，主要有两种模式：<strong>一个是statement格式记录的是原始的sql，而row格式则是记录行内容</strong>。</p>
+<p>redo log和binlog记录的形式、内容不同，这两者日志都能通过自己记录的内容恢复数据。</p>
+<p>之所以这两个日志同时存在，是因为刚开始Mysql自带的引擎MyISAM就没有crash-safe功能的，并且在此之前Mysql还没有InnoDB引擎，Mysql自带的binlog日志只是用来归档日志的，所以InnoDB引擎也就通过自己redo log日志来实现crash-safe功能。</p>
+<h3 id="ACID-MVCC-原理"><a href="#ACID-MVCC-原理" class="headerlink" title="ACID MVCC 原理"></a>ACID MVCC 原理</h3><p>当前读  select…lock in share mode  select…for update  update  insert  delete<br>快照读  select<br>隐藏字段   DB_TRX_ID(最后一次修改该记录的id)     DB_ROW_ID(隐藏主键 Innodb)     DB_ROW_PTR(回滚指针—undolog)<br>ReadView 快照读时产生的读视图  trx_list(事物活跃的Id),up_limit_id(列表中最小的id),low_limit_id(系统尚未分配的下一个id)<br>可见行算法<br>1: if DB_TRX_ID &lt; up_limit_id          已提交                 可见<br>2: if DB_TRX_ID &gt;= low_limit_id     读视图之后生成            不可见<br>3: if DB_TRX_ID in trx_list            未提交                不可见<br>4: if DB_TRX_ID not in trx_list        已提交                 可见<br>RC  每次进行快照读时都会生成ReadView<br>RR  第一次进行快照读时才会生成ReadView(如果过程中涉及到了当前读，会重新生成ReadView)</p>
+<p>原子性   undolog –&gt;<br>隔离性   MVCC        –&gt;          一致性<br>持久性   redolog –&gt;</p>
+<p>redolog 二阶段提交(WAL 机制  write ahead log  预写日志)    mysql binlog    innodb插件  undolog  redolog<br>保证binlog 和 redolog 的最终一致性  先写redolog 再写logbin</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="建立索引"><a href="#建立索引" class="headerlink" title="建立索引"></a>建立索引</h3><p>定位慢查询<br>show global status like %slow_queries%<br>cat 慢查询日志</p>
+<p>另一方面就是考虑到底是建立哪种索引比较合适，这里以普通索引和唯一索引进行举例说明。</p>
+<p>假如我们的业务场景是读多写少的场景，那么SQL查询请求过来，假如数据已经在内存中，获取到数据后就直接返回，假如数据不在内存的数据页中，就会加载磁盘到内存中再返回，对于这种场景可能对于普通索引和唯一索引的选择性能上并没有明显的区别。</p>
+<p>但是，一般建议选择普通索引，在写多读少的场景下，这两者索引的选择对性能的影响就比较大了，对于普通索引的的写，不管数据是否存在于内存中，都会先写入内存中的一小块叫做chang buffer内存中，然后在通过后台刷盘，一般会选择Mysql比较闲的时候进行刷盘。</p>
+<p>而唯一索引就不同了，因为他要确保索引的唯一性，索引写数据的时候，假如数据不在内存中，要先从磁盘中加载数据到内存中，然后比较是否唯一，所以唯一索引就不能使用chang buffer的优化机制，会频繁的进行随机的磁盘IO。</p>
+<h3 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h3><blockquote>
+<p>首先为什么要分表？（1） 如果一个表的每条记录的内容很大，那么就需要更多的IO操作，如果字段值比较大，而使用频率相对比较低，可以将大字段移到另一张表中，当查询不查大字段的时候，这样就减少了I/O操作 （2）如果表的数据量非常非常大，那么查询就变的比较慢；也就是表的数据量影响查询的性能。（3）表中的数据本来就有独立性，例如分别记录各个地区的数据或者不同时期的数据，特别是有些数据常用，而另外一些数据不常用。（4） 分表技术有(水平分割和垂直分割)</p>
+</blockquote>
+<h4 id="垂直分割"><a href="#垂直分割" class="headerlink" title="垂直分割"></a>垂直分割</h4><p>垂直分割是指数据表列的拆分，把一张列比较多的表拆分为多张表。垂直分割一般用于拆分大字段和访问频率低的字段，分离冷热数据。</p>
+<p>垂直分割比较常见：例如博客系统中的文章表，比如文章tbl_articles (id, titile, summary, content, user_id, create_time)，因为文章中的内容content会比较长，放在tbl_articles中会严重影响表的查询速度，所以将内容放到tbl_articles_detail(article_id, content)，像文章列表只需要查询tbl_articles中的字段即可。</p>
+<p>垂直拆分的优点：可以使得行数据变小，在查询时减少读取的Block数，减少I/O次数。此外，垂直分区可以简化表的结构，易于维护。</p>
+<p>垂直拆分的缺点：主键会出现冗余，需要管理冗余列，并会引起Join操作，可以通过在应用层进行Join来解决。此外，垂直分区会让事务变得更加复杂。</p>
+<h4 id="水平分割"><a href="#水平分割" class="headerlink" title="水平分割"></a>水平分割</h4><p>水平拆分是指数据表行数据的拆分，表的行数超过500万行或者单表容量超过10GB时，查询就会变慢，这时可以把一张的表的数据拆成多张表来存放。水平分表尽可能使每张表的数据量相当，比较均匀。</p>
+<p>水平拆分会给应用增加复杂度，它通常在查询时需要多个表名，查询所有数据需要union操作。在许多数据库应用中，这种复杂性会超过它带来的优点。</p>
+<p>因为只要索引关键字不大，则在索引用于查询时，表中增加2-3倍数据量，查询时也就增加读一个索引层的磁盘次数，所以水平拆分要考虑数据量的增长速度，根据实际情况决定是否需要对表进行水平拆分。</p>
+<p>水平分割最重要的是找到分割的标准，不同的表应根据业务找出不同的标准</p>
+<ol>
+<li>用户表可以根据用户的手机号段进行分割如user183、user150、user153、user189等，每个号段就是一张表。</li>
+<li>用户表也可以根据用户的id进行分割，加入分3张表user0,user1,user2，如果用户的id%3=0就查询user0表，如果用户的id%3=1就查询user1表。</li>
+<li>对于订单表可以按照订单的时间进行分表。</li>
+</ol>
+<h3 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a>Explain</h3><p>explain 查看执行计划(type,key,possible keys,extra)<br>type:查询使用了何种类型(system,const(唯一索引匹配一个) ,eq_ref(外键匹配一个),ref(匹配多个),range(范围查询),index(全索引扫描),all(全表扫描))<br>extra:(using where,using index,usingFileSort,usingTemporary)</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/Mysql%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93/">Mysql、数据库</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/Jvm/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="hidden-mobile">Java并发</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

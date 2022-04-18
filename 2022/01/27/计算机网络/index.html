@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/01/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="计算机网络">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/Java%E5%9F%BA%E7%A1%80.png">
+<meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
+<meta property="article:modified_time" content="2022-04-14T03:55:33.623Z">
+<meta property="article:author" content="Cherish">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/Java%E5%9F%BA%E7%A1%80.png">
+  
+  
+  <title>计算机网络 - Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-27 14:30" pubdate>
+        January 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络</h1>
+            
+            <div class="markdown-body">
+              <h2 id="OSI-七层模型"><a href="#OSI-七层模型" class="headerlink" title="OSI 七层模型"></a>OSI 七层模型</h2><ul>
+<li><p>物理层      利用物理传输介质为数据链路层提供物理连接      电气特性（0-1 的电压表示）、机械特性（引脚）  单位/比特</p>
+</li>
+<li><p>数据链路层     定义通过通信媒介互连的设备之间传输的规范         封装成帧、透明传输、差错校验   MAC地址</p>
+</li>
+<li><p>网络层    寻址和路由      IP地址， ARP，路由选择协议（RIP，OSPF）</p>
+</li>
+<li><p>传输层    为上层协议提供端到端的可靠传输    TCP，UDP协议</p>
+</li>
+<li><p>会话层    建立、断开和维护通信链接</p>
+</li>
+<li><p>表示层    数据格式转换、数据压缩、数据加密</p>
+</li>
+<li><p>应用层    为应用层提供网络服务   HTTP/FTP/DNS</p>
+</li>
+</ul>
+<h2 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP/IP 协议"></a>TCP/IP 协议</h2><ul>
+<li><p>网络接口层（物理层，数据链路层）</p>
+</li>
+<li><p>网际层（网络层）</p>
+</li>
+<li><p>传输层（传输层）</p>
+</li>
+<li><p>应用层（会话层、表示层、应用层）</p>
+</li>
+</ul>
+<h2 id="什么是面向有连接型和面向无连接型？"><a href="#什么是面向有连接型和面向无连接型？" class="headerlink" title="什么是面向有连接型和面向无连接型？"></a>什么是面向有连接型和面向无连接型？</h2><ul>
+<li>面向有连接型传输包括会话建立、传输数据和会话断开，此外还包括保证传输可靠性的各种措施，比如超时重传、流量控制等，常见的面向有连接传输有TCP；</li>
+<li>面向无连接型传输仅提供基本的传输数据的功能，即使接收端不存在，发送端也能发送数据包，常见的面向无连接传输有UDP、IP。</li>
+</ul>
+<h2 id="什么是UDP和TCP？UDP和TCP的区别是什么？"><a href="#什么是UDP和TCP？UDP和TCP的区别是什么？" class="headerlink" title="什么是UDP和TCP？UDP和TCP的区别是什么？"></a>什么是UDP和TCP？UDP和TCP的区别是什么？</h2><ul>
+<li>TCP是面向有连接型，UDP是面向无连接型；</li>
+<li>TCP是一对一传输，UDP支持一对一、一对多、多对一和多对多的交互通信；</li>
+<li>TCP是面向字节流的，即把应用层传来的报文看成字节流，将字节流拆分成大小不等的数据块，并添加TCP首部；UDP是面向报文的，对应用层传下来的报文不拆分也不合并，仅添加UDP首部；</li>
+<li>TCP支持传输可靠性的多种措施，包括保证包的传输顺序、重发机制、流量控制和拥塞控制；UDP仅提供最基本的数据传输能力。</li>
+</ul>
+<h2 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" srcset="/blog/img/loading.gif" lazyload alt="三次握手"></p>
+<h4 id="为什么tcp需要三次握手，而不是两次？"><a href="#为什么tcp需要三次握手，而不是两次？" class="headerlink" title="为什么tcp需要三次握手，而不是两次？"></a>为什么tcp需要三次握手，而不是两次？</h4><p>如果是两次，客户端如果一段时间没接受到确认，会重新发起连接，如果之前失效的连接到达服务端，<br>服务端就会建立连接，浪费了服务端的资源</p>
+<h4 id="三次握手过程中可以携带数据吗？"><a href="#三次握手过程中可以携带数据吗？" class="headerlink" title="三次握手过程中可以携带数据吗？"></a>三次握手过程中可以携带数据吗？</h4><p>其实第三次握手的时候，可以携带数据，但是第一二次握手不可以携带数据</p>
+<h4 id="半连接队列、全连接队列"><a href="#半连接队列、全连接队列" class="headerlink" title="半连接队列、全连接队列"></a>半连接队列、全连接队列</h4><p>服务器第一次接收到客户端发送过来的SYN报文，就会处于SYN-RCVD状态，此时双方还未完全<br>建立连接，服务器会把此时状态下的请求连接放在一个队列中，把这种队列称为”半连接队列”</p>
+<p>完成”三从握手”，建立的连接就会存放在 全连接队列中，若队列已满，就有可能出现丢包现象</p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" srcset="/blog/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="为什么挥手需要四次"><a href="#为什么挥手需要四次" class="headerlink" title="为什么挥手需要四次"></a>为什么挥手需要四次</h4><p>因为TCP是全双工通信的<br>（当服务端收到客户端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。）</p>
+<p>但在关闭连接时，当服务端收到FIN报文时仅代表客户端不会再发送数据报文了，但客户端仍可以接收数据报文，且服务器此时可能还有数据报文需要发送，所以只能先回复一个ACK报文，告诉客户端，“你发的FIN报文我收到了”。这样客户端便不会因为没有收到应答而继续发送断开连接的请求(FIN报文)，当客户端处理完数据报文后，便发送给主动方FIN报文。这样可以保证数据通信正常可靠地完成，因此不能一起发送。故需要四次挥手。</p>
+<h4 id="tcp第四次挥手为什么要等待2MSL"><a href="#tcp第四次挥手为什么要等待2MSL" class="headerlink" title="tcp第四次挥手为什么要等待2MSL"></a>tcp第四次挥手为什么要等待2MSL</h4><p>为了保证客户端最后一次发送的ACK能够到达服务端。等待2MSL，如果ACK丢失，服务端会超时重传。<br>等待2MSL可以保证网络中滞留的报文段全部消失，不会再去干扰服务器</p>
+<h3 id="ARQ协议"><a href="#ARQ协议" class="headerlink" title="ARQ协议"></a>ARQ协议</h3><p>ARQ协议，即自动重传请求（Automatic Repeat-reQuest），意思是如果发送方在发送后一段时间之内没有收到确认回执，它通常会重新发送。ARQ协议包括停止等待ARQ协议和连续ARQ协议。</p>
+<p>（1）停止等待ARQ协议</p>
+<p>停止等待ARQ协议是指，在停止等待中如果接收端没有收到发送端发来的分组，接收端就不会给发送端发送确认回执，此时发送端会重新发送之前的报文分组。发送端会维护一个超时计时器，超时时间会设置的比数据在传输往返过程的时间要长一些。</p>
+<p>（2）连续ARQ协议</p>
+<p>连续ARQ协议是指，发送端维护一个“窗口”，“窗口”内可以有多个分组，窗口的大小就是窗口中分组的个数，凡是位于“窗口”内的分组可以连续发送出去而不必等待接收端返回的确认回执，对按序到达的最后一个分组，接收端会向发送端发送确认回执，如果有分组没有正确到达，会返回最后一个正确达到的分组序号，该序号后面的分组会重新发送给接收端。</p>
+<h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>什么是流量控制？流量控制的目的？</p>
+<p>如果发送者发送数据过快，接收者来不及接收，那么就会有分组丢失。为了避免分组丢失，控制发送者的发送速度，使得接收者来得及接收，这就是流量控制。流量控制根本目的是防止分组丢失，它是构成TCP可靠性的一方面。</p>
+<p>如何实现流量控制？</p>
+<p>由滑动窗口协议（连续ARQ协议）实现。滑动窗口协议既保证了分组无差错、有序接收，也实现了流量控制。主要的方式就是接收方返回的 ACK 中会包含自己的接收窗口的大小，并且利用大小来控制发送方的数据发送。</p>
+<h3 id="拥塞控制和流量控制的区别"><a href="#拥塞控制和流量控制的区别" class="headerlink" title="拥塞控制和流量控制的区别"></a>拥塞控制和流量控制的区别</h3><p>拥塞控制：拥塞控制是作用于网络的，它是防止过多的数据注入到网络中，避免出现网络负载过大的情况；常用的方法就是：（ 1 ）慢开始、拥塞避免（ 2 ）快重传、快恢复。</p>
+<p>流量控制：流量控制是作用于接收者的，它是控制发送者的发送速度从而使接收者来得及接收，防止分组丢失的。</p>
+<h3 id="拥塞控制算法"><a href="#拥塞控制算法" class="headerlink" title="拥塞控制算法"></a>拥塞控制算法</h3><h4 id="慢开始算法"><a href="#慢开始算法" class="headerlink" title="慢开始算法"></a>慢开始算法</h4><p>发送方维持一个叫做拥塞窗口cwnd（congestion window）的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方让自己的发送窗口等于拥塞窗口，另外考虑到接受方的接收能力，发送窗口可能小于拥塞窗口。</p>
+<p>慢开始算法的思路就是，不要一开始就发送大量的数据，先探测一下网络的拥塞程度，也就是说由小到大逐渐增加拥塞窗口的大小。</p>
+<p>这里用报文段的个数作为拥塞窗口的大小举例说明慢开始算法，实际的拥塞窗口大小是以字节为单位的。如下图：</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%85%A2%E5%BC%80%E5%A7%8B.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>从上图可以看到，一个传输轮次所经历的时间其实就是往返时间RTT，而且没经过一个传输轮次（transmission round），拥塞窗口cwnd就加倍。</p>
+<p>为了防止cwnd增长过大引起网络拥塞，还需设置一个慢开始门限ssthresh状态变量。ssthresh的用法如下：当cwnd&lt;ssthresh时，使用慢开始算法。<br>当cwnd&gt;ssthresh时，改用拥塞避免算法。<br>当cwnd=ssthresh时，慢开始与拥塞避免算法任意</p>
+<p>注意，这里的“慢”并不是指cwnd的增长速率慢，而是指在TCP开始发送报文段时先设置cwnd=1，然后逐渐增大，这当然比按照大的cwnd一下子把许多报文段突然注入到网络中要“慢得多”。</p>
+<h4 id="拥塞避免算法"><a href="#拥塞避免算法" class="headerlink" title="拥塞避免算法"></a>拥塞避免算法</h4><p>拥塞避免算法让拥塞窗口缓慢增长，即每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口按线性规律缓慢增长。</p>
+<p>无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有按时收到确认，虽然没有收到确认可能是其他原因的分组丢失，但是因为无法判定，所以都当做拥塞来处理），就把慢开始门限ssthresh设置为出现拥塞时的发送窗口大小的一半（但不能小于2）。然后把拥塞窗口cwnd重新设置为1，执行慢开始算法。这样做的目的就是要迅速减少主机发送到网络中的分组数，使得发生拥塞的路由器有足够时间把队列中积压的分组处理完毕。</p>
+<p>整个拥塞控制的流程如下图：</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>（1）拥塞窗口cwnd初始化为1个报文段，慢开始门限初始值为16<br>（2）执行慢开始算法，指数规律增长到第4轮，即cwnd=16=ssthresh，改为执行拥塞避免算法，拥塞窗口按线性规律增长<br>（3）假定cwnd=24时，网络出现超时（拥塞），则更新后的ssthresh=12，cwnd重新设置为1，并执行慢开始算法。当cwnd=12=ssthresh时，改为执行拥塞避免算法</p>
+<p>关于 乘法减小（Multiplicative Decrease）和加法增大（Additive Increase）：</p>
+<p>“乘法减小”指的是无论是在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞，就把慢开始门限ssthresh设置为出现拥塞时的发送窗口大小的一半，并执行慢开始算法，所以当网络频繁出现拥塞时，ssthresh下降的很快，以大大减少注入到网络中的分组数。“加法增大”是指执行拥塞避免算法后，使拥塞窗口缓慢增大，以防止过早出现拥塞。常合起来成为AIMD算法。</p>
+<p>注意：“拥塞避免”并非完全能够避免了阻塞，而是使网络比较不容易出现拥塞。</p>
+<h4 id="快重传算法"><a href="#快重传算法" class="headerlink" title="快重传算法"></a>快重传算法</h4><p>快重传要求接收方在收到一个失序的报文段后就立即发出重复确认（为的是使发送方及早知道有报文段没有到达对方，可提高网络吞吐量约20%）而不要等到自己发送数据时捎带确认。快重传算法规定，发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器时间到期。如下图：</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BF%AB%E9%87%8D%E4%BC%A0.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h4 id="快恢复算法"><a href="#快恢复算法" class="headerlink" title="快恢复算法"></a>快恢复算法</h4><p>快重传配合使用的还有快恢复算法，有以下两个要点：</p>
+<p>当发送方连续收到三个重复确认时，就执行“乘法减小”算法，把ssthresh门限减半（为了预防网络发生拥塞）。但是接下去并不执行慢开始算法<br>考虑到如果网络出现拥塞的话就不会收到好几个重复的确认，所以发送方现在认为网络可能没有出现拥塞。所以此时不执行慢开始算法，而是将cwnd设置为ssthresh减半后的值，然后执行拥塞避免算法，使cwnd缓慢增大。如下图：TCP Reno版本是目前使用最广泛的版本。</p>
+<p><img src="/blog/Users/ckz/Desktop/hexo/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BF%AB%E6%81%A2%E5%A4%8D.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h3 id="粘包、半包"><a href="#粘包、半包" class="headerlink" title="粘包、半包"></a>粘包、半包</h3><p>（1）发送方产生粘包</p>
+<p>采用 TCP 协议传输数据的客户端与服务器经常是保持一个长连接的状态（一次连接发一次数据不存在粘包），双方在连接不断开的情况下，可以一直传输数据。但当发送的数据包过于的小时，那么 TCP 协议默认的会启用 Nagle 算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）；这个合并过程就是在发送缓冲区中进行的，也就是说数据发送出来它已经是粘包的状态了。</p>
+<p>一句话：要发送的数据小于 TCP 发送缓冲区的大小，TCP 将多次写入缓冲区的数据一次发送出去，将会发生粘包。</p>
+<p>（2）接收方产生粘包</p>
+<p>接收方采用 TCP 协议接收数据时的过程是这样的：数据到接收方，从网络模型的下方传递至传输层，传输层的 TCP 协议处理是将其放置接收缓冲区，然后由应用层来主动获取（C 语言用 recv、read 等函数）；这时会出现一个问题，就是我们在程序中调用的读取数据函数不能及时的把缓冲区中的数据拿出来，而下一个数据又到来并有一部分放入的缓冲区末尾，等我们读取数据时就是一个粘包。（放数据的速度 &gt; 应用层拿数据速度）。</p>
+<p>一句话：接收数据端的应用层没有及时读取接收缓冲区中的数据，将发生粘包。</p>
+<p>有以下两个措施：</p>
+<ul>
+<li>在每个包的末尾加上特殊字符，用以区分连续的两个包；</li>
+<li>在报文首部添加包的长度。</li>
+</ul>
+<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><h3 id="http-报文结构"><a href="#http-报文结构" class="headerlink" title="http  报文结构"></a>http  报文结构</h3><p>![image-20220414103012862](/Users/ckz/Desktop/hexo/source/_posts/计算机网络/http 结构.png)</p>
+<h3 id="http-常用方法"><a href="#http-常用方法" class="headerlink" title="http 常用方法"></a>http 常用方法</h3><p>![image-20220414114919418](/Users/ckz/Desktop/hexo/source/_posts/计算机网络/http 常用方法.png)</p>
+<h3 id="http-长连接、短连接"><a href="#http-长连接、短连接" class="headerlink" title="http 长连接、短连接"></a>http 长连接、短连接</h3><p><strong>HTTP长连接</strong></p>
+<ul>
+<li>浏览器向服务器进行一次HTTP会话访问后，并不会直接关闭这个连接，而是会默认保持一段时间，那么下一次浏览器继续访问的时候就会再次利用到这个连接。</li>
+<li>在<code>HTTP/1.1</code>版本中，默认的连接都是长连接，我们可以通过<code>Connection: keep-alive</code>字段进行指定。</li>
+</ul>
+<p><strong>HTTP短连接</strong></p>
+<ul>
+<li>浏览器向服务器每进行一次HTTP操作都要建立一个新的连接。</li>
+<li>在<code>HTTP/1.0</code>版本中默认是短链接</li>
+</ul>
+<p><strong>2. HTTP长连接本质</strong></p>
+<p>HTTP协议本质是OSI七层参考模型中的应用层协议，而网络进行通信的时候都是通过上层协议封装头部后作为下层协议的数据部分进行封装的，而实际中我们经常接触的是TCP/IP协议簇，也就是传输层利用TCP协议和网络层利用IP协议。因此HTTP协议的长连接本质上就是TCP的长连接。</p>
+<h3 id="http和https的区别？"><a href="#http和https的区别？" class="headerlink" title="http和https的区别？"></a>http和https的区别？</h3><p>https可以简单的理解为：https = http + 加密 + 认证 + 完整性保护。</p>
+<p>http协议的缺点:</p>
+<ol>
+<li>通信使用明文，内容可能被窃听。</li>
+<li>通信双方的身份无法得到认证，身份可能遭遇伪装。</li>
+<li>无法验证报文的完整性。</li>
+</ol>
+<p>针对以上问题，https的改进措施:</p>
+<ol>
+<li>加密。https协议通过SSL或者TLS协议将报文内容进行加密，client端进行加密，server端进行解密。</li>
+<li>认证。通过值得信赖的第三方机构颁布证书，即可确认通信双方的身份。客户端持有证书即可完成客户端身份的确认，客户端通信前会查看服务端的证书。</li>
+<li>完整性保护。可以通过MD5等散列码进行通信内容的校验。</li>
+</ol>
+<h3 id="https-实现原理？"><a href="#https-实现原理？" class="headerlink" title="https 实现原理？"></a>https 实现原理？</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903830916694030">https://juejin.cn/post/6844903830916694030</a></p>
+<h3 id="为什么说http协议是无状态协议？怎么解决Http协议无状态协议"><a href="#为什么说http协议是无状态协议？怎么解决Http协议无状态协议" class="headerlink" title="为什么说http协议是无状态协议？怎么解决Http协议无状态协议?"></a>为什么说http协议是无状态协议？怎么解决Http协议无状态协议?</h3><p>http协议是一种无状态协议，协议自身不对请求和响应之间的通信状态进行保存，即对发送过来的请求和响应都不做持久化处理，把http协议设计的如此简单是为了更快地处理大量事务。</p>
+<p>为了解决http协议不能保存通信状态的问题，引入了Cookie状态管理。Cookie技术通过在请求和响应报文中写入Cookie信息来控制客户端的状态。Cookie会根据从服务端发送的响应报文的一个叫Set-Cookie的首部字段，通知客户端保存Cookie。当下次客户端再往该服务端发送请求时，客户端会自动在请求报文中加入Cookie值发送出去，服务端发现客户端发来的Cookie后，会检查是哪一个客户端发来的连接请求，对比服务器上的记录，最后得到之前的状态信息。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/redis/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/01/27/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">操作系统</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
