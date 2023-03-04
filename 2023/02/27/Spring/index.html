@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring IOCAutowired和Resource关键字的区别?@Autowired是Spring自己提供的注解，@Resource是Java自带的注解 @Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier @Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入 IOC的理解IOC是控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cherish&#39;s blog">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2023/02/27/Spring/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="Spring IOCAutowired和Resource关键字的区别?@Autowired是Spring自己提供的注解，@Resource是Java自带的注解 @Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier @Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入 IOC的理解IOC是控">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/68747470733a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3234393939332f3230313631322f3234393939332d32303136313231323134323534323034322d323131373637393139352e6a7067-20230227%2020:23:09.jpeg">
+<meta property="article:published_time" content="2023-02-27T14:23:04.667Z">
+<meta property="article:modified_time" content="2023-02-28T13:38:43.361Z">
+<meta property="article:author" content="Cherish">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png">
+  
+  
+  <title>Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-27 22:23" pubdate>
+        February 27, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png" srcset="/blog/img/loading.gif" lazyload alt="spring问题"></p>
+<h1 id="Spring-IOC"><a href="#Spring-IOC" class="headerlink" title="Spring IOC"></a>Spring IOC</h1><h2 id="Autowired和Resource关键字的区别"><a href="#Autowired和Resource关键字的区别" class="headerlink" title="Autowired和Resource关键字的区别?"></a>Autowired和Resource关键字的区别?</h2><p>@Autowired是Spring自己提供的注解，@Resource是Java自带的注解</p>
+<p>@Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier</p>
+<p>@Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入</p>
+<h2 id="IOC的理解"><a href="#IOC的理解" class="headerlink" title="IOC的理解"></a>IOC的理解</h2><p>IOC是控制反转，把创建对象的主动权和时机交给Spring 容器，并通过依赖注入的方式为对象的属性赋值，IOC容器管理了整个Bean的生命周期。本质上IOC容器可以看做一个Map，我们要使用某个对象使用某个对象时，去这个容器里面拿就可以，非常方便。</p>
+<h2 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h2><p>1）实例化Bean 通过BeanDefinition，使用Java反射机制，实例化Bean</p>
+<p>2）实例化的Bean里面的属性还没有赋值，第二步是使用依赖注入的方式为Bean的属性进行赋值</p>
+<p>3）调用Bean的前置处理器在Bean初始化前对Bean进行一些操作</p>
+<p>4）初始化Bean</p>
+<p>5）调用Bean的后置处理器在Bean初始化之后做一些操作（AOP就是在这个过程中，生成代理对象对原始对象对功能进行增强）</p>
+<p>6）经过这个步骤之后，Bean就被正确创建了，创建好的Bean会放入到单例池中</p>
+<h2 id="如何解决循环依赖"><a href="#如何解决循环依赖" class="headerlink" title="如何解决循环依赖"></a>如何解决循环依赖</h2><p>Spring使用三级缓存来解决循环依赖。举个例子：先实例化A，在对A进行属性注入时，发现A依赖于B，在单例池中没找到B，就会去创建B，在对B进行属性注入时发现B依赖于A，A此时还没有初始化完成，放到单例池中，这样就因为循环依赖死锁了。Spring如何解决的呢，我们注意到此时A已经实例化了，我们可以将A放入到一个单独的Map中进行保存，这就是Spring的二级缓存，earlySingleObjects，专门存放那些已经创建到还没初始化完成的Bean。貌似使用二级缓存就能解决循环依赖的问题，那为什么需要三级缓存呢，这里就不得不提Spring的AOP机制。我们知道在Bean初始化之后，Bean的后置处理器可以对Bean进行增强，创建代理对象。如果直接把A放入二级缓存，B注入的就是原始A对象，AOP机制就失效了。因此我们需要引入三级缓存，三级缓存存放的是Bean的lamda表达式，通过这个表达式我们能计算出Bean是否需要提前AOP，如果需要，我们就创建Bean的AOP代理对象，存放在二级缓存，这样就完美解决了循环依赖的问题。</p>
+<p>总结一下：在发生循环依赖时，首先会到单例池（也就是一级缓存）中寻找对象，如果不存在，就到二级缓存（earlySingleObjects）中寻找对象，如果二级缓存也不存在，就到一级缓存中，根据lamda表达式计算是否需要创建Bean到代理对象，创建完的对象会放入到二级缓存。在整个流程结束后，会将二级缓存已经初始化完成的Bean转移到一级缓存。</p>
+<h1 id="Spring-AOP"><a href="#Spring-AOP" class="headerlink" title="Spring AOP"></a>Spring AOP</h1><h2 id="AOP的作用"><a href="#AOP的作用" class="headerlink" title="AOP的作用"></a>AOP的作用</h2><p>AOP(Aspect-Oriented Programming，面向切面编程)能够将那些与业务无关，却为业务模块所 共同调用的逻辑或责任(例如事务处理、日志管理、权限控制等)封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可扩展性和可维护性。</p>
+<p>AOP是IOC的一个扩展功能，在Bean的生命周期中，Bean初始化后，又一个后置处理器BeanPostProcessor对Bean进行增强，生成原始Bean的代理类。通常有两种代理方式，一种是JDK代理，另一种是Cglib代理。</p>
+<p>AOP中有几个比较重要的概念，切面，切点，通知</p>
+<p>切面可以看做切点和通知的一个集合。</p>
+<p>切点限定了方法的生效的范围</p>
+<p>通知定义我们方法的生效时机，分为5种</p>
+<p><strong>前置通知</strong>（Before）：在目标方法被调用之前调用通知功能 （参数校验、身份认证）<br><strong>后置通知</strong>（After）：在目标方法完成之后调用通知，此时不会关心方法的输出是什么 （日志）<br><strong>返回通知</strong>（After-returning）：在目标方法成功执行之后调用通知<br><strong>异常通知</strong>（After-throwing）：在目标方法抛出异常后调用通知<br><strong>环绕通知</strong>（Around）：通知包裹了被通知的方法，在被通知的方</p>
+<p>增强后的代理类，会根据通知和切点生成拦截器链，执行通知方法。</p>
+<h2 id="Spring-事务"><a href="#Spring-事务" class="headerlink" title="Spring 事务"></a>Spring 事务</h2><p>Spring事务是基于AOP来完成的。JDBC的事务流程是这样的，新建一个连接，然后关闭连接的自动提交，执行业务SQL，根据业务代码是否抛出异常来决定提交事务还是回滚事务。如果由我们自己来控制事务的提交、会滚，代码会变得很重复，耦合性很高、还容易出错。因此，Spring使用AOP机制来替我们完成这些事情，建立连接、关闭自动提交可以使用前置通知来完成，提交事务可以使用后置通知，事务回滚可以使用异常通知。Spring使用@Transactional注解来决定是否开启事务，事务的传播级别。</p>
+<h2 id="Spring事务的传播级别"><a href="#Spring事务的传播级别" class="headerlink" title="Spring事务的传播级别"></a>Spring事务的传播级别</h2><p>Spring事务定义了7种传播机制:</p>
+<ol>
+<li><p>PROPAGATION_REQUIRED:默认的Spring事物传播级别，若当前存在事务，则加入该事务，若 不存在事务，则新建一个事务。</p>
+</li>
+<li><p>PAOPAGATION_REQUIRE_NEW:若当前没有事务，则新建一个事务。若当前存在事务，则新建 一个事务，新老事务相互独立。外部事务抛出异常回滚不会影响内部事务的正常提交。</p>
+</li>
+<li><p>PROPAGATION_NESTED:如果当前存在事务，则嵌套在当前事务中执行。如果当前没有事务， 则新建一个事务，类似于REQUIRE_NEW。</p>
+</li>
+<li><p>PROPAGATION_SUPPORTS:支持当前事务，若当前不存在事务，以非事务的方式执行。</p>
+</li>
+<li><p>PROPAGATION_NOT_SUPPORTED:以非事务的方式执行，若当前存在事务，则把当前事务挂</p>
+<p>起。</p>
+</li>
+<li><p>PROPAGATION_MANDATORY:强制事务执行，若当前不存在事务，则抛出异常.</p>
+</li>
+<li><p>PROPAGATION_NEVER:以非事务的方式执行，如果当前存在事务，则抛出异常。</p>
+</li>
+</ol>
+<h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><h2 id="DispatchServlet处理流程"><a href="#DispatchServlet处理流程" class="headerlink" title="DispatchServlet处理流程"></a>DispatchServlet处理流程</h2><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/68747470733a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3234393939332f3230313631322f3234393939332d32303136313231323134323534323034322d323131373637393139352e6a7067-20230227%2020:23:09.jpeg" srcset="/blog/img/loading.gif" lazyload alt="68747470733a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3234393939332f3230313631322f3234393939332d32303136313231323134323534323034322d323131373637393139352e6a7067"></p>
+<ul>
+<li><p> 用户发送请求至前端控制器DispatcherServlet。</p>
+</li>
+<li><p>DispatcherServlet收到请求调用HandlerMapping处理器映射器。</p>
+</li>
+<li><p>处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器 拦截器(如果有则生成)一并返回给DispatcherServlet。</p>
+</li>
+<li><p>DispatcherServlet调用HandlerAdapter处理器适配器。</p>
+</li>
+<li><p> HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)。</p>
+</li>
+<li><p> Controller执行完成返回ModelAndView。</p>
+</li>
+<li><p> HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet。</p>
+</li>
+<li><p>DispatcherServlet将ModelAndView传给ViewReslover视图解析器。</p>
+</li>
+<li><p> ViewReslover解析后返回具体View。 </p>
+</li>
+<li><p>DispatcherServlet根据View进行渲染视图(即将模型数据填充至视图中)。</p>
+</li>
+<li><p>DispatcherServlet响应用户。</p>
+</li>
+</ul>
+<h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h2 id="为什么要用Springboot"><a href="#为什么要用Springboot" class="headerlink" title="为什么要用Springboot"></a>为什么要用Springboot</h2><p>1、独立运行，Springboot内置了各种Servelt容器，比如tomcat、Jetty，不需要打成war包部署到容器中运行，只需要打一个jar包就能独立运行。</p>
+<p>2、自动装配  Springboot到自动装配机制，允许我们快速地整合各种其他框架如Mytatis等，通常我们只需要进行简单的配置。</p>
+<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><h2 id="自动装配原理"><a href="#自动装配原理" class="headerlink" title="自动装配原理"></a>自动装配原理</h2><p>自动装配目的是快速地整合第三方组件，将第三方组件的Bean自动加载到IOC容器中来。其实现依赖于@SpringBootApplication注解，这是个复合注解，真正实现自动装配的注解是@EnbaleAutoConfiguration，这个注解会导入一个AutoConfigurationImportSelector类。</p>
+<p>这个类会通过spring.factories文件获取到所有需要进行自动装配的配置类，通常我们整合或者自己定义</p>
+<p>自动配置简单来说呢，就是将第三方的组件自动装载到IOC容器里面，不需要开发人员再去编写相关的配置，在SpringBoot应用里面呢只需要加上@SpringBootApplication注解就可以实现自动配置，SpringBootApplication它是一个复合注解，真正实现自动装配的注解是@EnableAutoConfiguration注解。自动装配的实现呢主要依靠三个核心的关键技术：<br>1）引入Starter，启动依赖组件的时候，这个组件里面必须包括@Configuration配置类，然后我需要通过Bean注解去声明需要装配到IOC容器里面的Bean对象<br>2）这个配置类是放在第三方的jar包里面，然后通过Spring Boot中约定大于配置的理念，去把配置类的全路径放在件META_INF/Spring.factories文件里面，SpringBoot就可以知道第三方jar包里面配置类的位置，它主要是依靠Spring里面的SpringFactorierLoader来完成的<br>3）SpringBoot拿到所有第三方jar包声明的配置类之后，再通过ImportSelector这样一个接口来实现对这些配置类的动态加载，从而去完成自动装配这样的一个动作。<br>在我看来，SpringBoot是约定优于配置这一理念下的一个产物，所以在很多的地方都会看到这一类的思想，它的出现让开发人员可以更加聚焦在业务代码的编写上，而不需要去关系和业务无关的配置</p>
+<p>SpringBoot和Spring的区别，自动装配的原理</p>
+<p>了解Springboot吗？那讲—下Springboot的启动流程吧</p>
+<p>Spring AOP原理是什么？怎么使用？什么是切点，什么是切面？最好是举个例子</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/05/09/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">分布式系统设计论文</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

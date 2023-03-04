@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cherish-merry.github.io/blog/img/JVM.jpeg">
 <meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-03-08T06:34:39.000Z">
+<meta property="article:modified_time" content="2023-03-03T05:48:37.414Z">
 <meta property="article:author" content="Cherish">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.4k 字
+      7.7k 字
     </span>
   
 
@@ -221,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45 分钟
+      65 分钟
     </span>
   
 
@@ -253,8 +253,8 @@
             <h1 style="display: none">JVM</h1>
             
             <div class="markdown-body">
-              <h3 id="1-JVM-JRE-JDK的区别"><a href="#1-JVM-JRE-JDK的区别" class="headerlink" title="1 JVM JRE JDK的区别"></a>1 JVM JRE JDK的区别</h3><p><img src="/blog/2022/01/27/Jvm/jre.png" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
-<h3 id="2-内存结构（运行时数据区）"><a href="#2-内存结构（运行时数据区）" class="headerlink" title="2 内存结构（运行时数据区）"></a>2 内存结构（运行时数据区）</h3><p><img src="/blog/2022/01/27/Jvm/memory.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307165912478"></p>
+              <h3 id="1-JVM-JRE-JDK的区别"><a href="#1-JVM-JRE-JDK的区别" class="headerlink" title="1 JVM JRE JDK的区别"></a>1 JVM JRE JDK的区别</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/jre-20230301%2021:34:59.png" srcset="/blog/img/loading.gif" lazyload alt="jre"></p>
+<h3 id="2-内存结构（运行时数据区）"><a href="#2-内存结构（运行时数据区）" class="headerlink" title="2 内存结构（运行时数据区）"></a>2 内存结构（运行时数据区）</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/memory-20230301%2021:35:39.png" srcset="/blog/img/loading.gif" lazyload alt="memory"></p>
 <p><code>jvm</code> 的运行时数据区由<strong>程序计数器</strong>，<strong>虚拟机栈</strong>，<strong>本地方法栈</strong>，<strong>方法区</strong>几部分组成</p>
 <ul>
 <li>程序计数器：记录了下一条虚拟机指令的位置</li>
@@ -266,7 +266,7 @@
 <p>程序计数器，虚拟机栈，本地方法栈是线程私有的</p>
 <p>方法区，堆是线程共享的</p>
 <p><strong>方法区</strong></p>
-<p><img src="/blog/2022/01/27/Jvm/method.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220307170009776"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/method-20230301%2021:36:20.png" srcset="/blog/img/loading.gif" lazyload alt="method"></p>
 <h3 id="3-直接内存"><a href="#3-直接内存" class="headerlink" title="3 直接内存"></a>3 直接内存</h3><ul>
 <li>属于操作系统，常见于NIO操作时，<strong>用于数据缓冲区</strong></li>
 <li>分配回收成本较高，但读写性能高</li>
@@ -278,7 +278,7 @@
 <p>一旦 ByteBuffer 对象被垃圾回收，那么就会由 ReferenceHandler 线程通过 Cleaner 的 clean 方法调 用 freeMemory 来释放直接内存</p>
 <h3 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4 垃圾回收"></a>4 垃圾回收</h3><h4 id="4-1-如何判断对象可以回收"><a href="#4-1-如何判断对象可以回收" class="headerlink" title="4.1 如何判断对象可以回收"></a>4.1 如何判断对象可以回收</h4><p><strong>引用计数法</strong></p>
 <p>弊端：循环引用时，两个对象的计数都为1，导致两个对象都无法被释放</p>
-<p><img src="/blog/2022/01/27/Jvm/reference.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102652818"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/reference-20230301%2021:36:46.png" srcset="/blog/img/loading.gif" lazyload alt="reference"></p>
 <p><strong>可达性分析算法</strong></p>
 <ul>
 <li>JVM中的垃圾回收器通过<strong>可达性分析</strong>来探索所有存活的对象</li>
@@ -291,7 +291,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="4-2-五种引用"><a href="#4-2-五种引用" class="headerlink" title="4.2 五种引用"></a>4.2 五种引用</h4><p><img src="/blog/2022/01/27/Jvm/reference2.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308102810499"></p>
+<h4 id="4-2-五种引用"><a href="#4-2-五种引用" class="headerlink" title="4.2 五种引用"></a>4.2 五种引用</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/reference2-20230301%2021:37:04.png" srcset="/blog/img/loading.gif" lazyload alt="reference2"></p>
 <p>只有GC Root<strong>都不引用</strong>该对象时，才会回收<strong>强引用</strong>对象</p>
 <ul>
 <li>如上图B、C对象都不引用A1对象时，A1对象才会被回收</li>
@@ -332,13 +332,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="5-垃圾回收算法"><a href="#5-垃圾回收算法" class="headerlink" title="5 垃圾回收算法"></a>5 垃圾回收算法</h3><h4 id="5-1-标记清除算法"><a href="#5-1-标记清除算法" class="headerlink" title="5.1 标记清除算法"></a>5.1 标记清除算法</h4><p><img src="/blog/2022/01/27/Jvm/mark-clean.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103039362"></p>
+<h3 id="5-垃圾回收算法"><a href="#5-垃圾回收算法" class="headerlink" title="5 垃圾回收算法"></a>5 垃圾回收算法</h3><h4 id="5-1-标记清除算法"><a href="#5-1-标记清除算法" class="headerlink" title="5.1 标记清除算法"></a>5.1 标记清除算法</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/mark-clean-20230301%2021:37:29.png" srcset="/blog/img/loading.gif" lazyload alt="mark-clean"></p>
 <p>标记要被回收的对象，清除，会产生内存碎片</p>
-<h4 id="5-2-标记整理算法"><a href="#5-2-标记整理算法" class="headerlink" title="5.2 标记整理算法"></a>5.2 标记整理算法</h4><p><img src="/blog/2022/01/27/Jvm/mark-sort.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103119774"></p>
+<h4 id="5-2-标记整理算法"><a href="#5-2-标记整理算法" class="headerlink" title="5.2 标记整理算法"></a>5.2 标记整理算法</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/mark-sort-20230301%2021:37:46.png" srcset="/blog/img/loading.gif" lazyload alt="mark-sort"></p>
 <p>将存活的对象向一端移动，然后清除掉端边界以外的内容</p>
-<h4 id="5-3-复制算法"><a href="#5-3-复制算法" class="headerlink" title="5.3 复制算法"></a>5.3 复制算法</h4><p><img src="/blog/.copy.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103706534"></p>
+<h4 id="5-3-复制算法"><a href="#5-3-复制算法" class="headerlink" title="5.3 复制算法"></a>5.3 复制算法</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/copy-20230301%2021:38:13.png" srcset="/blog/img/loading.gif" lazyload alt="copy"></p>
 <p>标记存活对象，将对象复制到另一块区域中区</p>
-<h4 id="5-4-分代回收"><a href="#5-4-分代回收" class="headerlink" title="5.4 分代回收"></a>5.4 分代回收</h4><p><img src="/blog/2022/01/27/Jvm/divide.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308103157273"></p>
+<h4 id="5-4-分代回收"><a href="#5-4-分代回收" class="headerlink" title="5.4 分代回收"></a>5.4 分代回收</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/divide-20230301%2021:38:23.png" srcset="/blog/img/loading.gif" lazyload alt="divide"></p>
 <ul>
 <li>对象首先分配在伊甸园区域新生代空间不足时，触发 <code>minor gc</code></li>
 <li>伊甸园和<code>from</code>存活的对象使用 <code>copy</code> 复制到<code>to</code>中，存活的对象年龄加1并且交换 <code>from</code> <code>to</code> </li>
@@ -390,66 +390,128 @@
 <td>-XX:+ScavengeBeforeFullGC</td>
 </tr>
 </tbody></table>
-<h3 id="6-垃圾回收器"><a href="#6-垃圾回收器" class="headerlink" title="6 垃圾回收器"></a>6 垃圾回收器</h3><h4 id="6-1-串行"><a href="#6-1-串行" class="headerlink" title="6.1 串行"></a>6.1 串行</h4><p><strong>Serial + SerialOld</strong></p>
+<h3 id="6-垃圾回收器"><a href="#6-垃圾回收器" class="headerlink" title="6 垃圾回收器"></a>6 垃圾回收器</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230302102247319-20230302%2010:22:47.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230302102247319"></p>
+<h4 id="6-1-串行"><a href="#6-1-串行" class="headerlink" title="6.1 串行"></a>6.1 串行</h4><p><strong>Serial + SerialOld</strong></p>
 <p>Serial 工作在新生代，使用复制算法</p>
 <p>SerialOld 工作在老年代，使用标记整理算法</p>
 <p><code>-XX:+UseSerialGC = Serial + SerialOld</code></p>
-<p><img src="/blog/2022/01/27/Jvm/serial.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104204084"></p>
-<h4 id="6-2-吞吐量优先"><a href="#6-2-吞吐量优先" class="headerlink" title="6.2 吞吐量优先"></a>6.2 吞吐量优先</h4><p><strong>Parallel + ParallelOld</strong></p>
-<p>Parallel 工作在新生代，使用复制算法</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/serial-20230301%2021:38:44.png" srcset="/blog/img/loading.gif" lazyload alt="serial"></p>
+<h4 id="6-2-吞吐量优先"><a href="#6-2-吞吐量优先" class="headerlink" title="6.2 吞吐量优先"></a>6.2 吞吐量优先</h4><p><strong>Parallel Scavenge + ParallelOld</strong></p>
+<p>Parallel Scavenge 工作在新生代，使用复制算法</p>
 <p>ParallelOld 工作在老年代，使用标记整理算法</p>
 <p><code>-XX:+UseParallelGC</code>~`-XX:+UseParallelOldGC` </p>
 <p><code>-XX:+UseAdaptiveSizePolicy</code>  自适应地调整新生代比例</p>
 <p><code>-XX:GCTimeRatio=ratio</code>  GC时间占比（默认99   1%）</p>
 <p><code>-XX:MaxGCPauseMillis=ms</code> 最大暂停ms（默认200ms）</p>
 <p><code>-XX:ParallelGCThreads=n</code> 多少个回收线程</p>
-<p><img src="/blog/2022/01/27/Jvm/parallel.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308104715067"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/parallel-20230301%2021:38:54.png" srcset="/blog/img/loading.gif" lazyload alt="parallel"></p>
 <h4 id="6-3-响应时间优先"><a href="#6-3-响应时间优先" class="headerlink" title="6.3 响应时间优先"></a>6.3 响应时间优先</h4><p><strong>ParallelNew + CMS</strong></p>
 <p>ParallelNew  工作在新生代</p>
-<p>CMS 工作在老年代</p>
+<p>CMS 工作在老年代  标记清理算法</p>
 <p><code>-XX:+UseConcMarkSweepGC ~ -XX:+UseParNewGC ~ SerialOld</code> </p>
 <p><code>-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads</code>  并发线程数，建议为总线程数的1/4</p>
 <p><code>-XX:CMSInitiatingOccupancyFraction=percent</code> 垃圾回收时机的内存占比</p>
 <p><code>-XX:+CMSScavengeBeforeRemark</code> 重新标记直接执行新生代垃圾回收</p>
-<p><img src="/blog/2022/01/27/Jvm/CMS.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308110912272"></p>
-<p><code>Cms</code>工作在老年带，采用标记清除算法，分为初始标记，并发标记，重新标记，并发清理几个过程</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/CMS-20230301%2021:39:06.png" srcset="/blog/img/loading.gif" lazyload alt="CMS"></p>
+<p><code>Cms</code>工作在老年代，采用标记清除算法，分为初始标记，并发标记，重新标记，并发清理几个过程</p>
 <ol>
 <li>初始标记阶段会标记那些存活的<code>GcRoot</code>，会造成<code>STW</code></li>
 <li>并发标记阶段从<code>GcRoot</code> 出发标记剩下存活对象，与用户线程并发运行，不会造成<code>STW</code></li>
 <li>重新标记阶段 消除并发标记阶段新产生垃圾等影响，会造成<code>STW</code></li>
 <li>并发清理阶段与用户线程并发运行，不会造成<code>STW</code></li>
 </ol>
-<h4 id="6-4-G1"><a href="#6-4-G1" class="headerlink" title="6.4 G1"></a>6.4 G1</h4><p><strong>适用场景</strong></p>
+<h4 id="6-4-G1"><a href="#6-4-G1" class="headerlink" title="6.4 G1"></a>6.4 G1</h4><p>G1是JDK1.9之后默认使用的垃圾回收器，G1摒弃了传统的堆划分方式，将内存划分为大小相等的网格状Region，Region分为伊甸园区(E)，幸存区(S)，老年代区(O)，以及专门存放大对象的H(Humgongous)区。</p>
+<h5 id="如何分配大对象？"><a href="#如何分配大对象？" class="headerlink" title="如何分配大对象？"></a>如何分配大对象？</h5><p>每个Region都比较小，当遇到大对象时。 如果对象对象 &gt;=0.5 个Region，小于1个Region是会把对象存放在O区，然后把O区标记为H区(Humgongous)。如果情况更极端，对象的大小超过了1个Region，G1会申请多个连续的H区来存放这种巨型对象。</p>
+<p><strong>适用场景</strong></p>
 <ul>
-<li>同时注重吞吐量(<code>Throughput</code>)和低延迟(<code>Low latency</code>)，默认的暂停目标是 200 ms</li>
-<li>超大堆内存，会将堆划分为多个大小相等的 <code>Region</code></li>
-<li> 整体上是 标记+整理算法，两个区域之间是复制算法</li>
+<li><p>同时注重吞吐量(<code>Throughput</code>)和低延迟(<code>Low latency</code>)，默认的暂停目标是 200 ms</p>
+</li>
+<li><p>超大堆内存，会将堆划分为多个大小相等的 <code>Region</code></p>
+</li>
+<li><p>整体上是 标记+整理算法，两个区域之间是复制算法</p>
+</li>
 </ul>
 <p><strong>相关 JVM 参数</strong></p>
 <p><code>-XX:+UseG1GC</code> </p>
 <p><code>-XX:G1HeapRegionSize=size</code> </p>
 <p><code>-XX:MaxGCPauseMillis=time</code></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/20180701120309694-20230302%2011:20:11.png" srcset="/blog/img/loading.gif" lazyload alt="20180701120309694"></p>
+<p><code>G1</code> 分为初始标记，并发标记，最终标记，筛选回收几个过程</p>
+<ol>
+<li>初始标记阶段会标记那些存活的<code>GcRoot</code>，会造成<code>STW</code></li>
+<li>并发标记阶段从<code>GcRoot</code> 出发标记剩下存活对象，与用户线程并发运行，不会造成<code>STW</code></li>
+<li>最终标记阶段，基于原始快照（<code>STAB</code>）来解决三色标记过程中的对象漏标问题，会造成<code>STW</code></li>
+<li>筛选回收阶段，会挑选一些回收价值较高的<code>Region</code>，使用标记-压缩算法进行回收，会造成<code>STW</code></li>
+</ol>
+<h5 id="三色标记算法"><a href="#三色标记算法" class="headerlink" title="三色标记算法"></a>三色标记算法</h5><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6859931488352370702#comment">https://juejin.cn/post/6859931488352370702#comment</a></p>
+<p>三色标记算法是CMS和G1进行垃圾回收时使用的算法。</p>
+<p>三色标记算法将对象的颜色分为黑色、灰色、白色。</p>
+<p>黑色对象是指那些已经被标记过，并且对象的引用都被访问过了的对象</p>
+<p>灰色对象是指那些已经被标记过，但对象的引用还没有完全访问的对象</p>
+<p>白色对象是指那些还没被标记过的对象</p>
+<p>算法流程：</p>
+<p>我们从Gc Root寻找对象，按照黑灰白的规则标记出所有与GC root相邻的对象</p>
+<p>每次扫描都从灰色对象开始，灰色对象的引用被扫描完成只有被标记为黑色对象，再从剩下的灰色对象中继续扫描</p>
+<p>最终那些没有被标记的白色对象将被当成垃圾回收掉</p>
+<p>存在的问题：</p>
+<p>浮动垃圾：在并发标记的过程中，如果一个黑色对象或者灰色对象突然变成了垃圾，此时对象不是白色，不会被当成垃圾清除掉，重新标记或最终标记也不会处理这些对象，因此这些对象变成了浮动垃圾，不过影响不大，留个下一次GC处理即可。</p>
+<p>对象漏标记问题：在并发标记过程中，由灰色对象引用的白色对象断开了与灰色对象的连接，并与黑色对象建立了新的连接，由于GC不会回过头来扫描黑色对象，此白色对象就会被当成垃圾GC掉。</p>
+<p>为了解决这个问题，CMS采用的是增量更新(Increment Update)的方式，在白色对象与黑色对象建立新的引用关系后，会把黑色对象变成灰色。</p>
+<p>CMS存在两个重要的问题</p>
+<p>CMS采用的是标记清除算法，会产生内存碎片，当内存碎片达到一定的数量，CMS无法进行清理了，CMS会使用Serial Old来进行清理，而Serial是单线程的，清理效率偏低。</p>
+<p>解决方法：使用<code>Mark-Sweep-Compact</code>算法，减少垃圾碎片</p>
+<p>当JVM认为内存不够了，再使用CMS进行并发清理内存可能会发生OOM的问题，而不得不进行<code>Serial Old GC</code>，<code>Serial Old</code>是单线程垃圾回收，效率低</p>
+<p>解决方案：降低触发<code>CMS GC</code>的阈值，让浮动垃圾不那么容易占满老年代</p>
+<p>前置知识：卡表（Card Table）</p>
+<p>由于在进行<code>YoungGC</code>时，我们在进行对一个对象是否被引用的过程，需要扫描整个Old区，所以JVM设计了<code>CardTable</code>，将Old区分为一个一个Card，一个Card有多个对象；如果一个Card中的对象有引用指向Young区，则将其标记为<code>Dirty Card</code>，下次需要进行<code>YoungGC</code>时，只需要去扫描<code>Dirty Card</code>即可。</p>
+<p>Card Table 在底层数据结构以 <code>Bit Map</code>实现。</p>
+<p>CSet(Collection Set)</p>
+<p>一组可被回收的分区Region的集合；Region，是多个对象的集合内存区域。</p>
+<p>RSet(Remembered Set)</p>
+<p>每个<code>Region</code>中都有一个<code>RSet</code>，记录其他<code>Region</code>到本<code>Region</code>的引用信息；使得垃圾回收器不需要扫描整个堆找到谁引用当前分区中的对象，只需要扫描RSet即可。</p>
+<p>SATB(Snapshot  At The Beginning)</p>
+<p>在应对漏标问题时，G1使用了<code>SATB</code>方法来做：</p>
+<ol>
+<li>在开始标记的时候生成一个快照图标记存活对象</li>
+<li>在一个引用断开后，要将此引用推到GC的堆栈里，保证白色对象（垃圾）还能被GC线程扫描到</li>
+<li>配合<code>Rset</code>，去扫描哪些Region引用到当前的白色对象，若没有引用到当前对象，则回收</li>
+</ol>
+<p>SATB效率高于Increment update原因？</p>
+<ul>
+<li>因为SATB在重新标记环节只需要去重新扫描那些被推到堆栈中的引用，并配合<code>Rset</code>来判断当前对象是否被引用来进行回收；</li>
+<li>并且在最后<code>G1</code>并不会选择回收所有垃圾对象，而是根据<code>Region</code>的垃圾多少来判断与预估回收价值（指回收的垃圾与回收的<code>STW</code>时间的一个预估值），将一个或者多个<code>Region</code>放到<code>CSet</code>中，最后将这些<code>Region</code>中的存活对象压缩并复制到新的<code>Region</code>中，清空原来的<code>Region</code>。</li>
+</ul>
+<p>问题：G1会不会进行Full GC?</p>
+<p>会，当内存满了的时候就会进行<code>Full GC</code>；且<code>JDK10</code>之前的<code>Full GC</code>，为单线程的，所以使用G1需要避免<code>Full GC</code>的产生。</p>
+<h5 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h5><ul>
+<li>加大内存；</li>
+<li>提高CPU性能，加快GC回收速度，而对象增加速度赶不上回收速度，则Full GC可以避免；</li>
+<li>降低进行Mixed GC触发的阈值，让Mixed GC提早发生（默认45%）</li>
+</ul>
 <p><strong>垃圾回收阶段</strong></p>
-<p><img src="/blog/2022/01/27/Jvm/garbage.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132241999"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/garbage-20230301%2021:39:26.png" srcset="/blog/img/loading.gif" lazyload alt="garbage"></p>
 <p><strong>1）Young Collection</strong></p>
 <p><code>Young Collection</code> 阶段  当<code>Eden Region</code> 内存空间不足时，把<code>Eden Region</code> ，<code>Survival Region</code><br>存活对象复制到 Survival Region，存活年龄 +1，<code>Survival Region</code> 中存活年龄达到阈值的复制到<code>Old Region</code>中，会<code>STW</code></p>
-<p><img src="/blog/2022/01/27/Jvm/young.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308132548389"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/young-20230301%2021:39:35.png" srcset="/blog/img/loading.gif" lazyload alt="young"></p>
 <p><strong>2）Young Collection + Concurrent Mark</strong></p>
 <p><code>Young Collection</code> + <code>Concurrent Mark</code> 阶段  当老年代占用达到这个堆当一定比例时</p>
 <p>(-<code>XX:InitiatingHeapOccupancyPercent=percent</code>默认45%)，在进行<code>Young Collection</code>时进行并发标记，不会<code>STW</code></p>
-<p><img src="/blog/2022/01/27/Jvm/G12.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133414219"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/G12-20230301%2021:39:50.png" srcset="/blog/img/loading.gif" lazyload alt="G12"></p>
 <p><strong>3）Mixed Collection</strong>  </p>
 <p>当并发标记完成后进行混合收集，新生带执行<code>Young Collection</code> 老年代挑选一些回收价值高的<code>Region</code> 进行回收，会造成<code>STW</code></p>
-<p><img src="/blog/2022/01/27/Jvm/mix.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220308133719490"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/mix-20230301%2021:40:02.png" srcset="/blog/img/loading.gif" lazyload alt="mix"></p>
 <h3 id="7-类加载机制"><a href="#7-类加载机制" class="headerlink" title="7 类加载机制"></a>7 类加载机制</h3><h4 id="7-1-阶段"><a href="#7-1-阶段" class="headerlink" title="7.1 阶段"></a>7.1 阶段</h4><p>加载、链接（验证，准备，解析）、初始化</p>
 <ul>
-<li>加载：将字节码文件加载到方法区</li>
+<li>加载：将字节码文件加载到方法区，创建Class对象</li>
 <li>验证：验证类是否符合Jvm规范</li>
 <li>准备：为静态变量分配内存空间并赋默认值</li>
-<li>解析：符号引用解析为直接引用</li>
-<li>初始化：初始化静态变量</li>
+<li>解析：将常量池中的符号引用替换成直径引用</li>
+<li>初始化：执行静态代码块，为静态变量赋值</li>
 </ul>
-<h4 id="7-2-类加载器"><a href="#7-2-类加载器" class="headerlink" title="7.2 类加载器"></a>7.2 类加载器</h4><ul>
+<p>触发条件包括,创建类的实例时,访问类的静态方法或静态变量的时候,使用Class.forName反射类的时 候,或者某个子类初始化的时候.</p>
+<p>Java自带的加载器加载的类,在虚拟机的生命周期中是不会被卸载的,只有用户自定义的加载器加载的 类才可以被卸.</p>
+<h4 id="7-2-类加载器"><a href="#7-2-类加载器" class="headerlink" title="7.2 类加载器"></a>7.2 类加载器</h4><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/class-20230301%2021:49:03.png" srcset="/blog/img/loading.gif" lazyload alt="class"></p>
+<ul>
 <li>启动类加载器：加载 %JAVA_HOME%/lib 下的类</li>
 <li>扩展类加载器：加载 %JAVA_HOME%/jre/lib/ext 下的类</li>
 <li>系统类加载器：加载 %ClassPath% 下的类</li>
@@ -530,9 +592,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2022/02/05/offer/">
+                      <a href="/blog/2022/01/27/Netty/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer</span>
+                        <span class="hidden-mobile">IO模型、Netty</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -540,8 +602,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/01/27/Netty/">
-                        <span class="hidden-mobile">IO模型、Netty</span>
+                      <a href="/blog/2022/01/27/redis/">
+                        <span class="hidden-mobile">Redis</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

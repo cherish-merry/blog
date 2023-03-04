@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cherish-merry.github.io/blog/img/redis.jpeg">
 <meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-04-18T07:33:25.000Z">
+<meta property="article:modified_time" content="2023-02-24T14:00:06.196Z">
 <meta property="article:author" content="Cherish">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      6.6k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26 分钟
+      56 分钟
     </span>
   
 
@@ -252,43 +252,135 @@
             <h1 style="display: none">Redis</h1>
             
             <div class="markdown-body">
-              <h2 id="redis-基本类型，使用场景"><a href="#redis-基本类型，使用场景" class="headerlink" title="redis 基本类型，使用场景"></a>redis 基本类型，使用场景</h2><ul>
-<li>string      计数器，共享session</li>
-<li>hash         存放对象</li>
-<li>list        消息队列，下拉分页</li>
-<li>set       共同好友，想认识的人</li>
-<li>zset         热搜排行</li>
-<li>geospatial   地理位置</li>
-<li>hyperLogLog  基数记数</li>
-<li>bitmap      日活，月活，签到</li>
+              <h2 id="为什么要用Redis"><a href="#为什么要用Redis" class="headerlink" title="为什么要用Redis"></a>为什么要用Redis</h2><p>传统的关系型数据库如Mysql已经不能适用于所有的场景了，比如秒杀系统，APP首页访问流量高峰，都容易把数据库打崩。因此我们需要在引入缓存中间件，常用的缓存中间件有Redis和Memcached。</p>
+<p>相较于Memcache有以下优点：</p>
+<p>Memcache仅支持key-value结构的数据类型，Redis还提供了List、Set、Hash、ZipList等数据结构</p>
+<p>Memcache网络模型是多线程，非阻塞IO复用模型，Redis使用了单线程 非阻塞 IO复用模型 </p>
+<p>Memcached挂掉后，数据就没了，Redis可以定期把数据持久化到磁盘</p>
+<p>Memcached没有原生的集群模型，Redis原生支持集群、哨兵</p>
+<h2 id="为什么Redis单线程模型、效率也能那么高"><a href="#为什么Redis单线程模型、效率也能那么高" class="headerlink" title="为什么Redis单线程模型、效率也能那么高"></a>为什么Redis单线程模型、效率也能那么高</h2><p>1: Redis使用C编写，拥有高效的数据结构</p>
+<p>2: Redis是单线程，避免了线程间频繁的上下文切换，不用考虑锁的问题</p>
+<p>3: Redis基于内存，键值对数据存储使用HashMap，查找、操作的时间复杂度为O（1）</p>
+<p>4: Redis使用了非阻塞的IO复用模型，Reactor模型</p>
+<h2 id="Redis数据类型，使用场景"><a href="#Redis数据类型，使用场景" class="headerlink" title="Redis数据类型，使用场景"></a>Redis数据类型，使用场景</h2><p><img src="https://img-blog.csdnimg.cn/20210515185240138.png" srcset="/blog/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>hash  </p>
+<p>购物车  用户id，商品id，商品信息</p>
+<p>怎么使用 Redis 实现消息队列?<br> 一般使用 list 结构作为队列， rpush 生产消息， lpop 消费消息。当 lpop 没有消息的时候，要适当</p>
+<p>sleep 一会再重试。</p>
+<p>面试官可能会问可不可以不用 sleep 呢?list 还有个指令叫 blpop ，在没有消息的时候，它会 阻塞住直到消息到来。<br> 面试官可能还问能不能生产一次消费多次呢?使用 pub / sub 主题订阅者模式，可以实现 1:N 的消息队列。</p>
+<p>面试官可能还问 pub / sub 有什么缺点?在消费者下线的情况下，生产的消息会丢失，得使用 专业的消息队列如 rabbitmq 等。</p>
+<p>lrange 分页</p>
+<p>set  </p>
+<p>抽奖：spop命令，随机返回元素，元素从集合中删除该元素</p>
+<p>共同好友，想认识的人： 交集、并集、差集   </p>
+<p>zset 排行榜</p>
+<p>key score 根据score来排名 </p>
+<p>rangebyscore  TOP N操作</p>
+<p>热门试卷的缓存，试卷ID为键，Json对象为值</p>
+<p>验证码  用户ID为键，验证码为值，设置一个过期时间</p>
+<p>geospatial   地理位置</p>
+<p>yperLogLog  基数记数</p>
+<p>bitmap      日活，月活，签到</p>
+<h2 id="Redis数据类型底层结构"><a href="#Redis数据类型底层结构" class="headerlink" title="Redis数据类型底层结构"></a>Redis数据类型底层结构</h2><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224091720516-20230224%2009:17:21.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224091720516"></p>
+<h3 id="SDS"><a href="#SDS" class="headerlink" title="SDS"></a>SDS</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224093040864-20230224%2009:30:40.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224093040864"></p>
+<p>C语言字符串的结尾是以 ”\0” 字符标识，获取字符串长度的时间复杂度为  O（N），而且字符必须符合某种编码（比如ASCII），只能保存文本数据，不能保存二进制数据，而SDS使用len字段维护了所保存字符串长度，使用字节数组，可以存储音视频等二进制数据。</p>
+<p>C字符串操作函数不高效且不安全，比如可能会发生缓冲区溢出，从而造成程序运行终止，SDS维护了字符数组空间长度，修改字符串时，会提前计算空间是否满足，如果不满足，会将空间扩展至所需大小</p>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224093019714-20230224%2009:30:19.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224093019714"></p>
+<p>缺陷：内存不连续，无法很好地利用CPU缓存，因此在list数据量比较小的 情况下，会使用压缩链表作为底层实现</p>
+<h3 id="压缩链表"><a href="#压缩链表" class="headerlink" title="压缩链表"></a>压缩链表</h3><p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224093517448-20230224%2009:35:17.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224093517448"></p>
+<p>![image-20230224094014532](/Users/ckz/Library/Application Support/typora-user-images/image-20230224094014532.png)</p>
+<p>压缩列表是 Redis 为了节约内存而开发的，它是<strong>由连续内存块组成的顺序型数据结构</strong>，有点类似于数组。</p>
+<p>缺点：查找首元素和尾元素时间复杂度为O（1），其他元素为O（n），插入长度超过254字节的节点，可能会导致连锁更新</p>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>链式哈希+渐进式rehash</p>
+<p>为了避免 rehash 在数据迁移过程中，因拷贝数据的耗时，影响 Redis 性能的情况，所以 Redis 采用了<strong>渐进式 rehash</strong>，也就是将数据的迁移的工作不再是一次性迁移完成，而是分多次迁移。</p>
+<p>在 rehash 进行期间，每次哈希表元素进行新增、删除、查找或者更新操作时，Redis 除了会执行对应的操作之外，还会顺序将「哈希表 1 」中索引位置上的所有 key-value 迁移到「哈希表 2」 上</p>
+<p>Rehash触发条件</p>
+<ul>
+<li><strong>当负载因子大于等于 1 ，并且 Redis 没有在执行 bgsave 命令或者 bgrewiteaof 命令，也就是没有执行 RDB 快照或没有进行 AOF 重写的时候，就会进行 rehash 操作。</strong></li>
+<li><strong>当负载因子大于等于 5 时，此时说明哈希冲突非常严重了，不管有没有有在执行 RDB 快照或 AOF 重写，都会强制进行 rehash 操作。</strong></li>
 </ul>
-<h2 id="redis-底层数据结构"><a href="#redis-底层数据结构" class="headerlink" title="redis 底层数据结构"></a>redis 底层数据结构</h2><p><img src="/blog/2022/01/27/redis/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220415135932130"></p>
-<h2 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h2><ul>
-<li><p><strong>noeviction</strong>:返回错误当内存限制达到并且客户端尝试执行会让更多内存被使用的命令（大部分的写入指令，但DEL和几个例外）</p>
-</li>
-<li><p><strong>allkeys-lru</strong>: 尝试回收最少使用的键（LRU），使得新添加的数据有空间存放。</p>
-</li>
-<li><p><strong>volatile-lru</strong>: 尝试回收最少使用的键（LRU），但仅限于在过期集合的键,使得新添加的数据有空间存放。</p>
-</li>
-<li><p><strong>allkeys-random</strong>: 回收随机的键使得新添加的数据有空间存放。</p>
-</li>
-<li><p><strong>volatile-random</strong>: 回收随机的键使得新添加的数据有空间存放，但仅限于在过期集合的键。</p>
-</li>
-<li><p><strong>volatile-ttl</strong>: 回收在过期集合的键，并且优先回收存活时间（TTL）较短的键,使得新添加的数据有空间存放。</p>
-<p>如果没有键满足回收的前提条件的话，策略<strong>volatile-lru</strong>, <strong>volatile-random</strong>以及<strong>volatile-ttl</strong>就和noeviction 差不多了。</p>
-</li>
+<h3 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h3><p>zset使用双向链表 + 跳表实现</p>
+<p>元素数量少于128的时候，每个元素的长度小于64字节时使用双向链表，不满足以上条件使用跳表</p>
+<p>跳表实现原理：</p>
+<p>![image-20230224100028306](/Users/ckz/Library/Application Support/typora-user-images/image-20230224100028306.png)</p>
+<p>总结一下跳表原理：</p>
+<ul>
+<li>每个跳表都必须设定一个最大的连接层数MaxLevel</li>
+<li>第一层连接会连接到表中的每个元素</li>
+<li>插入一个元素会随机生成一个连接层数值[1, MaxLevel]之间，根据这个值跳表会给这元素建立N个连接</li>
+<li>插入某个元素的时候先从最高层开始，当跳到比目标值大的元素后，回退到上一个元素，用该元素的下一层连接进行遍历，周而复始直到第一层连接，最终在第一层连接中找到合适的位置</li>
 </ul>
-<h2 id="redis-持久化方式"><a href="#redis-持久化方式" class="headerlink" title="redis 持久化方式"></a>redis 持久化方式</h2><p>RDB  周期性把内存中的数据集已快照的方式写入磁盘    恢复速度快         保持快照之前宕机，数据会丢失<br>AOF   已追加的方式将操作写入日志                恢复速度慢    执行一条命令，写一条命名，数据不会丢失</p>
-<p>RDB做镜像全量持久化，AOF做增量持久化。因为RDB会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要AOF来配合使用。在redis实例重启时，会使用RDB持久化文件重新构建内存，再使用AOF重放近期的操作指令来实现完整恢复重启之前的状态。</p>
-<p><strong>RDB 原理</strong></p>
-<p>fork和cow。fork是指redis通过创建子进程来进行RDB操作，cow指的是<strong>copy on write</strong>，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p>
-<h3 id="Redis的同步机制了解么？"><a href="#Redis的同步机制了解么？" class="headerlink" title="Redis的同步机制了解么？"></a>Redis的同步机制了解么？</h3><p>Redis可以使用主从同步，从从同步。第一次同步时，主节点做一次<strong>bgsave</strong>，并同时将后续修改操作记录到内存buffer，待完成后将RDB文件全量同步到复制节点，复制节点接受完成后将RDB镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。后续的增量数据通过AOF日志同步即可，有点类似数据库的binlog。</p>
-<h3 id="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"><a href="#是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？" class="headerlink" title="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"></a>是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？</h3><p><strong>Redis Sentinal</strong> 着眼于高可用，在master宕机时会自动将slave提升为master，继续提供服务。</p>
-<p><strong>Redis Cluster</strong> 着眼于扩展性，在单个redis内存不足时，使用Cluster进行分片存储。</p>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><h2 id="缓存穿透-缓存击穿-缓存雪崩"><a href="#缓存穿透-缓存击穿-缓存雪崩" class="headerlink" title="缓存穿透  缓存击穿  缓存雪崩"></a>缓存穿透  缓存击穿  缓存雪崩</h2><p>缓存穿透: 恶意请求不存在的id     1:在缓存中创建空对象进行标记, 会产生大量无用的空对象    2:使用BloomFilter 进行过滤<br>缓存击穿: 热点数据失效         1:可以使用互斥锁更新   2:随机退避方式  3:针对多个热点 key 同时失效的问题，可以在缓存时使用固定时间加上一个小的随机数，避免大量热点 key 同一时刻失效。<br>缓存雪崩: 宕机              1: 熔断   2: 主从，集群</p>
+<p>redis中skiplist的MaxLevel设定为32层</p>
+<p>skiplist原理中提到skiplist一个元素插入后，会随机分配一个层数，而redis的实现，这个随机的规则是：</p>
+<ul>
+<li>一个元素拥有第1层连接的概率为100%</li>
+<li>一个元素拥有第2层连接的概率为50%</li>
+<li>一个元素拥有第3层连接的概率为25%</li>
+<li>以此类推…</li>
+</ul>
+<p>为了提高搜索效率，redis会缓存MaxLevel的值，在每次插入/删除节点后都会去更新这个值，这样每次搜索的时候不需要从32层开始搜索，而是从MaxLevel指定的层数开始搜索</p>
+<h2 id="Redis内存耗尽后会发生什么"><a href="#Redis内存耗尽后会发生什么" class="headerlink" title="Redis内存耗尽后会发生什么"></a>Redis内存耗尽后会发生什么</h2><p>过期策略：</p>
+<p><strong>惰性删除</strong> ：不管键有没有过期都不主动删除，等到每次去获取键时再判断是否过期，如果过期就删除该键，否则返回键对应的值。这种策略对内存不够友好，可能会浪费很多内存。</p>
+<p><strong>定期扫描</strong> ：Redis每隔一段时间就定期扫描一次，随机抽取一些过期的键进行删除。</p>
+<p><strong>淘汰策略：</strong></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224102923672-20230224%2010:29:23.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224102923672"></p>
+<p>LRU：</p>
+<p>在 <code>Redis</code> 当中，并没有采用传统的 <code>LRU</code> 算法，因为传统的 <code>LRU</code> 算法存在 <code>2</code> 个问题：</p>
+<ul>
+<li>需要额外的空间进行存储。</li>
+<li>可能存在某些 <code>key</code> 值使用很频繁，但是最近没被使用，从而被 <code>LRU</code> 算法删除。</li>
+</ul>
+<p>为了避免以上 <code>2</code> 个问题，<code>Redis</code> 当中对传统的 <code>LRU</code> 算法进行了改造，<strong>通过抽样的方式进行删除</strong>。</p>
+<p>配置文件中提供了一个属性 <code>maxmemory_samples 5</code>，默认值就是 <code>5</code>，表示随机抽取 <code>5</code> 个 <code>key</code> 值，然后对这 <code>5</code> 个 <code>key</code> 值按照 <code>LRU</code> 算法进行删除，所以很明显，<code>key</code> 值越大，删除的准确度越高。</p>
+<p>LFU：</p>
+<p><code>LFU</code> 计数器每个键只有 <code>8</code> 位，它能表示的最大值是 <code>255</code>，所以 <code>Redis</code> 使用的是一种基于概率的对数器来实现 <code>counter</code> 的递增。</p>
+<h2 id="Redis-持久化方式"><a href="#Redis-持久化方式" class="headerlink" title="Redis 持久化方式"></a>Redis 持久化方式</h2><p>RDB：Redis会定期生成快照，通常设置为5分钟，这个操作通常是比较慢的，为了不影响Redis接收其他命令，Redis fork 出来了一个子线程，使用Copy On Write机制，复制了一份数据，将这份数据写入磁盘。在写盘期间，并不会影响主线程接收客户端请求，对内存进行修改。</p>
+<p>AOF：快照生成时间间隔通常比较长，如果此期间发生Redis宕机，一段时间内的数据就会丢失。因此Redis还有另外一种持久化机制 AOF。AOF以追加日志的方式记录客户端的操作，通过回放这些操作来进行数据恢复。相较于RDB的定时全量备份，AOF以增加地方式追加命令，速度更快，丢失数据更少。但随着系统的运行，AOF日志会变得越来越大，恢复过程就会变得缓慢。因此，Redis提供了bgrewriteaof指令来对AOF进行瘦身。其原理是，开辟一个子线程对内存进行遍历，转换成操作指令，序列化到新AOF文件中，序列化期间对增量AOF日志追加到新AOF日志中，然后替换掉旧的AOF文件。</p>
+<p>使用RDB进行恢复会丢失大量的数据，而使用AOF恢复的速度比较慢。因此，Redis 4.0开始使用了混合持久化的模式，AOF日志文件不再是全量的日子，而是持久化开始到持久化结束期间的增量日志，这部分日志通常来说比较小。Redis重启时，先加载RDB数据，在重放AOF日志，重启效率得到了大大地提升。</p>
+<h3 id="Redis高可用"><a href="#Redis高可用" class="headerlink" title="Redis高可用"></a>Redis高可用</h3><p>1：主从复制</p>
+<p>从节点slave到主节点，主节点执行一次basave，生成RDB快照，发送到salve节点上，从节点加载RDB，还原数据，后续主节点的写操作都会发送到从节点，保证主从节点数据的一致性。</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224133521258-20230224%2013:35:21.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224133521258"></p>
+<p>2：哨兵</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224132150628-20230224%2013:21:51.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224132150628"></p>
+<p>leader哨兵会定时发送PING命令查询主节点的运行状态，如果最后一次有效的PING命令超过一段时间，哨兵就会标记改节点为主观下线。此时，有可能是因为网络原理导致数据不同，leader会通知其他哨兵节点，当足够数量的哨兵都无法与master主节点进行通信，标记master节点为客观下线，并开始故障转移。</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224132436165-20230224%2013:24:36.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224132436165"></p>
+<p>故障转移会从剩下的从节点中挑选一个节点作为主节点。会按照一定的规则进行挑选，首先会剔除主观下线或最后一次PING命令回复时间超过一定时间的Slave节点，然后剔除与主服务器断开时常超过一定时间的节点。在剩下的节点中挑选出数据最完整的Slave节点作为Master节点。</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224133059114-20230224%2013:30:59.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224133059114"></p>
+<p>其他的Slave节点会与新Master节点建立连接，进行数据的同步，之前挂的Master如果恢复后，会变为Slave。</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224133404779-20230224%2013:34:04.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224133404779"></p>
+<p>Leader Sentinel哨兵如果挂掉了，会使用Raft算法，进行投票选举，超过半数票的Sentinel成为新leader</p>
+<p>3: Redis Claster</p>
+<p>着眼与扩展性，使用Hash slot的方式进行分片存储。各个节点之间会通信，使用gossip协议交换节点元数据信息，每个节点都知道全局Hash slot 分配情况，以及整个集群的状态，可以在任意一个节点上进行写入操作，每个 key 通过 CRC16 校验后对 16384 取模来决定放置哪个槽。通常每个主几点都会带一到多个从节点，当主节点挂掉后，从节点会成为新的主节点，保证了集群的可用性。</p>
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p>SETNX lock 1</p>
+<p>当key不存在时，才能设置成功，保证只有一个线程能加锁成功</p>
+<p>问题：如果获取锁的线程挂了，不能及时释放锁，该怎么办？</p>
+<p>解决办法： 根据业务需要加锁的时间长短， 给锁加一个超时时间</p>
+<p>SET lock $uuid EX 20 NX</p>
+<p>使用自己线程的ID作为值，释放锁前先检查锁是否属于自己。</p>
+<p>前面我们提到，锁的过期时间如果评估不好，这个锁就会有「提前」过期的风险。</p>
+<p><strong>加锁时，先设置一个过期时间，然后我们开启一个「守护线程」，定时去检测这个锁的失效时间，如果锁快要过期了，操作共享资源还未完成，那么就自动对锁进行「续期」，重新设置过期时间。</strong>如果你是 Java 技术栈，幸运的是，已经有一个库把这些工作都封装好了：<strong>Redisson</strong>。</p>
+<p>DEL lock</p>
+<p>释放锁</p>
+<p>获取锁、检查锁是否属于自己不是一个原子操作，如何解决？</p>
+<p>使用Lua脚本把这两个命令合并，保证原子性</p>
+<p>分布式锁在集群中安全吗，如果Master宕机了，分布式锁还没有同步到Slave节点，Slave被选举为新Master，锁就丢失了。</p>
+<p>如何解决：Redlock</p>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><h2 id="缓存穿透-缓存击穿-缓存雪崩"><a href="#缓存穿透-缓存击穿-缓存雪崩" class="headerlink" title="缓存穿透  缓存击穿  缓存雪崩"></a>缓存穿透  缓存击穿  缓存雪崩</h2><p>缓存雪崩：缓存在某一时间集体生效，流量全部打到数据库上</p>
+<p>如何解决：每个key的失效时间上加一个随机值</p>
+<p>缓存穿透：嗯，了解，我先说一下缓存穿透吧，缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，我们数据库的 id 都是1开始自增上去的，如发起为id值为 -1 的数据或 id 为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大，严重会击垮数据库。</p>
+<p>如何解决：<strong>缓存穿透</strong>我会在接口层增加校验，比如用户鉴权校验，参数做校验，不合法的参数直接代码Return，比如：id 做基础校验，id &lt;=0的直接拦截等。也可以将请求不到的数据的值设置为NULL，存储在缓存中。</p>
+<p>还有我记得<strong>Redis</strong>还有一个高级用法<strong>布隆过滤器（Bloom Filter）</strong>这个也能很好的防止缓存穿透的发生，他的原理也很简单就是利用高效的数据结构和算法快速判断出你这个Key是否在数据库中存在，不存在你return就好了，存在你就去查了DB刷新KV再return。</p>
+<p>缓存击穿：至于<strong>缓存击穿</strong>嘛，这个跟<strong>缓存雪崩</strong>有点像，但是又有一点不一样，缓存雪崩是因为大面积的缓存失效，打崩了DB，而缓存击穿不同的是<strong>缓存击穿</strong>是指一个Key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个Key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个完好无损的桶上凿开了一个洞。</p>
+<p><strong>缓存击穿</strong>的话，设置热点数据永远不过期。</p>
+<ul>
+<li>事前：<strong>Redis</strong> 高可用，主从+哨兵，<strong>Redis cluster</strong>，避免全盘崩溃。</li>
+<li>事中：本地 <strong>ehcache</strong> 缓存 + <strong>Hystrix</strong> 限流+降级，避免<strong>MySQL</strong>被打死。</li>
+<li>事后：<strong>Redis</strong> 持久化 <strong>RDB</strong>+<strong>AOF</strong>，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。</li>
+</ul>
+<h3 id="什么是-bigkey-会存在什么影响"><a href="#什么是-bigkey-会存在什么影响" class="headerlink" title="什么是 bigkey?会存在什么影响?"></a>什么是 bigkey?会存在什么影响?</h3><p>bigkey 是指键值占用内存空间非常大的 key。例如一个字符串 a 存储了 200M 的数据。 bigkey 的主要影响有:</p>
+<p>网络阻塞;获取 bigkey 时，传输的数据量比较大，会增加带宽的压力。<br> 超时阻塞;因为 bigkey 占用的空间比较大，所以操作起来效率会比较低，导致出现阻塞的可能 性增加。</p>
+<p>导致内存空间不平衡;一个 bigkey 存储数据量比较大，同一个 key 在同一个节点或服务器中存 储，会造成一定影响。</p>
 <h3 id="如果有大量的key需要设置同一时间过期，一般需要注意什么？"><a href="#如果有大量的key需要设置同一时间过期，一般需要注意什么？" class="headerlink" title="如果有大量的key需要设置同一时间过期，一般需要注意什么？"></a>如果有大量的key需要设置同一时间过期，一般需要注意什么？</h3><p>如果大量的key过期时间设置的过于集中，到过期的那个时间点，<strong>Redis</strong>可能会出现短暂的卡顿现象。严重的话会出现缓存雪崩，我们一般需要在时间上加一个随机值，使得过期时间分散一些。</p>
-<h3 id="那你使用过Redis分布式锁么，它是什么回事？"><a href="#那你使用过Redis分布式锁么，它是什么回事？" class="headerlink" title="那你使用过Redis分布式锁么，它是什么回事？"></a>那你使用过Redis分布式锁么，它是什么回事？</h3><p>先拿<strong>setnx</strong>来争抢锁，抢到之后，再用<strong>expire</strong>给锁加一个过期时间防止锁忘记了释放。</p>
-<p>set指令有非常复杂的参数，这个应该是可以同时把<strong>setnx</strong>和<strong>expire</strong>合成一条指令来用的。</p>
 <h3 id="假如Redis里面有1亿个key，其中有10w个key是以某个固定的已知的前缀开头的，如何将它们全部找出来？如果这个redis正在给线上的业务提供服务，那使用keys指令会有什么问题？"><a href="#假如Redis里面有1亿个key，其中有10w个key是以某个固定的已知的前缀开头的，如何将它们全部找出来？如果这个redis正在给线上的业务提供服务，那使用keys指令会有什么问题？" class="headerlink" title="假如Redis里面有1亿个key，其中有10w个key是以某个固定的已知的前缀开头的，如何将它们全部找出来？如果这个redis正在给线上的业务提供服务，那使用keys指令会有什么问题？"></a>假如Redis里面有1亿个key，其中有10w个key是以某个固定的已知的前缀开头的，如何将它们全部找出来？如果这个redis正在给线上的业务提供服务，那使用keys指令会有什么问题？</h3><p>使用<strong>keys</strong>指令可以扫出指定模式的key列表。</p>
 <p>Redis的单线程的。keys指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用<strong>scan</strong>指令，<strong>scan</strong>指令可以无阻塞的提取出指定模式的key列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用keys指令长。</p>
 <h3 id="使用过Redis做异步队列么，你是怎么用的？"><a href="#使用过Redis做异步队列么，你是怎么用的？" class="headerlink" title="使用过Redis做异步队列么，你是怎么用的？"></a>使用过Redis做异步队列么，你是怎么用的？</h3><p>一般使用list结构作为队列，<strong>rpush</strong>生产消息，<strong>lpop</strong>消费消息。当lpop没有消息的时候，要适当sleep一会再重试。</p>
@@ -301,23 +393,15 @@
 <p>使用sortedset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者用<strong>zrangebyscore</strong>指令获取N秒之前的数据轮询进行处理。</p>
 <h3 id="Pipeline有什么好处，为什么要用pipeline？"><a href="#Pipeline有什么好处，为什么要用pipeline？" class="headerlink" title="Pipeline有什么好处，为什么要用pipeline？"></a>Pipeline有什么好处，为什么要用pipeline？</h3><p>可以将多次IO往返的时间缩减为一次，前提是<strong>pipeline</strong>执行的指令之间没有因果相关性。使用<strong>redis-benchmark</strong>进行压测的时候可以发现影响redis的QPS峰值的一个重要因素是<strong>pipeline</strong>批次指令的数目。</p>
 <h1 id="缓存与数据一致性"><a href="#缓存与数据一致性" class="headerlink" title="缓存与数据一致性"></a>缓存与数据一致性</h1><ol>
-<li>想要提高应用的性能，可以引入「缓存」来解决</li>
 <li>引入缓存后，需要考虑缓存和数据库一致性问题，可选的方案有：「更新数据库 + 更新缓存」、「更新数据库 + 删除缓存」</li>
-<li>更新数据库 + 更新缓存方案，在「并发」场景下无法保证缓存和数据一致性，且存在「缓存资源浪费」和「机器性能浪费」的情况发生</li>
-<li>在更新数据库 + 删除缓存的方案中，「先删除缓存，再更新数据库」在「并发」场景下依旧有数据不一致问题，解决方案是「延迟双删」，但这个延迟时间很难评估，所以推荐用「先更新数据库，再删除缓存」的方案</li>
-<li>在「先更新数据库，再删除缓存」方案下，为了保证两步都成功执行，需配合「消息队列」或「订阅变更日志」的方案来做，本质是通过「重试」的方式保证数据一致性</li>
-<li>在「先更新数据库，再删除缓存」方案下，「读写分离 + 主从库延迟」也会导致缓存和数据库不一致，缓解此问题的方案是「延迟双删」，凭借经验发送「延迟消息」到队列中，延迟删除缓存，同时也要控制主从库延迟，尽可能降低不一致发生的概率</li>
+<li>更新数据库 + 更新缓存方案，在「并发」场景下无法保证缓存和数据一致性</li>
 </ol>
-<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453153488&amp;idx=2&amp;sn=50d72c945bb3132eef89fde2fb62d982&amp;scene=21#wechat_redirect">https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453153488&amp;idx=2&amp;sn=50d72c945bb3132eef89fde2fb62d982&amp;scene=21#wechat_redirect</a></p>
-<p>Redis 数据结构 </p>
-<p>Redis 持久化机制</p>
-<p>Redis 的一致性哈希算法 </p>
-<p>Redis五种数据类型，当散列类型的 value 值非常大的时候怎么进行压缩， 用 redis 怎么实现摇一摇与附近的人功能</p>
-<p>Redis 主从复制过程</p>
-<p>Redis 如何解决 key 冲突 </p>
-<p>Redis 的五种数据结构 </p>
-<p>Redis 是怎么存储数据的 </p>
-<p>Redis 使用场景</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224211006148-20230224%2021:10:06.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224211006148"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224210951773-20230224%2021:09:52.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224210951773"></p>
+<p> 3：更新数据库 + 删除缓存的方案中，Cache Aside Pattern，在保证并发的请求下，尽可能减少数据不一致的可能，是AP模式下的一种BASE技术。如果非要保证强一致性，使用分布式锁。</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224220000059-20230224%2022:00:00.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224220000059"></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/image-20230224215935958-20230224%2021:59:36.png" srcset="/blog/img/loading.gif" lazyload alt="image-20230224215935958"></p>
+<p>4：更新数据库+删除缓存仍然会有一段时间的数据不一致（写缓存在删缓存之后），可以使用延迟双删的策略，删除缓存后发送一条延迟删除的命令到消息中间件，过一段时间后再进行删除。</p>
 
             </div>
             <hr>
@@ -352,9 +436,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2022/01/27/Netty/">
+                      <a href="/blog/2022/01/27/Jvm/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IO模型、Netty</span>
+                        <span class="hidden-mobile">JVM</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     

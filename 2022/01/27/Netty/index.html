@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cherish-merry.github.io/blog/img/Netty.png">
 <meta property="article:published_time" content="2022-01-27T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-03-02T01:19:51.000Z">
+<meta property="article:modified_time" content="2023-03-03T08:05:34.283Z">
 <meta property="article:author" content="Cherish">
 <meta property="article:tag" content="Nio、Netty、多路复用">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      7.1k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      50 分钟
+      60 分钟
     </span>
   
 
@@ -262,27 +262,44 @@
 <li>等待数据阶段</li>
 <li>复制数据阶段</li>
 </ul>
-<p><img src="/blog/2022/01/27/Netty/0033.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0033-20230303%2015:01:51.png" srcset="/blog/img/loading.gif" lazyload alt="0033"></p>
 <ul>
 <li><p>阻塞 IO</p>
-<p><img src="/blog/2022/01/27/Netty/0039.png" srcset="/blog/img/loading.gif" lazyload></p>
-</li>
-<li><p>非阻塞  IO</p>
-<p><img src="/blog/2022/01/27/Netty/0035.png" srcset="/blog/img/loading.gif" lazyload></p>
-</li>
-<li><p>多路复用</p>
-<p><img src="/blog/2022/01/27/Netty/0038.png" srcset="/blog/img/loading.gif" lazyload></p>
-</li>
-<li><p>信号驱动</p>
-</li>
-<li><p>异步 IO</p>
-<p><img src="/blog/2022/01/27/Netty/0037.png" srcset="/blog/img/loading.gif" lazyload></p>
-</li>
-<li><p>阻塞 IO vs 多路复用</p>
-<p><img src="/blog/2022/01/27/Netty/0034.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p><img src="/blog/2022/01/27/Netty/0036.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0039-20230303%2015:01:56.png" srcset="/blog/img/loading.gif" lazyload alt="0039"></p>
 </li>
 </ul>
+<p>流程：</p>
+<p>1: 应用程序通过recvfrom系统调用向内核发起读取数据的请求，此时网卡上可能还没收到客户端发送的数据，需要等待数据</p>
+<p>2: 网卡收到数据后，需要将数据复制到用户空间</p>
+<p>3: 等待数据和复制数据都是阻塞的</p>
+<ul>
+<li><p>非阻塞  IO</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0035-20230303%2015:02:05.png" srcset="/blog/img/loading.gif" lazyload alt="0035"></p>
+</li>
+</ul>
+<p>1: 不同于阻塞IO，当网卡上没有数据时会直接返回，并重复尝试知道网卡上收到数据</p>
+<p>2: 收到数据后，将数据复制到用户空间</p>
+<p>3: 等待数据的过程是非阻塞的，复制数据仍然是阻塞的</p>
+<ul>
+<li><p>多路复用</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0038-20230303%2015:02:20.png" srcset="/blog/img/loading.gif" lazyload alt="0038"></p>
+</li>
+</ul>
+<p>阻塞IO单个线程只能处理一个事件，当有其他事件到达时，只能等上一个事件处理完，要解决这个问题，我们可以使用多线程的方式，然而线程是操作系统非常宝贵的资源，当并发量到上万是，总不可能创建上万个线程吧。因此就要用到多路复用机制，使用一个线程监听多个网络请求（在Linux里面使用fd文件资源描述符来标识网络请求）。IO复用模型就是提供了一个可以监听多个fd的函数（比如select、poll、epoll）</p>
+<p>术语描述：进程通过将一个或多个fd传递给select，阻塞在select操作上，select帮我们侦测多个fd是否准备就绪，当有fd准备就绪时，select返回数据可读状态，应用程序再调用recvfrom读取数据。</p>
+<ul>
+<li>信号驱动</li>
+</ul>
+<p>复用IO模型解决了一个线程可以监控多个fd的问题，但是select是采用轮询的方式来监控多个fd的，通过不断的轮询fd的可读状态来知道是否有可读的数据，而无脑的轮询就显得有点暴力，因为大部分情况下的轮询都是无效的，所以有人就想，能不能不要我总是去问你是否数据准备就绪，能不能我发出请求后等你数据准备好了就通知我，所以就衍生了信号驱动IO模型。</p>
+<p><strong>术语描述：</strong>首先开启套接口信号驱动IO功能，并通过系统调用sigaction执行一个信号处理函数，此时请求即刻返回，当数据准备就绪时，就生成对应进程的SIGIO信号，通过信号回调通知应用线程调用recvfrom来读取数据。</p>
+<ul>
+<li><p>异步 IO</p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0037-20230303%2015:02:26.png" srcset="/blog/img/loading.gif" lazyload alt="0037"></p>
+</li>
+</ul>
+<p>其实经过了上面两个模型的优化，我们的效率有了很大的提升，但是我们当然不会就这样满足了，有没有更好的办法，通过观察我们发现，不管是IO复用还是信号驱动，我们要读取一个数据总是要发起两阶段的请求，第一次发送select请求，询问数据状态是否准备好，第二次发送recevform请求读取数据。</p>
+<p>也许你一开始就有一个疑问，为什么我们明明是想读取数据，而却非得要先发起一个select询问数据状态的请求，然后再发起真正的读取数据请求,能不能有一种一劳永逸的方式，我只要发送一个请求我告诉内核我要读取数据，然后我就什么都不管了，然后内核去帮我去完成剩下的所有事情？</p>
+<p><strong>术语描述：</strong> 应用告知内核启动某个操作，并让内核在整个操作完成之后，通知应用，这种模型与信号驱动模型的主要区别在于，信号驱动IO只是由内核通知我们合适可以开始下一个IO操作，而异步IO模型是由内核通知我们操作什么时候完成。</p>
 <h2 id="2、多路复用之select、poll、epoll详解"><a href="#2、多路复用之select、poll、epoll详解" class="headerlink" title="2、多路复用之select、poll、epoll详解"></a>2、多路复用之select、poll、epoll详解</h2><p>select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</p>
 <h3 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h3><figure class="highlight c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">select</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)</span></span>;<br></code></pre></td></tr></table></figure>
 
@@ -320,7 +337,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">File f = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;helloword/data.txt&quot;</span>);<br>RandomAccessFile file = <span class="hljs-keyword">new</span> RandomAccessFile(file, <span class="hljs-string">&quot;r&quot;</span>);<br><br><span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[(<span class="hljs-keyword">int</span>)f.length()];<br>file.read(buf);<br><br>Socket socket = ...;<br>socket.getOutputStream().write(buf);<br></code></pre></td></tr></table></figure>
 
 <p>内部工作流程是这样的：</p>
-<p><img src="/blog/2022/01/27/Netty/0024.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0024-20230303%2015:50:51.png" srcset="/blog/img/loading.gif" lazyload alt="0024"></p>
 <ol>
 <li><p>java 本身并不具备 IO 读写能力，因此 read 方法调用后，要从 java 程序的<strong>用户态</strong>切换至<strong>内核态</strong>，去调用操作系统（Kernel）的读能力，将数据读入<strong>内核缓冲区</strong>。这期间用户线程阻塞，操作系统使用 DMA（Direct Memory Access）来实现文件读，其间也不会使用 cpu</p>
 <blockquote>
@@ -344,7 +361,7 @@
 <li>ByteBuffer.allocate(10)  HeapByteBuffer 使用的还是 java 内存</li>
 <li>ByteBuffer.allocateDirect(10)  DirectByteBuffer 使用的是操作系统内存</li>
 </ul>
-<p><img src="/blog/2022/01/27/Netty/0025.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0025-20230303%2015:51:03.png" srcset="/blog/img/loading.gif" lazyload alt="0025"></p>
 <p>大部分步骤与优化前相同，不再赘述。唯有一点：java 可以使用 DirectByteBuf 将堆外内存映射到 jvm 内存中来直接访问使用</p>
 <ul>
 <li>这块内存不受 jvm 垃圾回收的影响，因此内存地址固定，有助于 IO 读写</li>
@@ -356,7 +373,7 @@
 <li>减少了一次数据拷贝，用户态与内核态的切换次数没有减少</li>
 </ul>
 <p>进一步优化（底层采用了 linux 2.1 后提供的 sendFile 方法），java 中对应着两个 channel 调用 transferTo/transferFrom 方法拷贝数据</p>
-<p><img src="/blog/2022/01/27/Netty/0026.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0026-20230303%2015:51:14.png" srcset="/blog/img/loading.gif" lazyload alt="0026"></p>
 <ol>
 <li>java 调用 transferTo 方法后，要从 java 程序的<strong>用户态</strong>切换至<strong>内核态</strong>，使用 DMA将数据读入<strong>内核缓冲区</strong>，不会使用 cpu</li>
 <li>数据从<strong>内核缓冲区</strong>传输到 <strong>socket 缓冲区</strong>，cpu 会参与拷贝</li>
@@ -368,7 +385,7 @@
 <li>数据拷贝了 3 次</li>
 </ul>
 <p>进一步优化（linux 2.4）</p>
-<p><img src="/blog/2022/01/27/Netty/0027.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/0027-20230303%2015:51:19.png" srcset="/blog/img/loading.gif" lazyload alt="0027"></p>
 <ol>
 <li>java 调用 transferTo 方法后，要从 java 程序的<strong>用户态</strong>切换至<strong>内核态</strong>，使用 DMA将数据读入<strong>内核缓冲区</strong>，不会使用 cpu</li>
 <li>只会将一些 offset 和 length 信息拷入 <strong>socket 缓冲区</strong>，几乎无消耗</li>
@@ -412,7 +429,7 @@
 </ol>
 <h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><ol>
 <li>Select 何时创建？构造方法</li>
-<li>为什么创建两个Select？  用数组实现替换Set，提高便利效率</li>
+<li>为什么创建两个Select？  用x数组实现替换Set，提高便利效率</li>
 <li>Nio 线程何时启动？ 首次调用execute()方法时</li>
 <li>提交普通任务是否回结束select阻塞？ 是</li>
 <li>什么时候回进入阻塞？  当没有定时任务时</li>
@@ -453,9 +470,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2022/01/27/Jvm/">
+                      <a href="/blog/2022/01/27/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM</span>
+                        <span class="hidden-mobile">Java并发</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -463,8 +480,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/01/27/redis/">
-                        <span class="hidden-mobile">Redis</span>
+                      <a href="/blog/2022/01/27/Jvm/">
+                        <span class="hidden-mobile">JVM</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
