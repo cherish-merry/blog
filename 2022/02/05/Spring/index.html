@@ -16,23 +16,23 @@
   <meta name="author" content="Cherish">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Spring IOCAutowired和Resource关键字的区别?@Autowired是Spring自己提供的注解，@Resource是Java自带的注解 @Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier @Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入 IOC的理解IOC是控">
+    <meta name="description" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cherish&#39;s blog">
-<meta property="og:url" content="https://cherish-merry.github.io/blog/2023/02/27/Spring/index.html">
+<meta property="og:title" content="Spring">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2022/02/05/Spring/index.html">
 <meta property="og:site_name" content="Cherish&#39;s blog">
-<meta property="og:description" content="Spring IOCAutowired和Resource关键字的区别?@Autowired是Spring自己提供的注解，@Resource是Java自带的注解 @Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier @Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入 IOC的理解IOC是控">
+<meta property="og:description" content="Spring">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/68747470733a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3234393939332f3230313631322f3234393939332d32303136313231323134323534323034322d323131373637393139352e6a7067-20230227%2020:23:09.jpeg">
-<meta property="article:published_time" content="2023-02-27T14:23:04.667Z">
-<meta property="article:modified_time" content="2023-02-28T13:38:43.361Z">
+<meta property="og:image" content="https://cherish-merry.github.io/blog/img/spring.jpeg">
+<meta property="article:published_time" content="2022-02-05T11:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T00:58:57.646Z">
 <meta property="article:author" content="Cherish">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png">
+<meta name="twitter:image" content="https://cherish-merry.github.io/blog/img/spring.jpeg">
   
   
-  <title>Cherish&#39;s blog</title>
+  <title>Spring - Cherish&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="Spring">
               
             </span>
 
@@ -200,8 +200,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-02-27 22:23" pubdate>
-        February 27, 2023 pm
+      <time datetime="2022-02-05 19:00" pubdate>
+        February 5, 2022 pm
       </time>
     </span>
   
@@ -249,11 +249,10 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">Spring</h1>
             
             <div class="markdown-body">
-              <p><img src="https://raw.githubusercontent.com/cherish-merry/img/master/blog/spring%E9%97%AE%E9%A2%98-20230227%2020:03:29.png" srcset="/blog/img/loading.gif" lazyload alt="spring问题"></p>
-<h1 id="Spring-IOC"><a href="#Spring-IOC" class="headerlink" title="Spring IOC"></a>Spring IOC</h1><h2 id="Autowired和Resource关键字的区别"><a href="#Autowired和Resource关键字的区别" class="headerlink" title="Autowired和Resource关键字的区别?"></a>Autowired和Resource关键字的区别?</h2><p>@Autowired是Spring自己提供的注解，@Resource是Java自带的注解</p>
+              <h1 id="Spring-IOC"><a href="#Spring-IOC" class="headerlink" title="Spring IOC"></a>Spring IOC</h1><h2 id="Autowired和Resource关键字的区别"><a href="#Autowired和Resource关键字的区别" class="headerlink" title="Autowired和Resource关键字的区别?"></a>Autowired和Resource关键字的区别?</h2><p>@Autowired是Spring自己提供的注解，@Resource是Java自带的注解</p>
 <p>@Autowired按照byType注入，如果想实现byName注入需要配合@Qualifier</p>
 <p>@Resource默认通过byName注入，使用属性name指定bean名字，使用属性type则使用byType注入</p>
 <h2 id="IOC的理解"><a href="#IOC的理解" class="headerlink" title="IOC的理解"></a>IOC的理解</h2><p>IOC是控制反转，把创建对象的主动权和时机交给Spring 容器，并通过依赖注入的方式为对象的属性赋值，IOC容器管理了整个Bean的生命周期。本质上IOC容器可以看做一个Map，我们要使用某个对象使用某个对象时，去这个容器里面拿就可以，非常方便。</p>
@@ -331,6 +330,20 @@
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/Spring/">Spring</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/Spring/">Spring</a>
+                    
+                  </div>
                 
               </div>
               
@@ -345,12 +358,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/blog/2022/05/09/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">分布式系统设计论文</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2022/05/09/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
-                        <span class="hidden-mobile">分布式系统设计论文</span>
+                      <a href="/blog/2022/02/05/offer/">
+                        <span class="hidden-mobile">剑指offer</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
