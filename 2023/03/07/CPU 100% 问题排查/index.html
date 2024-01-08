@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cherish">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CPU 100% 问题排查参考：https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;Bp3choZU8-e5PXIY1yEQ1Q 使用top查看CPU、内存等资料占用情况 按住大写P，使进程按CPU占用率从高到低排列，找出CPU最用最高进程的PID号 使用 top -Hp pid 查看进程里面线程的CPU占用情况，同样按住P，使线程按PID进行排序，找到暂用率最大的线程 根据占用率最大的线程PI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cherish&#39;s blog">
+<meta property="og:url" content="https://cherish-merry.github.io/blog/2023/03/07/CPU%20100%%20%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/index.html">
+<meta property="og:site_name" content="Cherish&#39;s blog">
+<meta property="og:description" content="CPU 100% 问题排查参考：https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;Bp3choZU8-e5PXIY1yEQ1Q 使用top查看CPU、内存等资料占用情况 按住大写P，使进程按CPU占用率从高到低排列，找出CPU最用最高进程的PID号 使用 top -Hp pid 查看进程里面线程的CPU占用情况，同样按住P，使线程按PID进行排序，找到暂用率最大的线程 根据占用率最大的线程PI">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-07T10:39:43.065Z">
+<meta property="article:modified_time" content="2023-03-24T01:20:36.919Z">
+<meta property="article:author" content="Cherish">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Cherish&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"cherish-merry.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Cherish</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-07 18:39" pubdate>
+        March 7, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="CPU-100-问题排查"><a href="#CPU-100-问题排查" class="headerlink" title="CPU 100% 问题排查"></a>CPU 100% 问题排查</h2><p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Bp3choZU8-e5PXIY1yEQ1Q">https://mp.weixin.qq.com/s/Bp3choZU8-e5PXIY1yEQ1Q</a></p>
+<p>使用top查看CPU、内存等资料占用情况</p>
+<p>按住大写P，使进程按CPU占用率从高到低排列，找出CPU最用最高进程的PID号</p>
+<p>使用 top -Hp pid 查看进程里面线程的CPU占用情况，同样按住P，使线程按PID进行排序，找到暂用率最大的线程</p>
+<p>根据占用率最大的线程PID，使用Jstack查看具体堆栈信息，定位到具体的代码行 </p>
+<h2 id="1-一个外卖平台上有一个外卖单子，现在有多名骑手想接这一单，如何保证只有一个骑手可以接到单子？"><a href="#1-一个外卖平台上有一个外卖单子，现在有多名骑手想接这一单，如何保证只有一个骑手可以接到单子？" class="headerlink" title="1. 一个外卖平台上有一个外卖单子，现在有多名骑手想接这一单，如何保证只有一个骑手可以接到单子？"></a>1. 一个<strong>外卖平台</strong>上有一个外卖单子，现在有<strong>多名骑手</strong>想接这一单，<strong>如何保证只有一个骑手</strong>可以接到单子？</h2><p>单机</p>
+<p>悲观锁：Synchronize  ReentrantLock</p>
+<p>乐观锁：Volatile + Cas 机制</p>
+<p>集群</p>
+<p>分布式锁：Redis 或者 Zookeeper</p>
+<h2 id="2-如何把一个文件快速下发到100w个服务器？"><a href="#2-如何把一个文件快速下发到100w个服务器？" class="headerlink" title="2.如何把一个文件快速下发到100w个服务器？"></a>2.如何把<strong>一个文件</strong>快速下发到<strong>100w</strong>个服务器？</h2><p>采用P2P点对点进行传输，每个节点即是发送者又是接受者。100w个节点的连通图，我们可以生成多颗生成树，同时进行数据的传递，防止因为某一个节点故障导致传递终止。</p>
+<h3 id="3-TOK问题-10亿个数据，找出最大的10个"><a href="#3-TOK问题-10亿个数据，找出最大的10个" class="headerlink" title="3: TOK问题 10亿个数据，找出最大的10个"></a>3: TOK问题 10亿个数据，找出最大的10个</h3><p>内存受限：</p>
+<p>排序、局部排序</p>
+<p>小根堆、分治（快排）</p>
+<p>内存不限：</p>
+<p>分治：</p>
+<p>分成 10000 * 10000 * 10 个块  MapReduce</p>
+<ul>
+<li>让你设计一个<strong>微信发红包的api</strong>，你会怎么设计，不能有人领到的红包里面没钱，红包数值精确到分。</li>
+</ul>
+<p>并发、</p>
+<ul>
+<li>分布式多个机器生成id，如何保证<strong>不重复</strong>?</li>
+<li><strong>扫码登录</strong>是如何实现的？</li>
+<li><strong>分布式集群</strong>中如何保证<strong>线程安全</strong>？</li>
+<li>某网站/app首页每天会从10000个商家里面推荐50个商家置顶，每个商家有一个权值，你如何来推荐？第二天怎么更新推荐的商家？</li>
+<li>如何设计一个<strong>本地缓存</strong>？需要考虑哪些方面？</li>
+</ul>
+<h2 id="3、美团首页每天会从-10000-个商家里面推荐-50-个商家置顶，每个商家有一个权值，你如何来推荐？第二天怎么更新推荐的商家？"><a href="#3、美团首页每天会从-10000-个商家里面推荐-50-个商家置顶，每个商家有一个权值，你如何来推荐？第二天怎么更新推荐的商家？" class="headerlink" title="3、美团首页每天会从 10000 个商家里面推荐 50 个商家置顶，每个商家有一个权值，你如何来推荐？第二天怎么更新推荐的商家？"></a>3、美团首页每天会从 10000 个商家里面推荐 50 个商家置顶，每个商家有一个权值，你如何来推荐？第二天怎么更新推荐的商家？</h2><h2 id="5、保证发送消息的有序性，消息处理的有序性。"><a href="#5、保证发送消息的有序性，消息处理的有序性。" class="headerlink" title="5、保证发送消息的有序性，消息处理的有序性。"></a>5、保证发送消息的有序性，消息处理的有序性。</h2><h2 id="6、如何把一个文件快速下发到-100w-个服务器"><a href="#6、如何把一个文件快速下发到-100w-个服务器" class="headerlink" title="6、如何把一个文件快速下发到 100w 个服务器"></a>6、如何把一个文件快速下发到 100w 个服务器</h2><h2 id="7、给每个组分配不同的-IP-段，怎么设计一种结构使的快速得知-IP-是哪个组的"><a href="#7、给每个组分配不同的-IP-段，怎么设计一种结构使的快速得知-IP-是哪个组的" class="headerlink" title="7、给每个组分配不同的 IP 段，怎么设计一种结构使的快速得知 IP 是哪个组的?"></a>7、给每个组分配不同的 IP 段，怎么设计一种结构使的快速得知 IP 是哪个组的?</h2><h2 id="9、有几台机器存储着几亿淘宝搜索日志，你只有一台-2g-的电脑，怎么选出搜索热度最高的十个"><a href="#9、有几台机器存储着几亿淘宝搜索日志，你只有一台-2g-的电脑，怎么选出搜索热度最高的十个" class="headerlink" title="9、有几台机器存储着几亿淘宝搜索日志，你只有一台 2g 的电脑，怎么选出搜索热度最高的十个"></a>9、有几台机器存储着几亿淘宝搜索日志，你只有一台 2g 的电脑，怎么选出搜索热度最高的十个</h2><h2 id="10、分布式集群中如何保证线程安全？"><a href="#10、分布式集群中如何保证线程安全？" class="headerlink" title="10、分布式集群中如何保证线程安全？"></a>10、分布式集群中如何保证线程安全？</h2><h2 id="11、给个淘宝场景，怎么设计一消息队列？"><a href="#11、给个淘宝场景，怎么设计一消息队列？" class="headerlink" title="11、给个淘宝场景，怎么设计一消息队列？"></a>11、给个淘宝场景，怎么设计一消息队列？</h2><h2 id="12、10-万个数，输出从小到大？"><a href="#12、10-万个数，输出从小到大？" class="headerlink" title="12、10 万个数，输出从小到大？"></a>12、10 万个数，输出从小到大？</h2><h2 id="13、有十万个单词，找出重复次数最高十个？"><a href="#13、有十万个单词，找出重复次数最高十个？" class="headerlink" title="13、有十万个单词，找出重复次数最高十个？"></a>13、有十万个单词，找出重复次数最高十个？</h2><h2 id="14、在2-5亿个整数中找出不重复的整数，内存不足以容纳这2-5亿个整数"><a href="#14、在2-5亿个整数中找出不重复的整数，内存不足以容纳这2-5亿个整数" class="headerlink" title="14、在2.5亿个整数中找出不重复的整数，内存不足以容纳这2.5亿个整数"></a>14、在2.5亿个整数中找出不重复的整数，内存不足以容纳这2.5亿个整数</h2><p>分治、位图</p>
+<ul>
+<li><p>搜索引擎的实现，会用到哪些重要的数据结构 </p>
+</li>
+<li><p>设计实现一个HTTP代理服务器 / web服务器 / FTP服务器/</p>
+</li>
+<li><p>设计实现cache缓存web服务器的网页访问记录</p>
+</li>
+<li><p>把一个文件快速下发到100w个服务器</p>
+</li>
+<li><p>将微信用户分为两组，组内的微信用户互相不为好友；用并查集</p>
+</li>
+<li><p>朋友之间的点对点关系用图维护，怎么判断两人是否是朋友；求朋友圈的个数</p>
+</li>
+<li><p>XX市有多少钢琴调音师傅？（费米问题）</p>
+</li>
+<li><p>范围1到1000的数，原本有1000个，互不重复，现多出来1个重复的数，怎么找到它</p>
+</li>
+<li><p>1-100顺序排列，丢失了一个怎么找到（二分法）</p>
+</li>
+<li><p>先手必胜策略问题</p>
+</li>
+<li><p>摆象棋的先手必胜策略</p>
+</li>
+<li><p>一个矩阵，从左上角到右下角，上下左右走，到达右下角的最短路径，</p>
+</li>
+<li><p>四辆小车，每辆车加满油可以走1公里，车子之间可以互相加油…</p>
+</li>
+<li><p>秒杀系统的架构设计</p>
+</li>
+<li><p>两个50亿url文件，找到相同url，内存4g</p>
+</li>
+<li><p>判断一个图是否连通？（开始说DFS，面试官说不满意，后来说并查集）</p>
+</li>
+<li><p>洗牌发牌算法</p>
+</li>
+<li><p>给你1MB的内存，你们怎么设计， 才能使其利用率最高，产生的碎片最少</p>
+</li>
+<li><p>BitMap局限与解决</p>
+</li>
+<li><p>memcache,redis</p>
+</li>
+<li><p>判断一个QQ号是否存在于40亿个QQ号中，4GB的空间，O(1)的时间</p>
+</li>
+<li><p>老鼠试毒药问题；</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E8%9A%82%E8%9A%81&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd">蚂蚁</a>爬杆；</p>
+</li>
+<li><p>从50亿的整数集合里找出中位数</p>
+</li>
+<li><p>高德地图是怎么知道高速路哪里堵车了</p>
+</li>
+<li><p>微信的朋友圈数据在后台应该怎么存放</p>
+</li>
+<li><p>如果采用LRU的方法，QQ用户的数据在后台存放管理</p>
+</li>
+<li><p>给定两个线段的端点坐标，如何判断它们是否相交。（用向量叉乘）</p>
+</li>
+<li><p>王者荣耀是基于TCP还是UDP，为什么？</p>
+</li>
+<li><p>一个5L的桶子和6L的桶子，打出3L水</p>
+</li>
+<li><p>要是设计一个高并发服务器，可以从哪些角度去优化</p>
+</li>
+<li><p>要完成一个微博评论的部分，在用户进入新闻时优先看到自己好友对此新闻的评论，</p>
+</li>
+<li><p>一亿QQ用户，每个用户都有500好友，每个人都可能玩很多腾讯出的游戏，如何存储能使获取一个人的好友玩的游戏列表。</p>
+</li>
+<li><p>1000w（L）个整数排序，范围0到100w(S)，8g内存，计数排序</p>
+</li>
+<li><p>给每个组分配不同的IP段，怎么设计一种结构使的快速得知IP是哪个组的</p>
+</li>
+<li><p>设计一个类似搜索扣扣好友列表，例如输入a显示前缀为a的所有好友</p>
+</li>
+<li><p>十亿个ip地址排序.</p>
+</li>
+<li><p>用数据结构模拟浏览器前进后退的操作</p>
+</li>
+<li><p>64匹马、8赛道，至少多少轮比赛找出速度最快的4匹马？</p>
+</li>
+<li><p>如何把访问次数过多的IP拉入黑名单</p>
+</li>
+<li><p>百度搜索的智能提示怎么实现，输入两个字，出来一些热搜</p>
+</li>
+<li><p>一亿个数字，找出最大的前 20 个</p>
+</li>
+<li><p>把上亿个字符串进行排序</p>
+</li>
+<li><p>1G内存，4G url，求重复的url ；或者是对url去重</p>
+</li>
+<li><p>摆象棋的先手必胜策略</p>
+</li>
+<li><p>微信的附近的人这个功能，如果让你实现，你准备怎么做，</p>
+</li>
+<li><p>如何设计一个好的字符串hash函数</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/05/09/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">分布式系统设计论文</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
